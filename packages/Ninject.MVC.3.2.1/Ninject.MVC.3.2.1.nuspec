@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2011/08/nuspec.xsd">
+  <metadata>
+    <id>Ninject.MVC</id>
+    <version>3.2.1</version>
+    <title>Ninject MVC</title>
+    <authors>Richard Sanchez</authors>
+    <owners>Richard Sanchez</owners>
+    <licenseUrl>http://radtec.com/Projects/Ninject.MVC/License</licenseUrl>
+    <projectUrl>http://radtec.com/Projects/Ninject.MVC/</projectUrl>
+    <iconUrl>http://radtec.com/Projects/Ninject.MVC/Icon</iconUrl>
+    <requireLicenseAcceptance>true</requireLicenseAcceptance>
+    <description>A Ninject Binder for ASP.Net MVC</description>
+    <summary />
+    <releaseNotes>Added InRequestScope to Scope Enumerations</releaseNotes>
+    <copyright>Copyright 2014</copyright>
+    <tags>Ninject ASP.Net MVC Binder net40 net45 net46</tags>
+  </metadata>
+</package>

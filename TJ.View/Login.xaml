@@ -1,0 +1,20 @@
+﻿<Window xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        x:Class="TJ.View.Login"
+        Title="Login" Height="350" Width="445" WindowStartupLocation="CenterScreen" ResizeMode="NoResize">
+    <Grid >
+        <Grid HorizontalAlignment="Left" Height="286" VerticalAlignment="Top" Width="430">
+            <Image Margin="107,0,107,24" Source="Imagens/TJ MG.png"/>
+            <Label x:Name="lblInicial" Content="Bem vindo. Favor aguardar, estamos carregando informações necessárias!" Margin="0,259,0,0" Width="430" HorizontalContentAlignment="Center" HorizontalAlignment="Center" Opacity="0.8" Padding="5,0,5,5" Foreground="Black" FontWeight="Bold"/>
+        </Grid>
+        <Grid Margin="0" Background="Red" VerticalAlignment="Bottom" Height="30">
+            <Label Content="Usuario" Foreground="White" HorizontalAlignment="Left" Margin="10,5,0,3" RenderTransformOrigin="0.345,-0.179" VerticalContentAlignment="Stretch" Padding="0"/>
+            <Button x:Name="btnLogar" Content="Logar" HorizontalAlignment="Right" Margin="0,5,10,0" VerticalAlignment="Top" Width="75" Click="btnLogar_Click" IsEnabled="False" VerticalContentAlignment="Top" HorizontalContentAlignment="Center" TabIndex="3"/>
+            <Label Content="Senha" Foreground="White"  HorizontalAlignment="Left" Margin="189,4,0,4" VerticalContentAlignment="Stretch" Padding="0"/>
+            <PasswordBox x:Name="pswSenha" HorizontalAlignment="Left" Margin="226,3,0,0" VerticalAlignment="Top" Width="102" Height="23" TabIndex="2" PasswordChanged="pswSenha_PasswordChanged" Padding="0" MaxLength="10" ToolTip="Favor informar uma senha válida!"/>
+            <ComboBox x:Name="cbxUsuario" HorizontalAlignment="Left" Margin="55,3,0,0" VerticalAlignment="Top" Width="120"  KeyUp="cbxUsuario_KeyUp" DropDownClosed="cbxUsuario_DropDownClosed">
+                <ComboBoxItem/>
+            </ComboBox>
+        </Grid>
+    </Grid>
+</Window>
