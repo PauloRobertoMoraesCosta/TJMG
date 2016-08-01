@@ -14,7 +14,7 @@ namespace TJ.Dados.Repositorios
             string loginLimpo = VerificacoesBanco.LimpaCaracteresEspeciais(login);
             string senhaLimpa = VerificacoesBanco.LimpaCaracteresEspeciais(senha);
             Usuario usuarioBanco;
-            
+
             try
             {
                 usuarioBanco = db.Usuarios.AsNoTracking().FirstOrDefault(u => u.Login.Equals(loginLimpo) && u.Ativo.Equals("True"));
@@ -24,7 +24,7 @@ namespace TJ.Dados.Repositorios
                 usuarioBanco = db.Usuarios.AsNoTracking().FirstOrDefault(u => u.Login.Equals(loginLimpo) && u.Senha.Equals(senhaLimpa) && u.Ativo.Equals("True"));
                 if (usuarioBanco == null)
                     throw new DadosException("Senha Inválida!");
-                    
+
                 return usuarioBanco;
             }
             catch (DadosException)
@@ -38,14 +38,14 @@ namespace TJ.Dados.Repositorios
         }
 
 
-        public IEnumerable<Usuario> RetornausuariosAtivosAsNoTracking()
+        public IEnumerable<Usuario> RetornaUsuariosAtivosAsNoTracking()
         {
             try
             {
-                IEnumerable<Usuario> usuariosAtivos =
-                    (IEnumerable<Usuario>) db.Usuarios.AsNoTracking().Select(u => u.Ativo.Equals("True"));
+                IEnumerable<Usuario> usuariosAtivos = (IEnumerable<Usuario>) db.Usuarios.AsNoTracking().Where(u => u.Ativo.Equals("True"));
                 if (usuariosAtivos == null)
                     throw new DadosException("Nenhum Usuário ativo no sistema");
+
                 return usuariosAtivos;
             }
             catch (DadosException)

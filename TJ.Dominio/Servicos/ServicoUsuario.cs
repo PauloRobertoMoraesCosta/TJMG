@@ -21,9 +21,9 @@ namespace TJ.Dominio.Servicos
         }
 
 
-        public IEnumerable<Usuario> RetornausuariosAtivosAsNoTracking()
+        public IEnumerable<Usuario> RetornaUsuariosAtivosAsNoTracking()
         {
-            return _usuarioRepositorio.RetornausuariosAtivosAsNoTracking();
+            return _usuarioRepositorio.RetornaUsuariosAtivosAsNoTracking();
         }
     }
 }

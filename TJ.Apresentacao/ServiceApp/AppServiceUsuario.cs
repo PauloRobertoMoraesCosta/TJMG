@@ -22,9 +22,9 @@ namespace TJ.Apresentacao.ServiceApp
         }
 
 
-        public IEnumerable<Usuario> RetornausuariosAtivosAsNoTracking()
+        public IEnumerable<Usuario> RetornaUsuariosAtivosAsNoTracking()
         {
-            throw new NotImplementedException();
+            return _serviceUsuario.RetornaUsuariosAtivosAsNoTracking();
         }
     }
 }

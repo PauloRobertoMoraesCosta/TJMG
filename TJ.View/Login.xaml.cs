@@ -52,7 +52,7 @@ namespace TJ.View
 
         public void inicializar()
         {
-            var usu = _serviceUsuario.RetornaTodosAsNoTracking();
+            var usu = _serviceUsuario.RetornaUsuariosAtivosAsNoTracking();
             foreach (Usuario usuario in usu)
             {
                 cbxUsuario.Items.Add(usuario.Login);
