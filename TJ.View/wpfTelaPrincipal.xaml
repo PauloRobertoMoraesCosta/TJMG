@@ -1,8 +1,24 @@
-﻿<Window x:Class="TJ.View.wpfTelaPrincipal"
+﻿<Window x:Class="TJ.View.WpfTelaPrincipal"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        Title="wpfTelaPrincipal" Height="300" Width="300">
-    <Grid>
-        
+        Title="Upa" Height="500" Width="700" WindowStartupLocation="CenterScreen">
+    <Grid Background="#FF117816">
+        <DockPanel Height="auto"  Width="auto" LastChildFill="True" Margin="0,-1,0,1">
+            <Label DockPanel.Dock="Top" Height="35" HorizontalContentAlignment="Center" Content="TJ MG - Prestação de serviço comunitário" Foreground="Black" FontSize="16" Background="White"/>
+            <Menu DockPanel.Dock="Left" Width="auto" Height="auto" VerticalAlignment="Top,Stretch" Background="White" BorderThickness="1" BorderBrush="#FF117816">
+                <Menu.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <StackPanel Margin="0,10,0,0"/>
+                    </ItemsPanelTemplate>
+                </Menu.ItemsPanel>
+                <Label x:Name="lblUsuarios" Content="Usuarios" Background="White" Foreground="Black" HorizontalContentAlignment="Center" Width="125" FontSize="14"/>
+                <Label Content="Parâmetros" Background="White" Foreground="Black" HorizontalContentAlignment="Center" Width="125" FontSize="14"/>
+                <Label Content="Trocar de usuario" Background="White" Foreground="#FF117816" HorizontalContentAlignment="Center" Width="125" FontSize="14"/>
+                <Label Content="Sair" Background="White" Foreground="#FF117816" HorizontalContentAlignment="Center" Width="125" FontSize="14"/>
+            </Menu>
+            <Label Name="lblDataHora" DockPanel.Dock="Bottom" Background="White" HorizontalContentAlignment="Right" Foreground="#FF117816"/>
+            <TabControl x:Name="TbcPrincipal" DockPanel.Dock="Right" Width="auto" Height="auto" VerticalAlignment="Top,Stretch" HorizontalAlignment="Left,Stretch">
+            </TabControl>
+        </DockPanel>
     </Grid>
 </Window>

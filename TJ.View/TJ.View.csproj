@@ -81,11 +81,8 @@
     <Compile Include="UCMovimentacoesLencoes.xaml.cs">
       <DependentUpon>UCMovimentacoesLencoes.xaml</DependentUpon>
     </Compile>
-    <Compile Include="wpfTelaPrincipal.xaml.cs">
-      <DependentUpon>wpfTelaPrincipal.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="wpfTelaPrincipal2.xaml.cs">
-      <DependentUpon>wpfTelaPrincipal2.xaml</DependentUpon>
+    <Compile Include="WpfTelaPrincipal.xaml.cs">
+      <DependentUpon>WpfTelaPrincipal.xaml</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
@@ -137,11 +134,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="wpfTelaPrincipal.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="wpfTelaPrincipal2.xaml">
+    <Page Include="WpfTelaPrincipal.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>

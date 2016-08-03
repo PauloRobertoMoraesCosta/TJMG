@@ -23,10 +23,10 @@ namespace TJ.View
         {
             try
             {
-                Usuario usu = _serviceUsuario.logaUsuario(cbxUsuario.Text, pswSenha.Password);
-                if (usu != null)
+                Usuario usuario = _serviceUsuario.logaUsuario(cbxUsuario.Text, pswSenha.Password);
+                if (usuario != null)
                 {
-                    App.Current.MainWindow = new wpfTelaPrincipal();
+                    App.Current.MainWindow = new WpfTelaPrincipal(usuario);
                     App.Current.MainWindow.Show();
                     this.Close();
                 }

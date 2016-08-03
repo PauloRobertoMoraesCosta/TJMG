@@ -1,27 +1,38 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
 using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
+using TJ.Dominio.Entidades;
 
 namespace TJ.View
 {
     /// <summary>
     /// Interaction logic for wpfTelaPrincipal.xaml
     /// </summary>
-    public partial class wpfTelaPrincipal : Window
+    public partial class WpfTelaPrincipal : Window
     {
-        public wpfTelaPrincipal()
+        protected readonly Usuario usuarioLogado ;
+        public WpfTelaPrincipal()
         {
             InitializeComponent();
+            
+        }
+
+        public WpfTelaPrincipal(Usuario usuario)
+        {
+            InitializeComponent();
+            usuarioLogado = usuario;
+            updateDadosTela();
+            UCMovimentacoesLencoes ucMovimentacoesLencoes = new UCMovimentacoesLencoes();
+            TabItem tabItemMovimentacoesLencoes = new TabItem();
+            tabItemMovimentacoesLencoes.Header = "Movimentações Lenções";
+            tabItemMovimentacoesLencoes.Content = ucMovimentacoesLencoes;
+            TbcPrincipal.Items.Add(tabItemMovimentacoesLencoes);
+        }
+
+        public void updateDadosTela()
+        {
+            this.lblDataHora.Content = DateTime.Now.Date.ToString().Substring(0, 10);
         }
     }
 }
