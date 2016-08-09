@@ -1,23 +1,31 @@
 ﻿<Window x:Class="TJ.View.WpfTelaPrincipal"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        Title="Upa" Height="500" Width="700" WindowStartupLocation="CenterScreen">
-    <Grid Background="#FF117816">
+        Title="TJMG" Foreground="Blue" Height="500" Width="700" WindowStartupLocation="CenterScreen">
+    <Grid Background="Blue">
         <DockPanel Height="auto"  Width="auto" LastChildFill="True" Margin="0,-1,0,1">
-            <Label DockPanel.Dock="Top" Height="35" HorizontalContentAlignment="Center" Content="TJ MG - Prestação de serviço comunitário" Foreground="Black" FontSize="16" Background="White"/>
-            <Menu DockPanel.Dock="Left" Width="auto" Height="auto" VerticalAlignment="Top,Stretch" Background="White" BorderThickness="1" BorderBrush="#FF117816">
+            <Label DockPanel.Dock="Top" Height="35" HorizontalContentAlignment="Center" Content="TJMG - Prestação de Serviços Comunitários" Foreground="Blue" FontSize="16" Background="White"/>
+            <Menu DockPanel.Dock="Left" Width="auto" Height="auto" VerticalAlignment="Top,Stretch" Background="White" BorderThickness="1" BorderBrush="Blue">
                 <Menu.ItemsPanel>
                     <ItemsPanelTemplate>
                         <StackPanel Margin="0,10,0,0"/>
                     </ItemsPanelTemplate>
                 </Menu.ItemsPanel>
-                <Label x:Name="lblUsuarios" Content="Usuarios" Background="White" Foreground="Black" HorizontalContentAlignment="Center" Width="125" FontSize="14"/>
-                <Label Content="Parâmetros" Background="White" Foreground="Black" HorizontalContentAlignment="Center" Width="125" FontSize="14"/>
-                <Label Content="Trocar de usuario" Background="White" Foreground="#FF117816" HorizontalContentAlignment="Center" Width="125" FontSize="14"/>
-                <Label Content="Sair" Background="White" Foreground="#FF117816" HorizontalContentAlignment="Center" Width="125" FontSize="14"/>
+                <Label x:Name="lblUsuarios" Content="Usuários" Background="White" Foreground="Blue" HorizontalContentAlignment="Center" Width="125" FontSize="14" MouseDown="lblUsuarios_MouseDown"/>
+                <Label x:Name="lblReeducando" Content="Reeducando" Background="White" Foreground="Blue" HorizontalContentAlignment="Center" Width="125" FontSize="14" MouseDown="lblUsuarios_MouseDown"/>
+                <Label x:Name="lblLancamentos" Content="Cumprimento PSC" Background="White" Foreground="Blue" HorizontalContentAlignment="Center" Width="125" FontSize="14" MouseDown="lblUsuarios_MouseDown"/>
+                <Label x:Name="lblInstituicoes" Content="Entidades" Background="White" Foreground="Blue" HorizontalContentAlignment="Center" Width="125" FontSize="14" MouseDown="lblUsuarios_MouseDown"/>
+                <Label Content="Encam. VEP" Background="White" Foreground="Blue" HorizontalContentAlignment="Center" Width="125" FontSize="14"/>
+                <Label Content="Encam. 1ª UJ" Background="White" Foreground="Blue" HorizontalContentAlignment="Center" Width="125" FontSize="14"/>
+                <Label Content="Encam. Crim." Background="White" Foreground="Blue" HorizontalContentAlignment="Center" Width="125" FontSize="14"/>
+                <Label Content="Frequência VEP" Background="White" Foreground="Blue" HorizontalContentAlignment="Center" Width="125" FontSize="14"/>
+                <Label Content="Frequência 1ª UJ" Background="White" Foreground="Blue" HorizontalContentAlignment="Center" Width="125" FontSize="14"/>
+                <Label Content="Frequência Crim." Background="White" Foreground="Blue" HorizontalContentAlignment="Center" Width="125" FontSize="14"/>
+                <Label Content="Trocar de Usuário" Background="White" Foreground="Blue" HorizontalContentAlignment="Center" Width="125" FontSize="14"/>
+                <Label Content="Sair" Background="White" Foreground="Blue" HorizontalContentAlignment="Center" Width="125" FontSize="14"/>
             </Menu>
-            <Label Name="lblDataHora" DockPanel.Dock="Bottom" Background="White" HorizontalContentAlignment="Right" Foreground="#FF117816"/>
-            <TabControl x:Name="TbcPrincipal" DockPanel.Dock="Right" Width="auto" Height="auto" VerticalAlignment="Top,Stretch" HorizontalAlignment="Left,Stretch">
+            <Label Name="lblDataHora" DockPanel.Dock="Bottom" Background="White" HorizontalContentAlignment="Right" Foreground="Blue"/>
+            <TabControl x:Name="TbcPrincipal" DockPanel.Dock="Right" Width="auto" Height="auto" VerticalAlignment="Top,Stretch" HorizontalAlignment="Left,Stretch" Margin="0,-6,0,6">
             </TabControl>
         </DockPanel>
     </Grid>

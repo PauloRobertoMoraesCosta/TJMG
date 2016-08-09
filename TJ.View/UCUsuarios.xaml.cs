@@ -12,17 +12,21 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using TJ.Apresentacao.InterfacesApp;
 
 namespace TJ.View
 {
     /// <summary>
     /// Interaction logic for UCMovimentacoesLencoes.xaml
     /// </summary>
-    public partial class UCMovimentacoesLencoes : UserControl
+    public partial class UCUsuarios : UserControl
     {
-        public UCMovimentacoesLencoes()
+        protected readonly IAppServiceUsuario _serviceUsuario;
+        public UCUsuarios(IAppServiceUsuario serviceUsuario)
         {
+            _serviceUsuario = serviceUsuario;
             InitializeComponent();
+            dgvUsuarios.ItemsSource = _serviceUsuario.RetornaTodos();
         }
     }
 }

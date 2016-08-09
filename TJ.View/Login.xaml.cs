@@ -2,6 +2,7 @@
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
+using TJ.Apresentacao;
 using TJ.Apresentacao.InterfacesApp;
 using TJ.Dominio.Entidades;
 

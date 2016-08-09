@@ -16,7 +16,7 @@ namespace TJ.View
         }
         private void OnAppStartup(object sender, StartupEventArgs e)
         {
-            Login login = ninject.Kernel.Get<Login>();
+            Login login = MinhaNinject.Kernel.Get<Login>();
             login.Show();
             login.inicializar();
         }

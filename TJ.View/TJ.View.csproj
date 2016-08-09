@@ -78,8 +78,8 @@
       <DependentUpon>Login.xaml</DependentUpon>
     </Compile>
     <Compile Include="Mensagens.cs" />
-    <Compile Include="UCMovimentacoesLencoes.xaml.cs">
-      <DependentUpon>UCMovimentacoesLencoes.xaml</DependentUpon>
+    <Compile Include="UCUsuarios.xaml.cs">
+      <DependentUpon>UCUsuarios.xaml</DependentUpon>
     </Compile>
     <Compile Include="WpfTelaPrincipal.xaml.cs">
       <DependentUpon>WpfTelaPrincipal.xaml</DependentUpon>
@@ -130,7 +130,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="UCMovimentacoesLencoes.xaml">
+    <Page Include="UCUsuarios.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

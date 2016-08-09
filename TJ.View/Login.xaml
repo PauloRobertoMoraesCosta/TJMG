@@ -7,7 +7,7 @@
             <Image Margin="107,0,107,24" Source="Imagens/TJ MG.png"/>
             <Label x:Name="lblInicial" Content="Bem vindo. Favor aguardar, estamos carregando informações necessárias!" Margin="0,259,0,0" Width="430" HorizontalContentAlignment="Center" HorizontalAlignment="Center" Opacity="0.8" Padding="5,0,5,5" Foreground="Black" FontWeight="Bold"/>
         </Grid>
-        <Grid Margin="0" Background="Red" VerticalAlignment="Bottom" Height="30">
+        <Grid Margin="0" Background="Blue" VerticalAlignment="Bottom" Height="30">
             <Label Content="Usuario" Foreground="White" HorizontalAlignment="Left" Margin="10,5,0,3" RenderTransformOrigin="0.345,-0.179" VerticalContentAlignment="Stretch" Padding="0"/>
             <Button x:Name="btnLogar" Content="Logar" HorizontalAlignment="Right" Margin="0,5,10,0" VerticalAlignment="Top" Width="75" Click="btnLogar_Click" IsEnabled="False" VerticalContentAlignment="Top" HorizontalContentAlignment="Center" TabIndex="3"/>
             <Label Content="Senha" Foreground="White"  HorizontalAlignment="Left" Margin="189,4,0,4" VerticalContentAlignment="Stretch" Padding="0"/>

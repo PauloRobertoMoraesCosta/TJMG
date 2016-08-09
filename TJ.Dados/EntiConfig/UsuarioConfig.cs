@@ -12,9 +12,8 @@ namespace TJ.Dados.EntiConfig
     {
         public UsuarioConfig()
         {
-            HasKey(u => u.Id);
+            HasKey(u => u.Login);
 
-            Property(u => u.Id).HasColumnName("Usuario_Id");
             Property(u => u.Login).HasColumnName("Usuario_Login").IsRequired().HasMaxLength(20).HasColumnAnnotation(IndexAnnotation.AnnotationName, new IndexAnnotation(new IndexAttribute("UN_Usuario") { IsUnique = true }));
             Property(u => u.Senha).HasColumnName("Usuario_Senha").IsRequired().HasMaxLength(15);
             Property(u => u.Nome).HasColumnName("Usuario_Nome").IsRequired().HasMaxLength(150);

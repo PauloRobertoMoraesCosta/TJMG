@@ -1,4 +1,5 @@
-﻿using Ninject;
+﻿using System;
+using Ninject;
 using TJ.Apresentacao.InterfacesApp;
 using TJ.Apresentacao.ServiceApp;
 using TJ.Dados.Repositorios;
@@ -10,9 +11,9 @@ namespace TJ.Apresentacao
 {
     public class MinhaNinject
     {
-        private IKernel kernel;
+        private static IKernel kernel;
 
-        public IKernel Kernel
+        public static IKernel Kernel
         {
             get { return kernel; }
             set { kernel = value; }
@@ -20,7 +21,7 @@ namespace TJ.Apresentacao
 
         public MinhaNinject()
         {
-            this.kernel = new StandardKernel();
+            Kernel = new StandardKernel();
             kernel.Bind(typeof(IAppServiceBase<>)).To(typeof(AppServiceBase<>)).InTransientScope();
             kernel.Bind<IAppServiceUsuario>().To<AppServiceUsuario>().InTransientScope();
 
@@ -29,7 +30,6 @@ namespace TJ.Apresentacao
 
             kernel.Bind(typeof(IRepositorioBase<>)).To(typeof(RepositorioBase<>)).InTransientScope();
             kernel.Bind<IRepositorioUsuario>().To<RepositorioUsuario>().InTransientScope();
-
         }
     }
 }
