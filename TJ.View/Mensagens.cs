@@ -12,5 +12,15 @@ namespace TJ.View
         {
             MessageBox.Show(mensagem, "Alerta", MessageBoxButton.OK, MessageBoxImage.Exclamation);
         }
+
+        public static void MensagemErroOk(string mensagem)
+        {
+            MessageBox.Show(mensagem, "Erro", MessageBoxButton.OK, MessageBoxImage.Error);
+        }
+
+        public static MessageBoxResult MensagemConfirmOkCancel(string mensagem)
+        {
+            return MessageBox.Show(mensagem, "Dúvida", MessageBoxButton.OKCancel, MessageBoxImage.Question);
+        }
     }
 }

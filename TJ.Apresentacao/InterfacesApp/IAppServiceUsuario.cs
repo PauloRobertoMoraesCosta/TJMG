@@ -7,5 +7,6 @@ namespace TJ.Apresentacao.InterfacesApp
     {
         Usuario logaUsuario(string login, string senha);
         IEnumerable<Usuario> RetornaUsuariosAtivosAsNoTracking();
+        Usuario RetornarPorLogin(string login);
     }
 }

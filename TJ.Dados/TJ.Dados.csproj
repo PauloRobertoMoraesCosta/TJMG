@@ -31,10 +31,19 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="Contexto\Context.cs" />
+    <Compile Include="EntiConfig\CidadeConfig.cs" />
+    <Compile Include="EntiConfig\EnderecoConfig.cs" />
+    <Compile Include="EntiConfig\EntidadeConfig.cs" />
+    <Compile Include="EntiConfig\EstadoConfig.cs" />
+    <Compile Include="EntiConfig\TelefoneConfig.cs" />
     <Compile Include="EntiConfig\UsuarioConfig.cs" />
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repositorios\RepositorioBase.cs" />
+    <Compile Include="Repositorios\RepositorioCidade.cs" />
+    <Compile Include="Repositorios\RepositorioEndereco.cs" />
+    <Compile Include="Repositorios\RepositorioEstado.cs" />
+    <Compile Include="Repositorios\RepositorioTelefone.cs" />
     <Compile Include="Repositorios\RepositorioUsuario.cs" />
     <Compile Include="Verifications\DadosException.cs" />
     <Compile Include="Verifications\VerificacoesBanco.cs" />

@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using TJ.Apresentacao.InterfacesApp;
 using TJ.Dominio.Entidades;
 using TJ.Dominio.Interfaces.Servicos;
@@ -25,6 +24,11 @@ namespace TJ.Apresentacao.ServiceApp
         public IEnumerable<Usuario> RetornaUsuariosAtivosAsNoTracking()
         {
             return _serviceUsuario.RetornaUsuariosAtivosAsNoTracking();
+        }
+
+        public Usuario RetornarPorLogin(string login)
+        {
+            return _serviceUsuario.RetornarPorLogin(login);
         }
     }
 }

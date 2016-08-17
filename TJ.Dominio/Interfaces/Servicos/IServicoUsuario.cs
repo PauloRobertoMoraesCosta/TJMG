@@ -7,5 +7,6 @@ namespace TJ.Dominio.Interfaces.Servicos
     {
         Usuario LogaUsuario(string login, string senha);
         IEnumerable<Usuario> RetornaUsuariosAtivosAsNoTracking();
+        Usuario RetornarPorLogin(string login);
     }
 }

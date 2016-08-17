@@ -57,6 +57,18 @@ namespace TJ.Dados.Repositorios
                 throw new Exception("Problema inesperado ao carregar usuários ativos! " + ex.Message);
             }
         }
+
+        public Usuario RetornarPorLogin(string login)
+        {
+            try
+            {
+                return db.Usuarios.FirstOrDefault(u => u.Login.Equals(login));
+            }
+            catch (Exception ex)
+            {
+                throw new DadosException("Erro ao retornar usuário por login: " + ex.Message);
+            }
+        }
     }
 }
 

@@ -7,23 +7,29 @@ namespace TJ.Dominio.Servicos
 {
     public class ServicoUsuario : ServicoBase<Usuario>, IServicoUsuario
     {
-        private readonly IRepositorioUsuario _usuarioRepositorio;
+        private readonly IRepositorioUsuario _repositorioUsuario;
 
-        public ServicoUsuario(IRepositorioUsuario usuarioRepositorio) : base(usuarioRepositorio)
+        public ServicoUsuario(IRepositorioUsuario repositorioUsuario)
+            : base(repositorioUsuario)
         {
-            _usuarioRepositorio = usuarioRepositorio;
+            _repositorioUsuario = repositorioUsuario;
         }
 
 
         public Usuario LogaUsuario(string login, string senha)
         {
-            return _usuarioRepositorio.logaUsuario(login, senha);
+            return _repositorioUsuario.logaUsuario(login, senha);
         }
 
 
         public IEnumerable<Usuario> RetornaUsuariosAtivosAsNoTracking()
         {
-            return _usuarioRepositorio.RetornaUsuariosAtivosAsNoTracking();
+            return _repositorioUsuario.RetornaUsuariosAtivosAsNoTracking();
+        }
+
+        public Usuario RetornarPorLogin(string login)
+        {
+            return _repositorioUsuario.RetornarPorLogin(login);
         }
     }
 }

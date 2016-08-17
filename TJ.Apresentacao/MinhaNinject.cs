@@ -1,5 +1,4 @@
-﻿using System;
-using Ninject;
+﻿using Ninject;
 using TJ.Apresentacao.InterfacesApp;
 using TJ.Apresentacao.ServiceApp;
 using TJ.Dados.Repositorios;

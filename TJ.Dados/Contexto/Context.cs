@@ -19,6 +19,11 @@ namespace TJ.Dados.Contexto
         }
 
         public DbSet<Usuario> Usuarios { get; set; }
+        public DbSet<Cidade> Cidades { get; set; }
+        public DbSet<Endereco> Enderecos { get; set; }
+        public DbSet<Entidade> Entidades { get; set; }
+        public DbSet<Estado> Estados { get; set; }
+        public DbSet<Telefone> Telefones { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {

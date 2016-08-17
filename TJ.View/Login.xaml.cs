@@ -1,8 +1,7 @@
 ﻿using System;
 using System.Linq;
 using System.Windows;
-using System.Windows.Controls;
-using TJ.Apresentacao;
+using System.Windows.Input;
 using TJ.Apresentacao.InterfacesApp;
 using TJ.Dominio.Entidades;
 
@@ -62,7 +61,7 @@ namespace TJ.View
             cbxUsuario.Focus();
         }
 
-        private void cbxUsuario_KeyUp(object sender, System.Windows.Input.KeyEventArgs e)
+        private void cbxUsuario_KeyUp(object sender, KeyEventArgs e)
         {
             habilitaBotaoLogar();
         }

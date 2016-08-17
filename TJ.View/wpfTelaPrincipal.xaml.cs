@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Input;
 using System.Windows.Media;
 using Ninject;
 using TJ.Apresentacao;
@@ -39,20 +40,22 @@ namespace TJ.View
             {
                 if (TbcPrincipal.Items.Count == 0)
                 {
-                    TabItem tabItemMovimentacoesLencoes = new TabItem();
-                    tabItemMovimentacoesLencoes.Header = header;
-                    tabItemMovimentacoesLencoes.Content = control;
-                    TbcPrincipal.Items.Add(tabItemMovimentacoesLencoes);
-                    tabItemMovimentacoesLencoes.Focus();
+                    TabItem tabItem = new TabItem();
+                    tabItem.Header = header;
+                    tabItem.Content = control;
+                    tabItem.Foreground = Brushes.Blue;
+                    TbcPrincipal.Items.Add(tabItem);
+                    tabItem.Focus();
                 }
                 else
                 {
                     if (!FindTab(control))
                     {
-                        TabItem tabItemMovimentacoesLencoes = new TabItem();
-                        tabItemMovimentacoesLencoes.Header = header;
-                        tabItemMovimentacoesLencoes.Content = control;
-                        TbcPrincipal.Items.Add(tabItemMovimentacoesLencoes);
+                        TabItem tabItem = new TabItem();
+                        tabItem.Header = header;
+                        tabItem.Content = control;
+                        tabItem.Foreground = Brushes.Blue;
+                        TbcPrincipal.Items.Add(tabItem);
                     }
                 }
             }
@@ -86,10 +89,17 @@ namespace TJ.View
             }
         }
 
-        private void lblUsuarios_MouseDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
+        private void lblUsuarios_MouseDown(object sender, MouseButtonEventArgs e)
         {
-            UCUsuarios ucUsuario = MinhaNinject.Kernel.Get<UCUsuarios>();
-            InitializeTab(ucUsuario, "Usuarios");
+            try
+            {
+                UCUsuarios ucUsuario = MinhaNinject.Kernel.Get<UCUsuarios>();
+                InitializeTab(ucUsuario, "Usuários");
+            }
+            catch (Exception exception)
+            {
+                Mensagens.MensagemErroOk(exception.Message);
+            }
         }
     }
 }
