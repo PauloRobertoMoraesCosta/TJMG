@@ -1,14 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using TJ.Dominio.Entidades;
-using TJ.Dominio.Interfaces.Repositorios;
+﻿using TJ.Dominio.Entidades;
 
 namespace TJ.Dominio.Interfaces.Servicos
 {
-    public interface IServicoEntidade : IRepositorioBase<Entidade>
+    public interface IServicoEntidade : IServicoBase<Entidade>
     {
     }
 }
