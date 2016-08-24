@@ -26,6 +26,14 @@
             </Menu>
             <Label Name="lblDataHora" DockPanel.Dock="Bottom" Background="White" HorizontalContentAlignment="Right" Foreground="Blue"/>
             <TabControl x:Name="TbcPrincipal" DockPanel.Dock="Right" Width="auto" Height="auto" VerticalAlignment="Top,Stretch" HorizontalAlignment="Left,Stretch">
+                <!--<TabItem Name="tabItemPrincipal">
+                    <TabItem.Header>
+                        <StackPanel Orientation="Horizontal" Name="panelStack">
+                            <TextBlock x:Name="textBlockHeader" Text="" Margin="2,0,0,0" VerticalAlignment="Center" Foreground="Blue" />
+                            <Image Name="imgFechar" Height="18" Source="Imagens/Fechar.jpg" Margin="5,0,0,0" />
+                        </StackPanel>
+                    </TabItem.Header>
+                </TabItem>-->
             </TabControl>
         </DockPanel>
     </Grid>

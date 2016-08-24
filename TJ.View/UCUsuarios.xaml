@@ -5,49 +5,56 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              mc:Ignorable="d" >
     <DockPanel Background="White">
-        <Grid DockPanel.Dock="Top" VerticalAlignment="Top" HorizontalAlignment="Left,Stretch" x:Name="griddados" >
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="0.1*"/>
-                <ColumnDefinition Width="Auto"/>
-                <ColumnDefinition Width="Auto"/>
-                <ColumnDefinition Width="0.1*"/>
-                <ColumnDefinition Width="Auto"/>
-                <ColumnDefinition Width="Auto"/>
-                <ColumnDefinition Width="2*"/>
-            </Grid.ColumnDefinitions>
-            <Grid.RowDefinitions>
-                <RowDefinition Height="10"/>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="Auto"/>
-            </Grid.RowDefinitions>
-            <Label Content="Login:" HorizontalAlignment="Right" VerticalAlignment="Center" Grid.Column="1" Grid.Row="1" Foreground="Blue"/>
-            <TextBox Name="tbxLogin" HorizontalAlignment="Left" VerticalAlignment="center" Grid.Column="2" Grid.Row="1" MaxLength="20" MaxWidth="250" MinWidth="150" BorderThickness="1" BorderBrush="Blue"/>
-            <Label Content="Senha:" HorizontalAlignment="Right" VerticalAlignment="Center" Grid.Column="4" Grid.Row="1" Foreground="Blue"/>
-            <PasswordBox Name="pswSenha" HorizontalAlignment="Stretch" VerticalAlignment="Center" Grid.Column="5" Grid.Row="1" MaxLength="15" MaxWidth="250" MinWidth="150" BorderThickness="1" BorderBrush="Blue"/>
-            <Label Content="Nome:" VerticalAlignment="Center" HorizontalAlignment="Right" Grid.Row="2" Grid.Column="1" Foreground="Blue"/>
-            <TextBox Name="tbxNome" HorizontalAlignment="Left" VerticalAlignment="Center" Grid.ColumnSpan="4" Grid.Row="2" Grid.Column="2" MaxLength="50" MinWidth="300" BorderThickness="1" BorderBrush="Blue"/>
-            <Label Content="Data Cadastro:" VerticalAlignment="Center" HorizontalAlignment="Right" Grid.Row="3" Grid.Column="1" Foreground="Blue"/>
-            <TextBox Name="tbxDataCadastro" HorizontalAlignment="Left" VerticalAlignment="Center" IsReadOnly="True" Grid.Row="3" Grid.Column="2" BorderThickness="1" BorderBrush="Blue" MinWidth="150"/>
-            <CheckBox Name="cbxSuper" Content="Super Usuário" Grid.Row="4" Grid.Column="2" HorizontalAlignment="Left" Foreground="Blue"/>
-            <CheckBox Name="cbxAtivo" Content="Usuário Ativo" Grid.Row="4" Grid.Column="5" HorizontalAlignment="Left" Foreground="Blue"/>
-        </Grid>
-        <Grid DockPanel.Dock="Left, Top" Margin="30,20,0,0">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="52"/>
-                <ColumnDefinition Width="52"/>
-                <ColumnDefinition Width="52"/>
-                <ColumnDefinition Width="52"/>
-                <ColumnDefinition Width="52"/>
-            </Grid.ColumnDefinitions>
-            <Button Name="btnNovo" Content="Novo" Width="auto"  Click="btnNovo_Click"/>
-            <Button Name="btnGravar" Content="Gravar" Width="auto" Grid.Column="1" Click="btnGravar_Click"/>
-            <Button Name="btnEditar" Content="Editar" Width="auto" Grid.Column="2" Height="20" VerticalAlignment="Top" Click="btnEditar_Click"/>
-            <Button Name="btnExcluir" Content="Excluir" Width="auto" Grid.Column="3" Click="btnExcluir_Click"/>
-            <Button Name="btnCancelar" Content="Cancelar" Width="auto" Grid.Column="4" Click="btnCancelar_Click"/>
-        </Grid>
-        <DataGrid DockPanel.Dock="Bottom" x:Name="dgvUsuarios" Margin="30,10,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" IsReadOnly="True" AutoGenerateColumns="False" MouseDoubleClick="dgvUsuarios_MouseDoubleClick">
+        <GroupBox DockPanel.Dock="Top" Header="Usuários" HorizontalAlignment="Left" VerticalAlignment="Top" Foreground="Blue" BorderBrush="Blue">
+            <Grid DockPanel.Dock="Top" VerticalAlignment="Top" HorizontalAlignment="Left,Stretch" x:Name="griddados" >
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="0.1*"/>
+                    <ColumnDefinition Width="80"/>
+                    <ColumnDefinition Width="80"/>
+                    <ColumnDefinition Width="80"/>
+                    <ColumnDefinition Width="80"/>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="2*"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="10"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="10"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+                <Label Content="Login:" HorizontalAlignment="Right" VerticalAlignment="Center" Grid.Column="1" Grid.Row="1" Foreground="Blue"/>
+                <TextBox Name="tbxLogin" HorizontalAlignment="Left" VerticalAlignment="center" Grid.Column="2" Grid.Row="1" MaxLength="20" MaxWidth="250" MinWidth="150" BorderThickness="1" BorderBrush="Blue" Grid.ColumnSpan="2"/>
+                <Label Content="Senha:" HorizontalAlignment="Right" VerticalAlignment="Center" Grid.Column="4" Grid.Row="1" Foreground="Blue"/>
+                <PasswordBox Name="pswSenha" HorizontalAlignment="Stretch" VerticalAlignment="Center" Grid.Column="5" Grid.Row="1" MaxLength="15" MaxWidth="250" MinWidth="150" BorderThickness="1" BorderBrush="Blue"/>
+                <Label Content="Nome:" VerticalAlignment="Center" HorizontalAlignment="Right" Grid.Row="2" Grid.Column="1" Foreground="Blue"/>
+                <TextBox Name="tbxNome" HorizontalAlignment="Left" VerticalAlignment="Center" Grid.ColumnSpan="4" Grid.Row="2" Grid.Column="2" MaxLength="50" MinWidth="300" BorderThickness="1" BorderBrush="Blue"/>
+                <Label Content="Data Cadastro:" VerticalAlignment="Center" HorizontalAlignment="Right" Grid.Row="3" Grid.Column="1" Foreground="Blue"/>
+                <TextBox Name="tbxDataCadastro" HorizontalAlignment="Left" VerticalAlignment="Center" IsReadOnly="True" Grid.Row="3" Grid.Column="2" Grid.ColumnSpan="2" BorderThickness="1" BorderBrush="Blue" MinWidth="150"/>
+                <CheckBox Name="cbxSuper" Content="Super Usuário" Grid.Row="4" Grid.Column="2" Grid.ColumnSpan="2" HorizontalAlignment="Left" Foreground="Blue"/>
+                <CheckBox Name="cbxAtivo" Content="Usuário Ativo" Grid.Row="4" Grid.Column="4" Grid.ColumnSpan="2" HorizontalAlignment="Left" Foreground="Blue"/>
+                <Grid Grid.Row="6" Grid.Column="1" Grid.ColumnSpan="6">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="0.01*"/>
+                        <ColumnDefinition Width="52"/>
+                        <ColumnDefinition Width="0.01*"/>
+                        <ColumnDefinition Width="52"/>
+                        <ColumnDefinition Width="0.01*"/>
+                        <ColumnDefinition Width="52"/>
+                        <ColumnDefinition Width="0.01*"/>
+                        <ColumnDefinition Width="52"/>
+                        <ColumnDefinition Width="0.9*"/>
+                    </Grid.ColumnDefinitions>
+                    <Button Name="btnNovo" Content="Novo" Width="52" Grid.Column="1" Click="btnNovo_Click"/>
+                    <Button Name="btnGravar" Content="Gravar" Width="52" Grid.Column="3" Click="btnGravar_Click"/>
+                    <Button Name="btnExcluir" Content="Excluir" Width="52" Grid.Column="5" Click="btnExcluir_Click"/>
+                    <Button Name="btnCancelar" Content="Cancelar" Width="52" Grid.Column="7" Click="btnCancelar_Click"/>
+                </Grid>
+            </Grid>
+        </GroupBox>
+        <DataGrid DockPanel.Dock="Bottom" x:Name="dgvUsuarios" HorizontalAlignment="Left" VerticalAlignment="Top" IsReadOnly="True" AutoGenerateColumns="False" Margin="5,5,0,0"  MouseDoubleClick="dgvUsuarios_MouseDoubleClick">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Login" Binding="{Binding Login}"/>
                 <DataGridTextColumn Header="Nome" Binding="{Binding Nome}"/>

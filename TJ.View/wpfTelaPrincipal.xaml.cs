@@ -3,6 +3,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media;
+using System.Windows.Media.Imaging;
 using Ninject;
 using TJ.Apresentacao;
 using TJ.Dominio.Entidades;
@@ -40,18 +41,17 @@ namespace TJ.View
             {
                 if (TbcPrincipal.Items.Count == 0)
                 {
-                    TabItem tabItem = new TabItem();
-                    tabItem.Header = header;
-                    tabItem.Content = control;
-                    tabItem.Foreground = Brushes.Blue;
-                    TbcPrincipal.Items.Add(tabItem);
-                    tabItem.Focus();
+                    MyTabItem ucHeader = new MyTabItem();
+                    ucHeader.Title = header;
+                    ucHeader.Content = control;
+                    TbcPrincipal.Items.Add(ucHeader);
+                    ucHeader.Focus();
                 }
                 else
                 {
                     if (!FindTab(control))
                     {
-                        TabItem tabItem = new TabItem();
+                        MyTabItem tabItem = new MyTabItem();
                         tabItem.Header = header;
                         tabItem.Content = control;
                         tabItem.Foreground = Brushes.Blue;
@@ -71,9 +71,9 @@ namespace TJ.View
             {
                 for (int i = 0; i < TbcPrincipal.Items.Count + 1; i++)
                 {
-                    if ((TbcPrincipal.Items[i] as TabItem).Content.GetType() == control.GetType())
+                    if ((TbcPrincipal.Items[i] as MyTabItem).Content.GetType() == control.GetType())
                     {
-                        (TbcPrincipal.Items[i] as TabItem).Focus();
+                        (TbcPrincipal.Items[i] as MyTabItem).Focus();
                         return true;
                     }
                 }

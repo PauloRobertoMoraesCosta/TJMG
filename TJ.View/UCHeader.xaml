@@ -1,0 +1,11 @@
+﻿<UserControl x:Class="TJ.View.UCHeader"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             mc:Ignorable="d" Height="Auto" Width="Auto" Background="White" MouseLeave="UserControl_MouseLeave" MouseEnter="UserControl_MouseEnter">
+    <Grid>
+        <Label Content="TabItem" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="2,0,0,0" Name="lblTabTitle" FontSize="13" Foreground="Blue" SizeChanged="lbTabTitle_SizeChanged" />
+        <Button Content="x" Padding="0" HorizontalAlignment="Right" VerticalAlignment="Top"  BorderThickness="0" Visibility="Hidden" Background="White" Name="btnClose" FontSize="16" Width="14" ToolTip="Fechar" Click="btnClose_Click" MouseEnter="btnClose_MouseEnter" MouseLeave="btnClose_MouseLeave"/>
+    </Grid>
+</UserControl>

@@ -74,10 +74,17 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="MyTabItem.cs" />
+    <Compile Include="UCHeader.xaml.cs">
+      <DependentUpon>UCHeader.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Login.xaml.cs">
       <DependentUpon>Login.xaml</DependentUpon>
     </Compile>
     <Compile Include="Mensagens.cs" />
+    <Compile Include="UCEntidades.xaml.cs">
+      <DependentUpon>UCEntidades.xaml</DependentUpon>
+    </Compile>
     <Compile Include="UCUsuarios.xaml.cs">
       <DependentUpon>UCUsuarios.xaml</DependentUpon>
     </Compile>
@@ -126,7 +133,15 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <Page Include="UCHeader.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Login.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="UCEntidades.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -144,6 +159,9 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Imagens\TJ MG.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Imagens\Fechar.jpg" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it.

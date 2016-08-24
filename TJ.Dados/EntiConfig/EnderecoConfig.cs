@@ -14,7 +14,7 @@ namespace TJ.Dados.EntiConfig
             Property(e => e.Numero).HasColumnName("Endereco_Numero").IsRequired().HasMaxLength(5);
             Property(e => e.Bairro).HasColumnName("Endereco_Bairro").IsRequired().HasMaxLength(20);
             Property(e => e.Cidade.Id).HasColumnName("Endereco_Cidade").IsRequired();
-            Property(e => e.Entidade.Id).HasColumnName("Endereco_Cidade").IsRequired();
+            Property(e => e.Entidade.Id).HasColumnName("Endereco_Entidade").IsRequired();
         }
     }
 }
