@@ -3,7 +3,7 @@ using TJ.Dominio.Interfaces.Repositorios;
 
 namespace TJ.Dados.Repositorios
 {
-    public class RepositorioTelefone : RepositorioBase<Telefone>, IRepositorioTelefone
+    public class RepositorioEntidade : RepositorioBase<Entidade>, IRepositorioEntidade
     {
     }
 }

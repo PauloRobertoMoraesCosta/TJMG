@@ -1,4 +1,5 @@
-﻿using TJ.Dominio.Entidades;
+﻿using System.Collections.Generic;
+using TJ.Dominio.Entidades;
 using TJ.Dominio.Interfaces.Repositorios;
 using TJ.Dominio.Interfaces.Servicos;
 
@@ -11,6 +12,11 @@ namespace TJ.Dominio.Servicos
         public ServicoEndereco(IRepositorioEndereco repositorioEndereco) : base(repositorioEndereco)
         {
             _repositorioEndereco = repositorioEndereco;
+        }
+
+        public IEnumerable<Endereco> RetornarPorEntidade(int codigoEntidade)
+        {
+            return _repositorioEndereco.RetornarPorEntidade(codigoEntidade);
         }
     }
 }

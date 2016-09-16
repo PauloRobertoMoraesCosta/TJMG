@@ -2,7 +2,7 @@
 
 namespace TJ.Dominio.Interfaces.Repositorios
 {
-    public interface IRepositorioTelefone : IRepositorioBase<Telefone>
+    public interface IRepositorioBairro : IRepositorioBase<Bairro>
     {
     }
 }

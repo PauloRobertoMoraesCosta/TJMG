@@ -66,26 +66,6 @@ namespace TJ.View
             }
         }
 
-        private void btnEditar_Click(object sender, RoutedEventArgs e)
-        {
-            try
-            {
-                if (dgvUsuarios.SelectedItems.Count == 1)
-                {
-                    populaFormulario((dgvUsuarios.SelectedItem as Usuario).Login, (dgvUsuarios.SelectedItem as Usuario).Senha, (dgvUsuarios.SelectedItem as Usuario).Nome, (dgvUsuarios.SelectedItem as Usuario).DataCadastro.ToString().Substring(0, 10), Convert.ToBoolean((dgvUsuarios.SelectedItem as Usuario).Super), Convert.ToBoolean((dgvUsuarios.SelectedItem as Usuario).Ativo));
-                    alterEnableForm(true);
-                    tbxLogin.IsEnabled = false;
-                    incluindo = false;
-                }
-                else
-                Mensagens.MensagemAlertaOk("Por favor, selecione um registro!");
-            }
-            catch (Exception exception)
-            {
-                Mensagens.MensagemErroOk("Erro ao carregar dados: " + exception.Message);
-            }
-        }
-
         private void btnExcluir_Click(object sender, RoutedEventArgs e)
         {
             try
@@ -153,10 +133,12 @@ namespace TJ.View
                     tbxLogin.IsEnabled = false;
                     incluindo = false;
                 }
+                else
+                Mensagens.MensagemAlertaOk("Para editar algum usuário, clique duas vezes no mesmo!");
             }
-            catch (Exception)
+            catch (Exception exception)
             {
-                throw;
+                Mensagens.MensagemErroOk("Algo aconteceu errado ao clicar duas vezes no Grid: " + exception.Message);
             }
         }
         #endregion

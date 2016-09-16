@@ -9,7 +9,7 @@
             <Grid DockPanel.Dock="Top" VerticalAlignment="Top" HorizontalAlignment="Left,Stretch" x:Name="griddados" >
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="0.1*"/>
-                    <ColumnDefinition Width="80"/>
+                    <ColumnDefinition Width="Auto"/>
                     <ColumnDefinition Width="80"/>
                     <ColumnDefinition Width="80"/>
                     <ColumnDefinition Width="80"/>
@@ -54,7 +54,7 @@
                 </Grid>
             </Grid>
         </GroupBox>
-        <DataGrid DockPanel.Dock="Bottom" x:Name="dgvUsuarios" HorizontalAlignment="Left" VerticalAlignment="Top" IsReadOnly="True" AutoGenerateColumns="False" Margin="5,5,0,0"  MouseDoubleClick="dgvUsuarios_MouseDoubleClick">
+        <DataGrid DockPanel.Dock="Bottom" x:Name="dgvUsuarios" HorizontalAlignment="Left" VerticalAlignment="Top" IsReadOnly="True" AutoGenerateColumns="False" Margin="5,5,0,0"  MouseDoubleClick="dgvUsuarios_MouseDoubleClick" ToolTip="Para editar qualquer usuário, clique duas vezes no mesmo!">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Login" Binding="{Binding Login}"/>
                 <DataGridTextColumn Header="Nome" Binding="{Binding Nome}"/>

@@ -2,7 +2,7 @@
 
 namespace TJ.Dominio.Interfaces.Servicos
 {
-    public interface IServicoTelefone : IServicoBase<Telefone>
+    public interface IServicoBairro : IServicoBase<Bairro>
     {
     }
 }

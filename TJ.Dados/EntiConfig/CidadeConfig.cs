@@ -1,6 +1,4 @@
-﻿using System.ComponentModel.DataAnnotations.Schema;
-using System.Data.Entity.Infrastructure.Annotations;
-using System.Data.Entity.ModelConfiguration;
+﻿using System.Data.Entity.ModelConfiguration;
 using TJ.Dominio.Entidades;
 
 namespace TJ.Dados.EntiConfig
@@ -11,9 +9,14 @@ namespace TJ.Dados.EntiConfig
         {
             HasKey(c => c.Id);
 
-            Property(c => c.Id).HasColumnName("Cidade_Id");
-            Property(c => c.Nome).HasColumnName("Cidade_Nome").IsRequired().HasMaxLength(40).HasColumnAnnotation(IndexAnnotation.AnnotationName,new IndexAnnotation(new IndexAttribute("UN_Cidade") {IsUnique = true}));
-            Property(c => c.Estado.Id).HasColumnName("Cidade_Estado").IsRequired();
+            Property(c => c.Id).HasColumnName("Cidade_Codigo");
+            Property(c => c.Nome).HasColumnName("Cidade_Nome").IsRequired().HasMaxLength(40);
+            Property(c => c.EstadoSigla).IsRequired().HasColumnName("Cidade_EstadoSigla").HasMaxLength(2);
+
+            HasRequired(c => c.Estado);
+
+            HasMany(c => c.Enderecos);
+
         }
     }
 }

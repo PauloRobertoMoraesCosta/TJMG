@@ -7,10 +7,12 @@ namespace TJ.Dados.EntiConfig
     {
         public EstadoConfig()
         {
-            HasKey(e => e.Id);
+            HasKey(e => e.Sigla);
 
-            Property(e => e.Id).HasColumnName("Estado_Id");
+            Property(e => e.Sigla).HasColumnName("Estado_Sigla").HasMaxLength(2); 
             Property(e => e.Nome).HasColumnName("Estado_Nome").IsRequired().HasMaxLength(20);
+
+            HasMany(e => e.Cidades);
         }
     }
 }

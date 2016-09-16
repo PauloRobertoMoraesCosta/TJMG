@@ -2,8 +2,6 @@
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
 using Ninject;
 using TJ.Apresentacao;
 using TJ.Dominio.Entidades;
@@ -16,7 +14,7 @@ namespace TJ.View
     public partial class WpfTelaPrincipal : Window
     {
         protected readonly Usuario usuarioLogado;
-
+        
         public WpfTelaPrincipal()
         {
             InitializeComponent();
@@ -51,11 +49,11 @@ namespace TJ.View
                 {
                     if (!FindTab(control))
                     {
-                        MyTabItem tabItem = new MyTabItem();
-                        tabItem.Header = header;
-                        tabItem.Content = control;
-                        tabItem.Foreground = Brushes.Blue;
-                        TbcPrincipal.Items.Add(tabItem);
+                        MyTabItem ucHeader = new MyTabItem();
+                        ucHeader.Title = header;
+                        ucHeader.Content = control;
+                        TbcPrincipal.Items.Add(ucHeader);
+                        ucHeader.Focus();
                     }
                 }
             }
@@ -69,7 +67,7 @@ namespace TJ.View
         {
             try
             {
-                for (int i = 0; i < TbcPrincipal.Items.Count + 1; i++)
+                for (int i = 0; i < TbcPrincipal.Items.Count; i++)
                 {
                     if ((TbcPrincipal.Items[i] as MyTabItem).Content.GetType() == control.GetType())
                     {
@@ -95,6 +93,32 @@ namespace TJ.View
             {
                 UCUsuarios ucUsuario = MinhaNinject.Kernel.Get<UCUsuarios>();
                 InitializeTab(ucUsuario, "Usuários");
+            }
+            catch (Exception exception)
+            {
+                Mensagens.MensagemErroOk(exception.Message);
+            }
+        }
+
+        private void lblReeducando_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            try
+            {
+                UCUsuarios ucUsuario = MinhaNinject.Kernel.Get<UCUsuarios>();
+                InitializeTab(ucUsuario, "Reeducando");
+            }
+            catch (Exception exception)
+            {
+                Mensagens.MensagemErroOk(exception.Message);
+            }
+        }
+
+        private void lblInstituicoes_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            try
+            {
+                UCEntidades ucEntidade = MinhaNinject.Kernel.Get<UCEntidades>();
+                InitializeTab(ucEntidade, "Entidades");
             }
             catch (Exception exception)
             {

@@ -2,7 +2,7 @@
 
 namespace TJ.Apresentacao.InterfacesApp
 {
-    public interface IAppServiceTelefone : IAppServiceBase<Telefone>
+    public interface IAppServiceBairro : IAppServiceBase<Bairro>
     {
     }
 }

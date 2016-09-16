@@ -19,12 +19,12 @@ namespace TJ.Dados.Contexto
         }
 
         public DbSet<Usuario> Usuarios { get; set; }
+        public DbSet<Estado> Estados { get; set; }
         public DbSet<Cidade> Cidades { get; set; }
         public DbSet<Endereco> Enderecos { get; set; }
         public DbSet<Entidade> Entidades { get; set; }
-        public DbSet<Estado> Estados { get; set; }
-        public DbSet<Telefone> Telefones { get; set; }
-
+        public DbSet<Bairro> Bairros { get; set; }
+        
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             modelBuilder.Conventions.Remove<PluralizingTableNameConvention>();
@@ -36,6 +36,11 @@ namespace TJ.Dados.Contexto
             modelBuilder.Properties<string>().Configure(p => p.HasMaxLength(100));
 
             modelBuilder.Configurations.Add(new UsuarioConfig());
+            modelBuilder.Configurations.Add(new EntidadeConfig());
+            modelBuilder.Configurations.Add(new EstadoConfig());
+            modelBuilder.Configurations.Add(new EnderecoConfig());
+            modelBuilder.Configurations.Add(new CidadeConfig());
+            modelBuilder.Configurations.Add(new BairroConfig());
         }
 
         // Override do SaveChanges para que a DataCadastro seja sempre hoje

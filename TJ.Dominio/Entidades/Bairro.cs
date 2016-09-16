@@ -2,14 +2,14 @@
 
 namespace TJ.Dominio.Entidades
 {
-    public class Entidade
+    public class Bairro
     {
-        public Entidade()
+        public Bairro()
         {
             this.Enderecos = new List<Endereco>();
         }
         public int Id { get; set; }
         public string Nome { get; set; }
-        public virtual  ICollection<Endereco> Enderecos { get; set; }
+        public virtual ICollection<Endereco> Enderecos { get; set; }
     }
 }
