@@ -9,7 +9,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TJ.Dados", "TJ.Dados\TJ.Dad
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TJ.Apresentacao", "TJ.Apresentacao\TJ.Apresentacao.csproj", "{F972EAB2-3897-4059-8965-9C9D7E743E72}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TJ.View", "TJ.View\TJ.View.csproj", "{2C93468E-0291-4E50-8E0A-2AF26132083F}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TJ.View", "TJ.View\TJ.View.csproj", "{52024C0D-2F6A-4B2D-9D67-B0D7C59C95A2}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -29,10 +29,10 @@ Global
 		{F972EAB2-3897-4059-8965-9C9D7E743E72}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F972EAB2-3897-4059-8965-9C9D7E743E72}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F972EAB2-3897-4059-8965-9C9D7E743E72}.Release|Any CPU.Build.0 = Release|Any CPU
-		{2C93468E-0291-4E50-8E0A-2AF26132083F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{2C93468E-0291-4E50-8E0A-2AF26132083F}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{2C93468E-0291-4E50-8E0A-2AF26132083F}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{2C93468E-0291-4E50-8E0A-2AF26132083F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{52024C0D-2F6A-4B2D-9D67-B0D7C59C95A2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{52024C0D-2F6A-4B2D-9D67-B0D7C59C95A2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{52024C0D-2F6A-4B2D-9D67-B0D7C59C95A2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{52024C0D-2F6A-4B2D-9D67-B0D7C59C95A2}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

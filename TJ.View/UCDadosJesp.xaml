@@ -1,0 +1,55 @@
+﻿<UserControl x:Class="TJ.View.UCDadosJesp"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             mc:Ignorable="d" Background="White">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        <GroupBox Header="Dados Fórum" BorderBrush="Blue" BorderThickness="1" Foreground="Blue" MaxWidth="900" HorizontalAlignment="Left">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+                <Label Content="Descrição:* " HorizontalAlignment="Right" VerticalAlignment="Center" Foreground="Blue"/>
+                <TextBox Name="tbxDescricao" Grid.Column="1" Grid.ColumnSpan="3" BorderThickness="1" BorderBrush="Blue" MaxLength="150" MinWidth="200" MaxWidth="600" HorizontalAlignment="Left" VerticalAlignment="Center" TextWrapping="Wrap"/>
+                <Label Content="Endereço:* " Grid.Row="1" HorizontalAlignment="Right" VerticalAlignment="Center" Foreground="Blue"/>
+                <TextBox Name="tbxEndereco" Grid.Column="1" Grid.Row="1" Grid.ColumnSpan="3" BorderThickness="1" BorderBrush="Blue" MaxLength="150" MinWidth="200" MaxWidth="600" HorizontalAlignment="Left" VerticalAlignment="Center" TextWrapping="Wrap"/>
+                <Label Content="Bairro:* " Grid.Row="2" HorizontalAlignment="Right" VerticalAlignment="Center" Foreground="Blue"/>
+                <ComboBox Name="cbxBairro" Grid.Column="1" Grid.Row="2" BorderThickness="1" BorderBrush="Blue" MinWidth="150" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+                <Label Content="Cidade:* " Grid.Row="2" Grid.Column="2" HorizontalAlignment="Right" VerticalAlignment="Center" Foreground="Blue"/>
+                <ComboBox Name="cbxCidade" Grid.Column="3" Grid.Row="2" BorderThickness="1" BorderBrush="Blue" MinWidth="150" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="0,0,5,0"/>
+                <Label Content="Telefone:* " Grid.Row="3" HorizontalAlignment="Right" VerticalAlignment="Center" Foreground="Blue"/>
+                <TextBox Name="tbxTelefone" Grid.Column="1" Grid.Row="3" BorderThickness="1" BorderBrush="Blue" MaxLength="100" MinWidth="150" MaxWidth="300" HorizontalAlignment="Left" VerticalAlignment="Center" TextWrapping="Wrap"/>
+                <Label Content="E-mail:* " Grid.Row="3" Grid.Column="2" HorizontalAlignment="Right" VerticalAlignment="Center" Foreground="Blue"/>
+                <TextBox Name="tbxEmail" Grid.Column="3" Grid.Row="3" BorderThickness="1" BorderBrush="Blue" MaxLength="100" MinWidth="150" MaxWidth="300" HorizontalAlignment="Left" VerticalAlignment="Center" TextWrapping="Wrap"/>
+                <Label Content="Funcionamento:* " Grid.Row="4" HorizontalAlignment="Right" VerticalAlignment="Center" Foreground="Blue"/>
+                <TextBox Name="tbxHorarioFuncionamento" Grid.Column="1" Grid.Row="4" Grid.ColumnSpan="2" BorderThickness="1" BorderBrush="Blue" MaxLength="100" MinWidth="200" MaxWidth="400" HorizontalAlignment="Left" VerticalAlignment="Center" TextWrapping="Wrap"/>
+                <Label Content="* Dados Obrigatórios" Grid.Row="4" Grid.Column="3" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="Blue"/>
+            </Grid>
+        </GroupBox>
+        <Grid Grid.Row="1" Grid.ColumnSpan="4" Margin="5,5,0,5">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="0.1"/>
+                <ColumnDefinition Width="52"/>
+                <ColumnDefinition Width="0.1"/>
+                <ColumnDefinition Width="52"/>
+            </Grid.ColumnDefinitions>
+            <Button Name="btnGravaJesp" Content="Gravar" Grid.Column="1" Click="btnGravaJesp_Click" ToolTip="Permite gravar os dados do Fórum."/>
+            <Button Name="btnCancelaJesp" Content="Cancelar" Width="52" Grid.Column="3" Click="btnCancelaJesp_Click" ToolTip="Cancela as alterações não salvas."/>
+        </Grid>
+    </Grid>
+</UserControl>

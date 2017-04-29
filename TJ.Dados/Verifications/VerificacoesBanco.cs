@@ -7,7 +7,7 @@ namespace TJ.Dados.Verifications
     {
         public static string LimpaCaracteresEspeciais(string palavraInicial)
         {
-            String[] especiais = new String[] { "'", "=", ",", ";", "+", "\\.", ",", "-", ":", "\\(", "\\)", "ª", "\\|", "\\\\", "°" };
+            String[] especiais = { "'", "=", ",", ";", "+", "\\.", ",", "-", ":", "\\(", "\\)", "ª", "\\|", "\\\\", "°" };
 
             try
             {

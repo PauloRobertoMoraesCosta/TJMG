@@ -8,9 +8,10 @@
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>TJ.Dominio</RootNamespace>
-    <AssemblyName>Upa.Dominio</AssemblyName>
-    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <AssemblyName>TJ.Dominio</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -20,6 +21,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -28,43 +30,63 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+    <UseVSHostingProcess>false</UseVSHostingProcess>
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="Entidades\Bairro.cs" />
     <Compile Include="Entidades\Cidade.cs" />
+    <Compile Include="Entidades\Cumprimento.cs" />
     <Compile Include="Entidades\Entidade.cs" />
-    <Compile Include="Entidades\Endereco.cs" />
     <Compile Include="Entidades\Estado.cs" />
+    <Compile Include="Entidades\Jesp.cs" />
+    <Compile Include="Entidades\SentenciadoEntidade.cs" />
+    <Compile Include="Entidades\Sentenciado.cs" />
     <Compile Include="Entidades\Usuario.cs" />
     <Compile Include="Interfaces\Repositorios\IRepositorioBase.cs" />
     <Compile Include="Interfaces\Repositorios\IRepositorioBairro.cs" />
     <Compile Include="Interfaces\Repositorios\IRepositorioCidade.cs" />
-    <Compile Include="Interfaces\Repositorios\IRepositorioEndereco.cs" />
     <Compile Include="Interfaces\Repositorios\IRepositorioEntidade.cs" />
     <Compile Include="Interfaces\Repositorios\IRepositorioEstado.cs" />
+    <Compile Include="Interfaces\Repositorios\IRepositorioCumprimento.cs" />
+    <Compile Include="Interfaces\Repositorios\IRepositorioJesp.cs" />
+    <Compile Include="Interfaces\Repositorios\IRepositorioSentenciadoEntidade.cs" />
+    <Compile Include="Interfaces\Repositorios\IRepositorioSentenciado.cs" />
     <Compile Include="Interfaces\Repositorios\IRepositorioUsuario.cs" />
+    <Compile Include="Interfaces\Servicos\IServicoJesp.cs" />
     <Compile Include="Interfaces\Servicos\IServicoBase.cs" />
     <Compile Include="Interfaces\Servicos\IServicoBairro.cs" />
     <Compile Include="Interfaces\Servicos\IServicoCidade.cs" />
-    <Compile Include="Interfaces\Servicos\IServicoEndereco.cs" />
+    <Compile Include="Interfaces\Servicos\IServicoSentenciadoEntidade.cs" />
     <Compile Include="Interfaces\Servicos\IServicoEntidade.cs" />
     <Compile Include="Interfaces\Servicos\IServicoEstado.cs" />
+    <Compile Include="Interfaces\Servicos\IServicoCumprimento.cs" />
+    <Compile Include="Interfaces\Servicos\IServicoSentenciado.cs" />
     <Compile Include="Interfaces\Servicos\IServicoUsuario.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Servicos\ServicoJesp.cs" />
     <Compile Include="Servicos\ServicoBase.cs" />
     <Compile Include="Servicos\ServicoBairro.cs" />
     <Compile Include="Servicos\ServicoCidade.cs" />
-    <Compile Include="Servicos\ServicoEndereco.cs" />
+    <Compile Include="Servicos\ServicoSentenciadoEntidade.cs" />
     <Compile Include="Servicos\ServicoEntidade.cs" />
     <Compile Include="Servicos\ServicoEstado.cs" />
+    <Compile Include="Servicos\ServicoCumprimento.cs" />
+    <Compile Include="Servicos\ServicoSentenciado.cs" />
     <Compile Include="Servicos\ServicoUsuario.cs" />
     <Compile Include="verifications\DominioException.cs" />
     <Compile Include="verifications\Verificacoes.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Reference Include="CrystalDecisions.CrystalReports.Engine, Version=13.0.2000.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL" />
+    <Reference Include="CrystalDecisions.ReportSource, Version=13.0.2000.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL" />
+    <Reference Include="CrystalDecisions.Shared, Version=13.0.2000.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL" />
     <Reference Include="System" />
+    <Reference Include="System.Drawing" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Service Include="{C0C07587-41A7-46C8-8FBD-3F9C8EBE2DDC}" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

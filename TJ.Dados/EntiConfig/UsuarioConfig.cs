@@ -18,6 +18,7 @@ namespace TJ.Dados.EntiConfig
             Property(u => u.Senha).HasColumnName("Usuario_Senha").IsRequired().HasMaxLength(15);
             Property(u => u.Nome).HasColumnName("Usuario_Nome").IsRequired().HasMaxLength(50);
             Property(u => u.DataCadastro).HasColumnName("Usuario_DataCadastro").IsRequired();
+            Property(u => u.DadosRegistro).HasColumnName("Usuario_DadosRegistro").HasMaxLength(100);
             Property(u => u.Ativo).HasColumnName("Usuario_Ativo").IsRequired().HasMaxLength(5);
             Property(u => u.Super).HasColumnName("Usuario_Super").IsRequired().HasMaxLength(5);
             

@@ -11,5 +11,7 @@ namespace TJ.Dominio.Interfaces.Servicos
         void Alterar(TEntity objeto);
         void Remover(TEntity objeto);
         void Dispose();
+        void ReloadElement(TEntity objeto);
+        void Reload(IEnumerable<TEntity> objetos);
     }
 }

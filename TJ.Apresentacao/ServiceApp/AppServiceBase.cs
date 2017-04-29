@@ -48,5 +48,15 @@ namespace TJ.Apresentacao.ServiceApp
         {
             _serviceBase.Dispose();
         }
+
+        public void ReloadElement(TEntity objeto)
+        {
+            _serviceBase.ReloadElement(objeto);
+        }
+
+        public void Reload(IEnumerable<TEntity> objetos)
+        {
+            _serviceBase.Reload(objetos);
+        }
     }
 }

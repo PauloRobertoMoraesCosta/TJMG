@@ -11,5 +11,7 @@ namespace TJ.Apresentacao.InterfacesApp
         void Alterar(TEntity objeto);
         void Remover(TEntity objeto);
         void Dispose();
+        void ReloadElement(TEntity objeto);
+        void Reload(IEnumerable<TEntity> objetos);
     }
 }

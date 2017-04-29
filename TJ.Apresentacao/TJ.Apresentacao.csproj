@@ -8,9 +8,10 @@
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>TJ.Apresentacao</RootNamespace>
-    <AssemblyName>Upa.Apresentacao</AssemblyName>
-    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <AssemblyName>TJ.Apresentacao</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -20,6 +21,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -28,6 +30,8 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+    <UseVSHostingProcess>false</UseVSHostingProcess>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Ninject">
@@ -45,18 +49,24 @@
     <Compile Include="InterfacesApp\IAppServiceBase.cs" />
     <Compile Include="InterfacesApp\IAppServiceBairro.cs" />
     <Compile Include="InterfacesApp\IAppServiceCidade.cs" />
-    <Compile Include="InterfacesApp\IAppServiceEndereco.cs" />
     <Compile Include="InterfacesApp\IAppServiceEntidade.cs" />
     <Compile Include="InterfacesApp\IAppServiceEstado.cs" />
+    <Compile Include="InterfacesApp\IAppServiceCumprimento.cs" />
+    <Compile Include="InterfacesApp\IAppServiceJesp.cs" />
+    <Compile Include="InterfacesApp\IAppServiceSentenciadoEntidade.cs" />
+    <Compile Include="InterfacesApp\IAppServiceSentenciado.cs" />
     <Compile Include="InterfacesApp\IAppServiceUsuario.cs" />
     <Compile Include="MinhaNinject.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ServiceApp\AppServiceBase.cs" />
     <Compile Include="ServiceApp\AppServiceBairro.cs" />
     <Compile Include="ServiceApp\AppServiceCidade.cs" />
-    <Compile Include="ServiceApp\AppServiceEndereco.cs" />
     <Compile Include="ServiceApp\AppServiceEntidade.cs" />
     <Compile Include="ServiceApp\AppServiceEstado.cs" />
+    <Compile Include="ServiceApp\AppServiceCumprimento.cs" />
+    <Compile Include="ServiceApp\AppServiceJesp.cs" />
+    <Compile Include="ServiceApp\AppServiceSentenciadoEntidade.cs" />
+    <Compile Include="ServiceApp\AppServiceSentenciado.cs" />
     <Compile Include="ServiceApp\AppServiceUsuario.cs" />
   </ItemGroup>
   <ItemGroup>

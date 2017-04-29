@@ -15,8 +15,8 @@ namespace TJ.Dados.EntiConfig
 
             HasRequired(c => c.Estado);
 
-            HasMany(c => c.Enderecos);
-
+            HasMany(c => c.Sentenciados);
+            HasMany(c => c.Entidades);
         }
     }
 }

@@ -1,0 +1,119 @@
+﻿using System;
+using System.Configuration;
+using System.Linq;
+using System.Windows;
+using System.Windows.Controls;
+using System.Windows.Input;
+using System.Windows.Media;
+using CrystalDecisions.CrystalReports.Engine;
+using TJ.Apresentacao.InterfacesApp;
+using TJ.Dominio.Entidades;
+
+namespace TJ.View
+{
+    /// <summary>
+    /// Interaction logic for RelatorioEncaminhamento.xaml
+    /// </summary>
+    public partial class UCRelatorioEncaminhamento : UserControl
+    {
+        protected readonly IAppServiceSentenciado _serviceSentenciado;
+        protected readonly IAppServiceEntidade _serviceEntidade;
+        protected readonly IAppServiceSentenciadoEntidade _serviceSentenciadoEntidade;
+        private Usuario usuarioLogado;
+        ReportDocument relatorio = new ReportDocument();
+
+        public UCRelatorioEncaminhamento(IAppServiceSentenciado serviceSentenciado, IAppServiceEntidade serviceEntidade, IAppServiceSentenciadoEntidade serviceSentenciadoEntidade, Usuario UsuarioLogado)
+        {
+            try
+            {
+                InitializeComponent();
+                _serviceSentenciado = serviceSentenciado;
+                _serviceEntidade = serviceEntidade;
+                _serviceSentenciadoEntidade = serviceSentenciadoEntidade;
+                usuarioLogado = UsuarioLogado;
+                cbxSentenciado.ItemsSource = _serviceSentenciado.RetornaTodosAsNoTracking().ToList();
+                cbxSentenciado.DisplayMemberPath = "Nome";
+                CrystalReportsViewer.Owner = Window.GetWindow(this);
+            }
+            catch (Exception exception)
+            {
+                Mensagens.MensagemErroOk(exception.Message);
+            }
+
+        }
+
+        private void BtnImprimir_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                if ((cbxSentenciado.SelectedItem as Sentenciado).Origem != "")
+                {
+                    CrystalReportsViewer.Visibility = Visibility.Visible;
+                    relatorio.Load(String.Format(@"{0}Encaminhamento.rpt", Validacoes.caminhoExe()));
+                    string[] connectionString = ConfigurationManager.ConnectionStrings["TJ.View.Properties.Settings.StringConection"].ConnectionString.Split(';');
+                    string servidor = connectionString[0].Split('=')[1];
+                    string banco = connectionString[1].Split('=')[1];
+                    string usuario = connectionString[3].Split('=')[1];
+                    string senha = connectionString[4].Split('=')[1];
+                    
+                    relatorio.DataSourceConnections[0].SetConnection(servidor, banco, usuario, senha);
+                    //relatorio.SetDatabaseLogon(usuario,senha,servidor,banco);
+                    
+                    relatorio.SetParameterValue("IdSentenciado", (cbxSentenciado.SelectedItem as Sentenciado).Id);
+                    relatorio.SetParameterValue("Id_Instituicao", (cbxInstituicao.SelectedItem as SentenciadoEntidade).EntidadeId);
+                    relatorio.SetParameterValue("UsuarioLogado", String.Format("'{0}'", usuarioLogado.Login));
+                    relatorio.SetParameterValue("DataFim", dtpDataFim.SelectedDate == null ? "'null'" : String.Format("'{0}'",dtpDataFim.SelectedDate.Value.ToString("yyyy-MM-dd")));
+                     
+                    CrystalReportsViewer.Owner = Window.GetWindow(this);
+                    CrystalReportsViewer.ViewerCore.ReportSource = relatorio;
+                    
+                }
+                else
+                {
+                    Mensagens.MensagemAlertaOk("O sentenciado não possui uma origem selecionada, favor corrigir no cadastro do sentenciado.");
+                }
+
+            }
+            catch (Exception exception)
+            {
+                Mensagens.MensagemErroOk("Ocorreu algo inesperado ao imprimir o relatório: " + exception.Message);
+            }
+        }
+
+        private void cbx_KeyUp(object sender, KeyEventArgs e)
+        {
+            if ((sender as ComboBox).SelectedIndex != -1)
+                (sender as ComboBox).BorderBrush = new SolidColorBrush(Colors.Blue);
+        }
+
+        private void cbx_DropDownClosed(object sender, EventArgs e)
+        {
+            if ((sender as ComboBox).SelectedIndex != -1)
+                (sender as ComboBox).BorderBrush = new SolidColorBrush(Colors.Blue);
+        }
+
+        private void cbxSentenciado_KeyUp(object sender, KeyEventArgs e)
+        {
+            if ((sender as ComboBox).SelectedIndex != -1)
+            {
+                (sender as ComboBox).BorderBrush = new SolidColorBrush(Colors.Blue);
+
+                cbxInstituicao.ItemsSource =
+                    _serviceSentenciadoEntidade.RetornarPorSentenciado((cbxSentenciado.SelectedItem as Sentenciado).Id).ToList();
+                cbxInstituicao.DisplayMemberPath = "Nome";
+            }
+        }
+
+        private void cbxSentenciado_DropDownClosed(object sender, EventArgs e)
+        {
+            if ((sender as ComboBox).SelectedIndex != -1)
+            {
+                (sender as ComboBox).BorderBrush = new SolidColorBrush(Colors.Blue);
+
+                cbxInstituicao.ItemsSource =
+                    _serviceSentenciadoEntidade.RetornarPorSentenciado((cbxSentenciado.SelectedItem as Sentenciado).Id).ToList().Where(se => se.DataFim == null);
+                cbxInstituicao.DisplayMemberPath = "Entidade.Nome";
+            }
+        }
+    }
+}

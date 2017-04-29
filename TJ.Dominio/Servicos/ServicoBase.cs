@@ -49,5 +49,15 @@ namespace TJ.Dominio.Servicos
         {
             _repositorio.Dispose();
         }
+
+        public void ReloadElement(TEntity objeto)
+        {
+            _repositorio.ReloadElement(objeto);
+        }
+
+        public void Reload(IEnumerable<TEntity> objetos)
+        {
+            _repositorio.Reload(objetos);
+        }
     }
 }

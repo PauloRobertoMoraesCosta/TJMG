@@ -9,14 +9,15 @@ namespace TJ.Dominio.Entidades
     {
 
         #region "Atributos"
+
         public string Login { get; set; }
         public string Senha { get; set; }
         public string Nome { get; set; }
         public DateTime DataCadastro{ get; set; }
+        public string DadosRegistro { get; set; }
         public string Super { get; set; }
         public string Ativo { get; set; }
         
         #endregion
-
     }
 }

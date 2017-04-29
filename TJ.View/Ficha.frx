@@ -1,0 +1,53 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Report ScriptLanguage="CSharp" ReportInfo.Created="11/24/2016 13:05:34" ReportInfo.Modified="11/24/2016 13:29:28" ReportInfo.CreatorVersion="2014.2.2.0">
+  <Dictionary>
+    <MsSqlDataConnection Name="Connection" ConnectionString="rijcmlqwqKumgs0g/Q9YmuBIxPWrqI+ZRIX3KqwXq3+TuP8eCL1R5Y3+ALcWVjrj1vbD3rWuQ1uxYLlkmpfk3+HVHKIMqUGU4mK6c7L/Y4NXXELtqiMCUfo3SyIoIlx8mKGDlwva7uLBUGRwCpxtD+3iFMi6LEEgPGQyKDG8KaARjR46xlbY7Ej3HjGW6Em1K08mbgyLVigSgbCBTaOacnoYQjhZQ==">
+      <TableDataSource Name="Table" Alias="FichaEncaminhamento" DataType="System.Int32" Enabled="true" SelectCommand="SELECT S.Id, S.Sentenciado_Nome, S.Sentenciado_Sexo, S.Sentenciado_Processo, S.Sentenciado_Origem, S.Sentenciado_PenaAnos, S.Sentenciado_PenaMeses, S.Sentenciado_PenaDias, S.Sentenciado_Filiacao, S.Sentenciado_EstadoCivil, S.Sentenciado_DataNascimento, S.Sentenciado_Telefone, S.Sentenciado_ResponsavelSetor, S.Sentenciado_Endereco, S.Sentenciado_Bairro, S.Sentenciado_Cidade, S.Sentenciado_PontoReferencia, S.Sentenciado_AtividadePSC, S.Sentenciado_Naturalidade, S.Sentenciado_Ocupacao, S.Sentenciado_Escolaridade, S.Sentenciado_StatusPena, S.Sentenciado_Observacao, S.DataCadastro, S.Sentenciado_UsuarioCadastro, S.Sentenciado_UsuarioAlteracao, S.Sentenciado_Comutacao, S.Sentneciado_ComutacaoObservacao, S.Sentenciado_Detracao, S.Sentneciado_DetracaoObservacao&#13;&#10;FROM &quot;Sentenciado&quot; S&#13;&#10;">
+        <Column Name="Id" DataType="System.Int32"/>
+        <Column Name="Sentenciado_Nome" DataType="System.String"/>
+        <Column Name="Sentenciado_Sexo" DataType="System.String"/>
+        <Column Name="Sentenciado_Processo" DataType="System.String"/>
+        <Column Name="Sentenciado_Origem" DataType="System.String"/>
+        <Column Name="Sentenciado_PenaAnos" DataType="System.Int32"/>
+        <Column Name="Sentenciado_PenaMeses" DataType="System.Int32"/>
+        <Column Name="Sentenciado_PenaDias" DataType="System.Int32"/>
+        <Column Name="Sentenciado_Filiacao" DataType="System.String"/>
+        <Column Name="Sentenciado_EstadoCivil" DataType="System.String"/>
+        <Column Name="Sentenciado_DataNascimento" DataType="System.DateTime"/>
+        <Column Name="Sentenciado_Telefone" DataType="System.String"/>
+        <Column Name="Sentenciado_ResponsavelSetor" DataType="System.String"/>
+        <Column Name="Sentenciado_Endereco" DataType="System.String"/>
+        <Column Name="Sentenciado_Bairro" DataType="System.Int32"/>
+        <Column Name="Sentenciado_Cidade" DataType="System.Int32"/>
+        <Column Name="Sentenciado_PontoReferencia" DataType="System.String"/>
+        <Column Name="Sentenciado_AtividadePSC" DataType="System.String"/>
+        <Column Name="Sentenciado_Naturalidade" DataType="System.String"/>
+        <Column Name="Sentenciado_Ocupacao" DataType="System.String"/>
+        <Column Name="Sentenciado_Escolaridade" DataType="System.String"/>
+        <Column Name="Sentenciado_StatusPena" DataType="System.String"/>
+        <Column Name="Sentenciado_Observacao" DataType="System.String"/>
+        <Column Name="DataCadastro" DataType="System.DateTime"/>
+        <Column Name="Sentenciado_UsuarioCadastro" DataType="System.String"/>
+        <Column Name="Sentenciado_UsuarioAlteracao" DataType="System.String"/>
+        <Column Name="Sentenciado_Comutacao" DataType="System.Int32"/>
+        <Column Name="Sentneciado_ComutacaoObservacao" DataType="System.String"/>
+        <Column Name="Sentenciado_Detracao" DataType="System.Int32"/>
+        <Column Name="Sentneciado_DetracaoObservacao" DataType="System.String"/>
+      </TableDataSource>
+    </MsSqlDataConnection>
+  </Dictionary>
+  <ReportPage Name="Page1">
+    <ReportTitleBand Name="ReportTitle1" Width="718.2" Height="56.7">
+      <TextObject Name="Text1" Left="217.35" Top="28.35" Width="94.5" Height="18.9"/>
+    </ReportTitleBand>
+    <PageHeaderBand Name="PageHeader1" Top="60.7" Width="718.2" Height="28.35">
+      <TextObject Name="Text4" Left="28.35" Width="94.5" Height="18.9" Text="Sentenciado_Nome"/>
+    </PageHeaderBand>
+    <DataBand Name="Data1" Top="93.05" Width="718.2" Height="75.6" DataSource="Table">
+      <RichObject Name="Rich1" Left="28.35" Top="47.25" Width="94.5" Height="18.9"/>
+      <TextObject Name="Text3" Left="28.35" Top="47.25" Width="94.5" Height="18.9" Text="[FichaEncaminhamento.Sentenciado_Nome]"/>
+      <TextObject Name="Text2" Left="141.75" Top="47.25" Width="132.3" Height="18.9" Text="[FichaEncaminhamento.Sentenciado_Sexo]"/>
+    </DataBand>
+    <PageFooterBand Name="PageFooter1" Top="172.65" Width="718.2" Height="18.9"/>
+  </ReportPage>
+</Report>

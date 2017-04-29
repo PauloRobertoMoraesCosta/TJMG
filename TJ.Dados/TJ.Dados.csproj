@@ -8,9 +8,10 @@
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>TJ.Dados</RootNamespace>
-    <AssemblyName>Upa.Dados</AssemblyName>
-    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <AssemblyName>TJ.Dados</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -20,6 +21,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -28,23 +30,31 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+    <UseVSHostingProcess>false</UseVSHostingProcess>
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="Contexto\Context.cs" />
     <Compile Include="EntiConfig\BairroConfig.cs" />
     <Compile Include="EntiConfig\CidadeConfig.cs" />
-    <Compile Include="EntiConfig\EnderecoConfig.cs" />
     <Compile Include="EntiConfig\EntidadeConfig.cs" />
     <Compile Include="EntiConfig\EstadoConfig.cs" />
+    <Compile Include="EntiConfig\CumprimentoConfig.cs" />
+    <Compile Include="EntiConfig\JespConfig.cs" />
+    <Compile Include="EntiConfig\SentenciadoEntidadeConfig.cs" />
+    <Compile Include="EntiConfig\SentenciadoConfig.cs" />
     <Compile Include="EntiConfig\UsuarioConfig.cs" />
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repositorios\RepositorioBase.cs" />
     <Compile Include="Repositorios\RepositorioBairro.cs" />
     <Compile Include="Repositorios\RepositorioCidade.cs" />
-    <Compile Include="Repositorios\RepositorioEndereco.cs" />
     <Compile Include="Repositorios\RepositorioEntidade.cs" />
     <Compile Include="Repositorios\RepositorioEstado.cs" />
+    <Compile Include="Repositorios\RepositorioCumprimento.cs" />
+    <Compile Include="Repositorios\RepositorioJesp.cs" />
+    <Compile Include="Repositorios\RepositorioSentenciadoEntidade.cs" />
+    <Compile Include="Repositorios\RepositorioSentenciado.cs" />
     <Compile Include="Repositorios\RepositorioUsuario.cs" />
     <Compile Include="Verifications\DadosException.cs" />
     <Compile Include="Verifications\VerificacoesBanco.cs" />
@@ -56,20 +66,28 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Reference Include="EntityFramework">
-      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.dll</HintPath>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net40\EntityFramework.dll</HintPath>
     </Reference>
     <Reference Include="EntityFramework.SqlServer">
-      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net40\EntityFramework.SqlServer.dll</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="Newtonsoft.Json, Version=4.5.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL" />
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
-    <None Include="packages.config" />
+    <None Include="packages.config">
+      <SubType>Designer</SubType>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{C0C07587-41A7-46C8-8FBD-3F9C8EBE2DDC}" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

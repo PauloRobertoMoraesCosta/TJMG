@@ -6,12 +6,14 @@ namespace TJ.Dominio.Entidades
     {
         public Cidade()
         {
-            this.Enderecos = new List<Endereco>();
+            Sentenciados = new List<Sentenciado>();
+            Entidades = new List<Entidade>();
         }
         public int Id { get; set; }
         public string Nome { get; set; }
         public string EstadoSigla { get; set; }
         public virtual Estado Estado { get; set; }
-        public virtual ICollection<Endereco> Enderecos { get; set; }
+        public virtual ICollection<Sentenciado> Sentenciados { get; set; }
+        public virtual ICollection<Entidade> Entidades { get; set; }
     }
 }

@@ -14,6 +14,7 @@ namespace TJ.Dados.Repositorios
     public class RepositorioBase<TEntity> : IDisposable, IRepositorioBase<TEntity> where TEntity : class
     {
         protected Context db = new Context();
+
         public void Adiciona(TEntity objeto)
         {
             db.Set<TEntity>().Add(objeto);
@@ -28,12 +29,12 @@ namespace TJ.Dados.Repositorios
 
         public IEnumerable<TEntity> RetornaTodos()
         {
-            return db.Set<TEntity>().ToList();
+            return db.Set<TEntity>();
         }
 
         public IEnumerable<TEntity> RetornaTodosAsNoTracking()
         {
-            return db.Set<TEntity>().AsNoTracking().ToList();
+            return db.Set<TEntity>().AsNoTracking();
         }
 
         public void Alterar(TEntity objeto)
@@ -51,6 +52,19 @@ namespace TJ.Dados.Repositorios
         public void Dispose()
         {
             throw new NotImplementedException("Método dispose da classe RepositorioBase ainda não implementado");
+        }
+
+        public void ReloadElement(TEntity objeto)
+        {
+            db.Entry(objeto).Reload();
+        }
+
+        public void Reload(IEnumerable<TEntity> objetos)
+        {
+            for (int i = 0; i < objetos.Count(); i++)
+            {
+                db.Entry(objetos.ElementAt(i)).Reload();
+            }
         }
     }
 }
