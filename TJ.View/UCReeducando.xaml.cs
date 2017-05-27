@@ -120,7 +120,8 @@ namespace TJ.View
             {
                 "Regular (Mínimo 24 horas mês)",
                 "Irregular (Entre 1 e 23 horas mês)",
-                "Descumprimento"
+                "Descumprimento",
+                "Encaminhado(a)"
             };
             carregarDgvReeducando();
             alterEnableForm(false, gridDadosSentenciado);

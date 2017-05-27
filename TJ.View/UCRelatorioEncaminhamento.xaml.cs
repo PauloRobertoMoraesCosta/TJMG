@@ -33,7 +33,7 @@ namespace TJ.View
                 usuarioLogado = UsuarioLogado;
                 cbxSentenciado.ItemsSource = _serviceSentenciado.RetornaTodosAsNoTracking().ToList();
                 cbxSentenciado.DisplayMemberPath = "Nome";
-                CrystalReportsViewer.Owner = Window.GetWindow(this);
+                //CrystalReportsViewer.Owner = Window.GetWindow(this);
             }
             catch (Exception exception)
             {
@@ -49,6 +49,7 @@ namespace TJ.View
                 if ((cbxSentenciado.SelectedItem as Sentenciado).Origem != "")
                 {
                     CrystalReportsViewer.Visibility = Visibility.Visible;
+                 
                     relatorio.Load(String.Format(@"{0}Encaminhamento.rpt", Validacoes.caminhoExe()));
                     string[] connectionString = ConfigurationManager.ConnectionStrings["TJ.View.Properties.Settings.StringConection"].ConnectionString.Split(';');
                     string servidor = connectionString[0].Split('=')[1];
@@ -57,13 +58,13 @@ namespace TJ.View
                     string senha = connectionString[4].Split('=')[1];
                     
                     relatorio.DataSourceConnections[0].SetConnection(servidor, banco, usuario, senha);
-                    //relatorio.SetDatabaseLogon(usuario,senha,servidor,banco);
+                    relatorio.SetDatabaseLogon(usuario,senha,servidor,banco);
                     
                     relatorio.SetParameterValue("IdSentenciado", (cbxSentenciado.SelectedItem as Sentenciado).Id);
                     relatorio.SetParameterValue("Id_Instituicao", (cbxInstituicao.SelectedItem as SentenciadoEntidade).EntidadeId);
                     relatorio.SetParameterValue("UsuarioLogado", String.Format("'{0}'", usuarioLogado.Login));
                     relatorio.SetParameterValue("DataFim", dtpDataFim.SelectedDate == null ? "'null'" : String.Format("'{0}'",dtpDataFim.SelectedDate.Value.ToString("yyyy-MM-dd")));
-                     
+
                     CrystalReportsViewer.Owner = Window.GetWindow(this);
                     CrystalReportsViewer.ViewerCore.ReportSource = relatorio;
                     
