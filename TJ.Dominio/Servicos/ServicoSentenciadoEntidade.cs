@@ -7,16 +7,16 @@ namespace TJ.Dominio.Servicos
 {
     public class ServicoSentenciadoEntidade : ServicoBase<SentenciadoEntidade>, IServicoSentenciadoEntidade
     {
-        protected readonly IRepositorioSentenciadoEntidade _reposiotorioSentenciadoEntidade;
+        protected readonly IRepositorioSentenciadoEntidade _repositorioSentenciadoEntidade;
         public ServicoSentenciadoEntidade(IRepositorioSentenciadoEntidade repositorioSentenciadoEntidade)
             : base(repositorioSentenciadoEntidade)
         {
-            _reposiotorioSentenciadoEntidade = repositorioSentenciadoEntidade;
+            _repositorioSentenciadoEntidade = repositorioSentenciadoEntidade;
         }
 
         public IEnumerable<SentenciadoEntidade> RetornarPorSentenciado(int sentenciadoId)
         {
-            return _reposiotorioSentenciadoEntidade.RetornarPorSentenciado(sentenciadoId);
+            return _repositorioSentenciadoEntidade.RetornarPorSentenciado(sentenciadoId);
         }
     }
 }

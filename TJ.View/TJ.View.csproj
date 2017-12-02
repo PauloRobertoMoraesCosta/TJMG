@@ -73,6 +73,14 @@
     <Reference Include="System.Xaml">
       <RequiredTargetFramework>4.0</RequiredTargetFramework>
     </Reference>
+    <Reference Include="ToastNotifications, Version=2.2.0.0, Culture=neutral, PublicKeyToken=e89d9d7314a7c797, processorArchitecture=MSIL">
+      <HintPath>..\packages\ToastNotifications.2.2.0\lib\net40\ToastNotifications.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="ToastNotifications.Messages, Version=2.2.0.0, Culture=neutral, PublicKeyToken=e89d9d7314a7c797, processorArchitecture=MSIL">
+      <HintPath>..\packages\ToastNotifications.Messages.2.2.0\lib\net40\ToastNotifications.Messages.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="WindowsBase" />
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
@@ -82,31 +90,48 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Enumeracoes.cs" />
+    <Compile Include="ToastViewModel.cs" />
     <Compile Include="UCRelatorioFrequencia.xaml.cs">
       <DependentUpon>UCRelatorioFrequencia.xaml</DependentUpon>
     </Compile>
     <Compile Include="UCRelatorioEncaminhamento.xaml.cs">
       <DependentUpon>UCRelatorioEncaminhamento.xaml</DependentUpon>
     </Compile>
-    <Compile Include="UCCumprimentoPSC.xaml.cs">
-      <DependentUpon>UCCumprimentoPSC.xaml</DependentUpon>
+    <Compile Include="UCCumprimentoPSCLista.xaml.cs">
+      <DependentUpon>UCCumprimentoPSCLista.xaml</DependentUpon>
     </Compile>
-    <Compile Include="UCDadosJesp.xaml.cs">
-      <DependentUpon>UCDadosJesp.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="UCEntidades.xaml.cs">
-      <DependentUpon>UCEntidades.xaml</DependentUpon>
+    <Compile Include="UCEntidadesLista.xaml.cs">
+      <DependentUpon>UCEntidadesLista.xaml</DependentUpon>
     </Compile>
     <Compile Include="UCHeader.xaml.cs">
       <DependentUpon>UCHeader.xaml</DependentUpon>
     </Compile>
-    <Compile Include="UCReeducando.xaml.cs">
-      <DependentUpon>UCReeducando.xaml</DependentUpon>
+    <Compile Include="UCReeducandoLista.xaml.cs">
+      <DependentUpon>UCReeducandoLista.xaml</DependentUpon>
     </Compile>
-    <Compile Include="UCUsuarios.xaml.cs">
-      <DependentUpon>UCUsuarios.xaml</DependentUpon>
+    <Compile Include="UCUsuariosLista.xaml.cs">
+      <DependentUpon>UCUsuariosLista.xaml</DependentUpon>
     </Compile>
     <Compile Include="Validacoes.cs" />
+    <Compile Include="WinCadEdReeducando.xaml.cs">
+      <DependentUpon>WinCadEdReeducando.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="WinCadEdReeducandoEntidade.xaml.cs">
+      <DependentUpon>WinCadEdReeducandoEntidade.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="WinCadEdEntidade.xaml.cs">
+      <DependentUpon>WinCadEdEntidade.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="WinCadEdUsuario.xaml.cs">
+      <DependentUpon>WinCadEdUsuario.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="winCadEdCumprimento.xaml.cs">
+      <DependentUpon>winCadEdCumprimento.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="winDadosJesp.xaml.cs">
+      <DependentUpon>winDadosJesp.xaml</DependentUpon>
+    </Compile>
     <Compile Include="WpfTelaPrincipal.xaml.cs">
       <DependentUpon>WpfTelaPrincipal.xaml</DependentUpon>
     </Compile>
@@ -129,15 +154,11 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="UCCumprimentoPSC.xaml">
+    <Page Include="UCCumprimentoPSCLista.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="UCDadosJesp.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="UCEntidades.xaml">
+    <Page Include="UCEntidadesLista.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -145,13 +166,37 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="UCReeducando.xaml">
+    <Page Include="UCReeducandoLista.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="UCUsuarios.xaml">
+    <Page Include="UCUsuariosLista.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="WinCadEdReeducando.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="WinCadEdReeducandoEntidade.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="WinCadEdEntidade.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="WinCadEdUsuario.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="winCadEdCumprimento.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="winDadosJesp.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="WpfTelaPrincipal.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -204,9 +249,6 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Imagens\Seta carregar.jpg" />
-  </ItemGroup>
-  <ItemGroup>
     <Service Include="{C0C07587-41A7-46C8-8FBD-3F9C8EBE2DDC}" />
   </ItemGroup>
   <ItemGroup>
@@ -219,6 +261,18 @@
       <Isolated>False</Isolated>
       <EmbedInteropTypes>True</EmbedInteropTypes>
     </COMReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Imagens\Seta carregar.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Imagens\Excluir vermelho.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Imagens\atualizar.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Imagens\brazão.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

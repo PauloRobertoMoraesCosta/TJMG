@@ -9,7 +9,6 @@ namespace TJ.Dados.EntiConfig
         {
             HasKey(s => s.Id);
 
-            Property(s => s.AtividadePSC).HasColumnName("Sentenciado_AtividadePSC").HasMaxLength(100);
             Property(s => s.DataNascimento).HasColumnName("Sentenciado_DataNascimento").IsRequired();
             Property(s => s.Endereco).HasColumnName("Sentenciado_Endereco").HasMaxLength(50).IsRequired();
             Property(s => s.Escolaridade).HasColumnName("Sentenciado_Escolaridade").HasMaxLength(50).IsRequired();
@@ -26,22 +25,22 @@ namespace TJ.Dados.EntiConfig
             Property(s => s.ResponsavelSetor).HasColumnName("Sentenciado_ResponsavelSetor").HasMaxLength(50).IsRequired();
             Property(s => s.PontoReferencia).HasColumnName("Sentenciado_PontoReferencia").HasMaxLength(200);
             Property(s => s.Processo).HasColumnName("Sentenciado_Processo").HasMaxLength(25).IsRequired();
-            Property(s => s.StatusPena).HasColumnName("Sentenciado_StatusPena").HasMaxLength(30);
+            Property(s => s.StatusPena).HasColumnName("Sentenciado_StatusPena").HasMaxLength(50);
             Property(s => s.Telefone).HasColumnName("Sentenciado_Telefone").HasMaxLength(50);
-            Property(s => s.Comutacao).HasColumnName("Sentenciado_Comutacao");
-            Property(s => s.ComutacaoObservacao).HasColumnName("Sentneciado_ComutacaoObservacao").HasMaxLength(200);
+            Property(s => s.SomaDePena).HasColumnName("Sentenciado_SomaDePena");
+            Property(s => s.SomaDePenaObservacao).HasColumnName("Sentenciado_SomaDePenaObservacao").HasMaxLength(300);
             Property(s => s.Detracao).HasColumnName("Sentenciado_Detracao");
-            Property(s => s.DetracaoObservacao).HasColumnName("Sentneciado_DetracaoObservacao").HasMaxLength(200);
+            Property(s => s.DetracaoObservacao).HasColumnName("Sentenciado_DetracaoObservacao").HasMaxLength(300);
+            Property(s => s.Sexo).HasColumnName("Sentenciado_Sexo").HasMaxLength(9).IsRequired();
             Property(s => s.BairroId).HasColumnName("Sentenciado_Bairro").IsRequired();
             Property(s => s.CidadeId).HasColumnName("Sentenciado_Cidade").IsRequired();
-            Property(s => s.UsuarioCadastroLogin).HasColumnName("Sentenciado_UsuarioCadastro").IsRequired().HasMaxLength(20);
-            Property(s => s.UsuarioAlteracaoLogin).HasColumnName("Sentenciado_UsuarioAlteracao").HasMaxLength(20);
-            Property(s => s.Sexo).HasColumnName("Sentenciado_Sexo").HasMaxLength(9).IsRequired();
-
-            HasRequired(s => s.Bairro);
-            HasRequired(s => s.Cidade);
-
-            HasMany(s => s.SentenciadoEntidades);
+            Property(s => s.UsuarioCadastroId).HasColumnName("Sentenciado_UsuarioCadastoId").IsRequired();
+            Property(s => s.UsuarioAlteracaoId).HasColumnName("Sentenciado_UsuarioAlteracaoId");
+            
+            HasRequired(s => s.Bairro).WithMany(b => b.Sentenciados).HasForeignKey(sb => sb.BairroId);
+            HasRequired(s => s.Cidade).WithMany(c => c.Sentenciados).HasForeignKey(sc => sc.CidadeId);
+            HasRequired(s => s.UsuarioCadastro).WithMany(u => u.SentenciadosCadastro).HasForeignKey(su => su.UsuarioCadastroId);
+            HasOptional(s => s.UsuarioAlteracao).WithMany(u => u.SentenciadosAlteracao).HasForeignKey(s => s.UsuarioAlteracaoId);
         }
     }
 }

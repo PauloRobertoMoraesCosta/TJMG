@@ -8,6 +8,8 @@ using System.Windows.Media;
 using CrystalDecisions.CrystalReports.Engine;
 using TJ.Apresentacao.InterfacesApp;
 using TJ.Dominio.Entidades;
+using TJ.Apresentacao;
+using Ninject;
 
 namespace TJ.View
 {
@@ -16,22 +18,20 @@ namespace TJ.View
     /// </summary>
     public partial class UCRelatorioEncaminhamento : UserControl
     {
-        protected readonly IAppServiceSentenciado _serviceSentenciado;
-        protected readonly IAppServiceEntidade _serviceEntidade;
-        protected readonly IAppServiceSentenciadoEntidade _serviceSentenciadoEntidade;
         private Usuario usuarioLogado;
         ReportDocument relatorio = new ReportDocument();
 
-        public UCRelatorioEncaminhamento(IAppServiceSentenciado serviceSentenciado, IAppServiceEntidade serviceEntidade, IAppServiceSentenciadoEntidade serviceSentenciadoEntidade, Usuario UsuarioLogado)
+        public UCRelatorioEncaminhamento(Usuario UsuarioLogado)
         {
             try
             {
                 InitializeComponent();
-                _serviceSentenciado = serviceSentenciado;
-                _serviceEntidade = serviceEntidade;
-                _serviceSentenciadoEntidade = serviceSentenciadoEntidade;
                 usuarioLogado = UsuarioLogado;
-                cbxSentenciado.ItemsSource = _serviceSentenciado.RetornaTodosAsNoTracking().ToList();
+                using (IAppServiceSentenciado serviceSentenciado = MinhaNinject.Kernel.Get<IAppServiceSentenciado>())
+                {
+                    cbxSentenciado.ItemsSource = serviceSentenciado.RetornaTodosAsNoTracking().OrderBy(s => s.Nome).ToList();
+                }
+                
                 cbxSentenciado.DisplayMemberPath = "Nome";
                 //CrystalReportsViewer.Owner = Window.GetWindow(this);
             }
@@ -100,7 +100,7 @@ namespace TJ.View
                 (sender as ComboBox).BorderBrush = new SolidColorBrush(Colors.Blue);
 
                 cbxInstituicao.ItemsSource =
-                    _serviceSentenciadoEntidade.RetornarPorSentenciado((cbxSentenciado.SelectedItem as Sentenciado).Id).ToList();
+                    //_serviceSentenciadoEntidade.RetornarPorSentenciado((cbxSentenciado.SelectedItem as Sentenciado).Id).ToList();
                 cbxInstituicao.DisplayMemberPath = "Nome";
             }
         }
@@ -112,7 +112,7 @@ namespace TJ.View
                 (sender as ComboBox).BorderBrush = new SolidColorBrush(Colors.Blue);
 
                 cbxInstituicao.ItemsSource =
-                    _serviceSentenciadoEntidade.RetornarPorSentenciado((cbxSentenciado.SelectedItem as Sentenciado).Id).ToList().Where(se => se.DataFim == null);
+                    //_serviceSentenciadoEntidade.RetornarPorSentenciado((cbxSentenciado.SelectedItem as Sentenciado).Id).ToList().Where(se => se.DataFim == null);
                 cbxInstituicao.DisplayMemberPath = "Entidade.Nome";
             }
         }

@@ -2,28 +2,40 @@
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         Title="TJMG" Foreground="Blue" WindowStartupLocation="CenterScreen" MinWidth="1200" MinHeight="700" Closing="wpfTelaPrincipal_Closing" WindowState="Maximized">
-    <Grid Background="Blue">
+    <Grid Name="grdPrincipal" Background="White">
+        <Grid.Resources>
+            <Style TargetType="Label">
+                <Setter Property="Foreground" Value="#0d9cfa"/>
+                <Setter Property="Background" Value="White"/>
+                <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
+                <Setter Property="FontSize" Value="15"/>
+                <Setter Property="Width" Value="132"/>
+            </Style>
+
+        </Grid.Resources>
         <DockPanel Height="auto"  Width="auto" LastChildFill="True">
-            <Label DockPanel.Dock="Top" Height="35" HorizontalContentAlignment="Center" Content="Prestação de Serviços à Comunidade" Foreground="Blue" FontSize="16" Background="White"/>
-            <Menu DockPanel.Dock="Left" Width="auto" Height="auto" VerticalAlignment="Top,Stretch" Background="White" BorderThickness="1" BorderBrush="Blue">
+            <Label DockPanel.Dock="Top" Height="35" HorizontalContentAlignment="Center" Width="auto" Content="Prestação de Serviços à Comunidade" FontSize="16" Background="White" BorderThickness="0,0,0,1" BorderBrush="#999"/>
+            <Menu DockPanel.Dock="Left" Width="auto" Height="auto" VerticalAlignment="Stretch" Background="White" BorderThickness="0,0,1,0" BorderBrush="#999">
                 <Menu.ItemsPanel>
                     <ItemsPanelTemplate>
                         <StackPanel Margin="0,10,0,0"/>
                     </ItemsPanelTemplate>
                 </Menu.ItemsPanel>
-                <Label x:Name="lblDadosJesp" Content="Dados Fórum" Background="White" Foreground="Blue" HorizontalContentAlignment="Center" Width="125" FontSize="14" MouseDown="lblDadosJesp_MouseDown" ToolTip="Cadastro dos dados principais do Fórum."/>
-                <Label x:Name="lblUsuarios" Content="Usuários" Background="White" Foreground="Blue" HorizontalContentAlignment="Center" Width="125" FontSize="14" MouseDown="lblUsuarios_MouseDown" ToolTip="Cadastro e manutenção dos usuários do sistema."/>
-                <Label x:Name="lblReeducando" Content="Reeducando" Background="White" Foreground="Blue" HorizontalContentAlignment="Center" Width="125" FontSize="14" MouseDown="lblReeducando_MouseDown" ToolTip="Cadastro e manutenção dos reeducandos."/>
-                <Label x:Name="lblInstituicoes" Content="Entidades" Background="White" Foreground="Blue" HorizontalContentAlignment="Center" Width="125" FontSize="14" MouseDown="lblInstituicoes_MouseDown" ToolTip="Cadastro e manutenção das entidades."/>
-                <Label x:Name="lblLancamentos" Content="Cumprimento PSC" Background="White" Foreground="Blue" HorizontalContentAlignment="Center" Width="125" FontSize="14" MouseDown="lblLancamentos_MouseDown" ToolTip="Cadastro e manutenção dos dados do cumprimento."/>
-                <Label Name="lblEncaminhamento" Content="Encaminhamento" Background="White" Foreground="Blue" HorizontalContentAlignment="Center" Width="125" FontSize="14" ToolTip="Geração e impressão do encaminhamento." MouseDown="Encaminhamento_MouseDown"/>
-                <Label Name="lblFrequencia" Content="Frequência" Background="White" Foreground="Blue" HorizontalContentAlignment="Center" Width="125" FontSize="14" ToolTip="Geração e impressão da folha de frequência." MouseDown="Frequencia_MouseDown"/>
-                <Label Content="Trocar de Usuário" Name="lblTtrocarUsuario" Background="White" Foreground="Blue" HorizontalContentAlignment="Center" Width="125" FontSize="14" MouseDown="lblTtrocarUsuario_MouseDown" ToolTip="Usado para entrar com outro usuário."/>
-                <Label Content="Sair" Name="lblSair" Background="White" Foreground="Blue" HorizontalContentAlignment="Center" Width="125" FontSize="14" MouseDown="lblSair_MouseDown" ToolTip="Usado para fechar o sistema."/>
+                <Label x:Name="lblDadosJesp" Content="Dados do Step" MouseDown="lblDadosJesp_MouseDown" ToolTip="Cadastro dos dados principais do Fórum."/>
+                <Label x:Name="lblUsuarios" Content="Usuários" MouseDown="lblUsuarios_MouseDown" ToolTip="Cadastro e manutenção dos usuários do sistema."/>
+                <Label x:Name="lblReeducando" Content="Reeducando" MouseDown="lblReeducando_MouseDown" ToolTip="Cadastro e manutenção dos reeducandos."/>
+                <Label x:Name="lblInstituicoes" Content="Entidades" MouseDown="lblInstituicoes_MouseDown" ToolTip="Cadastro e manutenção das entidades."/>
+                <Label x:Name="lblLancamentos" Content="Cumprimento PSC" MouseDown="lblLancamentos_MouseDown" ToolTip="Cadastro e manutenção dos dados do cumprimento."/>
+                <Label Name="lblEncaminhamento" Content="Encaminhamento" ToolTip="Geração e impressão do encaminhamento." MouseDown="Encaminhamento_MouseDown"/>
+                <Label Name="lblFrequencia" Content="Frequência" ToolTip="Geração e impressão da folha de frequência." MouseDown="Frequencia_MouseDown"/>
+                <Label Content="Trocar de Usuário" Name="lblTtrocarUsuario" MouseDown="lblTtrocarUsuario_MouseDown" ToolTip="Usado para entrar com outro usuário."/>
+                <Label Content="Sair" Name="lblSair" MouseDown="lblSair_MouseDown" ToolTip="Usado para fechar o sistema."/>
             </Menu>
-            <Label Name="lblDataHora" DockPanel.Dock="Bottom" Background="White" HorizontalContentAlignment="Right" Foreground="Blue"/>
-            <ScrollViewer VerticalScrollBarVisibility="Auto" Background="Blue" >
-                <TabControl x:Name="TbcPrincipal" DockPanel.Dock="Right" Width="auto" Height="auto" VerticalAlignment="Top,Stretch" HorizontalAlignment="Left,Stretch">
+            <Grid DockPanel.Dock="Bottom">
+                <Label Name="lblDataHora" HorizontalAlignment="Right" HorizontalContentAlignment="Right" Foreground="#333"/>
+            </Grid>
+            <ScrollViewer VerticalScrollBarVisibility="Auto" Background="White" >
+                <TabControl x:Name="TbcPrincipal" DockPanel.Dock="Right" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" BorderThickness="0,0,0,1">
                 </TabControl>
             </ScrollViewer>
         </DockPanel>

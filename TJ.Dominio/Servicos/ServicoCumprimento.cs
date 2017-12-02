@@ -13,10 +13,5 @@ namespace TJ.Dominio.Servicos
         {
             _reposiotorioCumprimento = repositorioCumprimento;
         }
-
-        public IEnumerable<Cumprimento> RetornarPorSentenciado(int sentenciadoId)
-        {
-            return _reposiotorioCumprimento.RetornarPorSentenciado(sentenciadoId);
-        }
     }
 }

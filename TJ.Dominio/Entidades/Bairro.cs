@@ -6,8 +6,8 @@ namespace TJ.Dominio.Entidades
     {
         public Bairro()
         {
-            Sentenciados = new List<Sentenciado>();
-            Entidades = new List<Entidade>();
+            Sentenciados = new HashSet<Sentenciado>();
+            Entidades = new HashSet<Entidade>();
         }
         public int Id { get; set; }
         public string Nome { get; set; }

@@ -1,8 +1,10 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace TJ.Dominio.Interfaces.Repositorios
 {
-    public interface IRepositorioBase<TEntity> where TEntity : class
+    public interface IRepositorioBase<TEntity> : IDisposable where TEntity : class
     {
         void Adiciona(TEntity objeto);
         TEntity RetornaPorId(int Id);

@@ -16,13 +16,24 @@ namespace TJ.View
     /// </summary>
     public partial class Login : Window
     {
-        protected readonly IAppServiceUsuario _serviceUsuario;
-        public Login(IAppServiceUsuario serviceUsuario)
-        {
-            _serviceUsuario = serviceUsuario;
-            InitializeComponent();
-        }
+        private ICollection<Usuario> usuarios;
+        private Usuario usuario;
 
+        #region "Contrutores"
+        public Login()
+        {
+            try
+            {
+                InitializeComponent();
+            }
+            catch (Exception ex)
+            {
+                Mensagens.MensagemErroOk("Ocorreu um problema: " + ex.Message);
+            }
+        }
+        #endregion
+
+        #region "Metodos avulsos"
         private void habilitaBotaoLogar()
         {
             if (cbxUsuario.Text.Any() && pswSenha.Password.Any())
@@ -35,7 +46,10 @@ namespace TJ.View
         {
             try
             {
-                IEnumerable<Usuario> usuarios = _serviceUsuario.RetornaUsuariosAtivosAsNoTracking().ToList();
+                using (IAppServiceUsuario _serviceUsuario = MinhaNinject.Kernel.Get<IAppServiceUsuario>())
+                {
+                    usuarios = _serviceUsuario.RetornaUsuariosAtivosAsNoTracking().ToList();
+                }
                 cbxUsuario.ItemsSource = usuarios;
                 cbxUsuario.DisplayMemberPath = "Login";
                 lblInicial.Content = "Favor selecionar o usuário e fornecer a senha de acesso.";
@@ -44,58 +58,83 @@ namespace TJ.View
             }
             catch (Exception exception)
             {
-                Mensagens.MensagemErroOk("Algo inesperado aconteceu: " + exception.Message);
+                Mensagens.MensagemErroOk("Ocorreu um problema ao iniciar: " + exception.Message);
             }
         }
 
+        #endregion
+
+        #region "Eventos"
         private void btnLogar_Click(object sender, RoutedEventArgs e)
         {
             try
             {
-                Usuario usuario = _serviceUsuario.logaUsuario(cbxUsuario.Text, pswSenha.Password);
+                using (IAppServiceUsuario _serviceUsuario = MinhaNinject.Kernel.Get<IAppServiceUsuario>())
+                {
+                    usuario = _serviceUsuario.logaUsuario(cbxUsuario.Text, pswSenha.Password);
+                }
                 if (usuario != null)
                 {
-                    IAppServiceCidade serviceCidade = MinhaNinject.Kernel.Get<IAppServiceCidade>();
-                    IAppServiceBairro serviceBairro = MinhaNinject.Kernel.Get<IAppServiceBairro>();
-                    IAppServiceCumprimento serviceCumprimento = MinhaNinject.Kernel.Get<IAppServiceCumprimento>();
-                    IAppServiceEntidade serviceEntidade = MinhaNinject.Kernel.Get<IAppServiceEntidade>();
-                    IAppServiceEstado serviceEstado = MinhaNinject.Kernel.Get<IAppServiceEstado>();
-                    IAppServiceSentenciado serviceSentenciado = MinhaNinject.Kernel.Get<IAppServiceSentenciado>();
-                    IAppServiceSentenciadoEntidade serviceSentenciadoEntidade = MinhaNinject.Kernel.Get<IAppServiceSentenciadoEntidade>();
-                    IAppServiceJesp serviceJesp = MinhaNinject.Kernel.Get<IAppServiceJesp>();
-
-                    App.Current.MainWindow = new WpfTelaPrincipal(serviceCidade, serviceBairro, serviceCumprimento, serviceEntidade, serviceEstado, serviceSentenciado, serviceSentenciadoEntidade, _serviceUsuario, serviceJesp, usuario);
+                    App.Current.MainWindow = new WpfTelaPrincipal(usuario);
                     App.Current.MainWindow.Show();
-                    this.Close();
+                    Close();
                 }
             }
             catch (Exception exception)
             {
-                Mensagens.MensagemAlertaOk("Algo inesperado aconteceu: " + exception.Message);
+                Mensagens.MensagemAlertaOk("Ocorreu um problema ao logar: " + exception.Message);
             }
         }
 
         private void cbxUsuario_KeyUp(object sender, KeyEventArgs e)
         {
-            habilitaBotaoLogar();
-            if (e.Key.Equals(Key.Enter))
-                pswSenha.Focus();
+            try
+            {
+                habilitaBotaoLogar();
+                if (e.Key.Equals(Key.Enter))
+                    pswSenha.Focus();
+            }
+            catch (Exception ex)
+            {
+                Mensagens.MensagemErroOk("Ocorreu um problema: " + ex.Message);
+            }
         }
 
         private void cbxUsuario_DropDownClosed(object sender, EventArgs e)
         {
-            habilitaBotaoLogar();
+            try
+            {
+                habilitaBotaoLogar();
+            }
+            catch (Exception ex)
+            {
+                Mensagens.MensagemErroOk("Ocorreu um problema: " + ex.Message);
+            }
         }
 
         private void pswSenha_KeyDown(object sender, KeyEventArgs e)
         {
-            if (e.Key.Equals(Key.Enter))
-                btnLogar.Focus();
+            try
+            {
+                if (e.Key.Equals(Key.Enter))
+                    btnLogar.Focus();
+            }
+            catch (Exception ex)
+            {
+                Mensagens.MensagemErroOk("Ocorreu um problema: " + ex.Message);
+            }
         }
         private void pswSenha_PasswordChanged(object sender, RoutedEventArgs e)
         {
-            habilitaBotaoLogar();
+            try
+            {
+                habilitaBotaoLogar();
+            }
+            catch (Exception ex)
+            {
+                Mensagens.MensagemErroOk("Ocorreu um problema: " + ex.Message);
+            }
         }
-
+        #endregion
     }
 }

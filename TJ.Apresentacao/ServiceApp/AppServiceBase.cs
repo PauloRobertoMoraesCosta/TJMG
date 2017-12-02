@@ -5,7 +5,7 @@ using TJ.Dominio.Interfaces.Servicos;
 
 namespace TJ.Apresentacao.ServiceApp
 {
-    public class AppServiceBase<TEntity> : IDisposable, IAppServiceBase<TEntity> where TEntity : class
+    public class AppServiceBase<TEntity> : IAppServiceBase<TEntity> where TEntity : class
     {
         private readonly IServicoBase<TEntity> _serviceBase;
 

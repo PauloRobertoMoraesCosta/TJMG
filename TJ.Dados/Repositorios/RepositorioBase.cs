@@ -11,7 +11,7 @@ namespace TJ.Dados.Repositorios
     /// Classe com o CRUD básico
     /// </summary>
     /// <typeparam name="TEntity">Informar a classe a ser usada</typeparam>
-    public class RepositorioBase<TEntity> : IDisposable, IRepositorioBase<TEntity> where TEntity : class
+    public class RepositorioBase<TEntity> : IRepositorioBase<TEntity> where TEntity : class
     {
         protected Context db = new Context();
 
@@ -25,7 +25,6 @@ namespace TJ.Dados.Repositorios
         {
             return db.Set<TEntity>().Find(Id);
         }
-
 
         public IEnumerable<TEntity> RetornaTodos()
         {
@@ -45,13 +44,14 @@ namespace TJ.Dados.Repositorios
 
         public void Remover(TEntity objeto)
         {
+            db.Set<TEntity>().Attach(objeto);
             db.Set<TEntity>().Remove(objeto);
             db.SaveChanges();
         }
 
         public void Dispose()
         {
-            throw new NotImplementedException("Método dispose da classe RepositorioBase ainda não implementado");
+            db.Dispose();
         }
 
         public void ReloadElement(TEntity objeto)

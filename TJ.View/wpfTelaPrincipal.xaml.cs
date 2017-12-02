@@ -7,6 +7,9 @@ using Ninject;
 using TJ.Apresentacao;
 using TJ.Apresentacao.InterfacesApp;
 using TJ.Dominio.Entidades;
+using System.Timers;
+using System.Windows.Media;
+using ToastNotifications.Core;
 
 namespace TJ.View
 {
@@ -15,44 +18,46 @@ namespace TJ.View
     /// </summary>
     public partial class WpfTelaPrincipal : Window
     {
-        protected readonly Usuario usuarioLogado;
-        protected readonly IAppServiceCidade _serviceCidade;
-        protected readonly IAppServiceBairro _serviceBairro;
-        protected readonly IAppServiceCumprimento _serviceCumprimento;
-        protected readonly IAppServiceEntidade _serviceEntidade;
-        protected readonly IAppServiceEstado _serviceEstado;
-        protected readonly IAppServiceSentenciado _serviceSentenciado;
-        protected readonly IAppServiceSentenciadoEntidade _serviceSentenciadoEntidade;
-        protected readonly IAppServiceUsuario _serviceUsuario;
-        protected readonly IAppServiceJesp _serviceJesp;
+        private Usuario usuarioLogado;
+        private bool mensagemDeFechamento = true;
+        public ToastViewModel _vm = new ToastViewModel();
 
-        public WpfTelaPrincipal(IAppServiceCidade serviceCidade, IAppServiceBairro serviceBairro, IAppServiceCumprimento serviceCumprimento, IAppServiceEntidade serviceEntidade, IAppServiceEstado serviceEstado, IAppServiceSentenciado serviceSentenciado, IAppServiceSentenciadoEntidade serviceSentenciadoEntidade, IAppServiceUsuario serviceUsuario, IAppServiceJesp serviceJesp, Usuario usuario)
+        #region "Contrutores"
+        public WpfTelaPrincipal(Usuario usuario)
         {
-            InitializeComponent();
-            _serviceCidade = serviceCidade;
-            _serviceBairro = serviceBairro;
-            _serviceCumprimento = serviceCumprimento;
-            _serviceEntidade = serviceEntidade;
-            _serviceEstado = serviceEstado;
-            _serviceSentenciado = serviceSentenciado;
-            _serviceSentenciadoEntidade = serviceSentenciadoEntidade;
-            _serviceUsuario = serviceUsuario;
-            _serviceJesp = serviceJesp;
-            usuarioLogado = usuario;
-            
-            if (usuarioLogado.Super.Equals("false", StringComparison.CurrentCultureIgnoreCase))
+            try
             {
-                this.lblUsuarios.IsEnabled = false;
-                this.lblUsuarios.Opacity = 0.5;
-                this.lblDadosJesp.IsEnabled = false;
-                this.lblDadosJesp.Opacity = 0.5;
+                InitializeComponent();
+                usuarioLogado = usuario;
+
+                if (usuarioLogado.Super.Equals("false", StringComparison.CurrentCultureIgnoreCase))
+                {
+                    lblUsuarios.IsEnabled = false;
+                    lblUsuarios.Opacity = 0.5;
+                    lblDadosJesp.IsEnabled = false;
+                    lblDadosJesp.Opacity = 0.5;
+                }
+                updateDadosTela();
             }
-            updateDadosTela();
+            catch (Exception exception)
+            {
+                _vm.ShowError("Ao iniciar a tela: " + exception.Message);
+            }
         }
+
+        #endregion
 
         private void updateDadosTela()
         {
-            this.lblDataHora.Content = DateTime.Now.Date.ToString().Substring(0, 10);
+            try
+            {
+                lblDataHora.Content = DateTime.Now.Date.ToString().Substring(0, 10);
+            }
+            catch (Exception exception)
+            {
+                _vm.ShowError("Ao carregar os dados da tela: " + exception.Message);
+            }
+
         }
 
         protected void InitializeTab(UserControl control, string header)
@@ -65,6 +70,7 @@ namespace TJ.View
                     ucHeader.Title = header;
                     ucHeader.Content = control;
                     TbcPrincipal.Items.Add(ucHeader);
+                    TbcPrincipal.BorderThickness = new Thickness(0, 1, 0, 1);
                     ucHeader.Focus();
                 }
                 else
@@ -81,7 +87,7 @@ namespace TJ.View
             }
             catch (Exception exception)
             {
-                throw new Exception("Erro inesperado: " + exception.Message);
+                _vm.ShowError("Ao inicializar a aba: " + exception.Message);
             }
         }
 
@@ -101,11 +107,13 @@ namespace TJ.View
             }
             catch (NullReferenceException nullReference)
             {
-                throw new NullReferenceException("Abas ainda não criadas: " + nullReference.Message);
+                _vm.ShowError("Abas ainda não criadas: " + nullReference.Message);
+                return false;
             }
-            catch (Exception ex)
+            catch (Exception exception)
             {
-                throw new Exception("Algo inesperado aconteceu: " + ex.Message);
+                _vm.ShowError(exception.Message);
+                return false;
             }
         }
 
@@ -113,12 +121,13 @@ namespace TJ.View
         {
             try
             {
-                UCUsuarios ucUsuario = new UCUsuarios(_serviceUsuario);
+
+                UCUsuariosLista ucUsuario = new UCUsuariosLista();
                 InitializeTab(ucUsuario, "Usuários");
             }
             catch (Exception exception)
             {
-                Mensagens.MensagemErroOk("Algo inesperado aconteceu: " + exception.Message);
+                _vm.ShowError("Ao iniciar a tela de usuários: " + exception.Message);
             }
         }
 
@@ -126,12 +135,12 @@ namespace TJ.View
         {
             try
             {
-                UCReeducando ucReeducando = new UCReeducando(_serviceBairro, _serviceCidade, _serviceSentenciado, _serviceSentenciadoEntidade, _serviceEntidade, _serviceUsuario, usuarioLogado);
+                UCReeducandoLista ucReeducando = new UCReeducandoLista(usuarioLogado);
                 InitializeTab(ucReeducando, "Reeducando");
             }
             catch (Exception exception)
             {
-                Mensagens.MensagemErroOk(exception.Message);
+                _vm.ShowError("Ao iniciar a tela de reeducando: " + exception.Message);
             }
         }
 
@@ -139,12 +148,12 @@ namespace TJ.View
         {
             try
             {
-                UCEntidades ucEntidade = new UCEntidades(_serviceEntidade, _serviceCidade, _serviceBairro, usuarioLogado);
+                UCEntidadesLista ucEntidade = new UCEntidadesLista(usuarioLogado);
                 InitializeTab(ucEntidade, "Entidades");
             }
             catch (Exception exception)
             {
-                Mensagens.MensagemErroOk(exception.Message);
+                _vm.ShowError("Ao iniciar a tela de entidades: " + exception.Message);
             }
         }
 
@@ -152,45 +161,24 @@ namespace TJ.View
         {
             try
             {
-                UCCumprimentoPSC ucCumprimentoPSC = new UCCumprimentoPSC(_serviceSentenciado, _serviceCumprimento, _serviceSentenciadoEntidade, usuarioLogado);
-                InitializeTab(ucCumprimentoPSC, "Cumprimento");
+                UCCumprimentoPSCLista ucCumprimentoPSC = new UCCumprimentoPSCLista(usuarioLogado);
+                InitializeTab(ucCumprimentoPSC, "Cumprimento PSC");
             }
             catch (Exception exception)
             {
-                Mensagens.MensagemErroOk(exception.Message);
+                _vm.ShowError("Ao iniciar a tela de cumprimentos: " + exception.Message);
             }
         }
-
-        private void lblTtrocarUsuario_MouseDown(object sender, MouseButtonEventArgs e)
-        {
-            Login login = MinhaNinject.Kernel.Get<Login>();
-            login.Show();
-            login.inicializar();
-            this.Close();
-        }
-
-        private void lblSair_MouseDown(object sender, MouseButtonEventArgs e)
-        {
-            if (Mensagens.MensagemConfirmOkCancel("Deseja sair do sistema?") == MessageBoxResult.OK)
-                this.Close();
-        }
-
-        private void wpfTelaPrincipal_Closing(object sender, CancelEventArgs e)
-        {
-            if (Mensagens.MensagemConfirmOkCancel("Deseja sair do sistema?") != MessageBoxResult.OK)
-                e.Cancel = true;
-        }
-
         private void lblDadosJesp_MouseDown(object sender, MouseButtonEventArgs e)
         {
             try
             {
-                UCDadosJesp ucDadosJesp = new UCDadosJesp(_serviceJesp, _serviceBairro, _serviceCidade);
-                InitializeTab(ucDadosJesp, "Dados Jesp");
+                winDadosJesp winDadosJesp = new winDadosJesp();
+                winDadosJesp.ShowDialog();
             }
             catch (Exception exception)
             {
-                Mensagens.MensagemErroOk(exception.Message);
+                _vm.ShowError("Ao iniciar a tela de dados do Jesp: " + exception.Message);
             }
         }
 
@@ -198,12 +186,12 @@ namespace TJ.View
         {
             try
             {
-                UCRelatorioEncaminhamento ucRelatorio = new UCRelatorioEncaminhamento(_serviceSentenciado, _serviceEntidade, _serviceSentenciadoEntidade, usuarioLogado);
+                UCRelatorioEncaminhamento ucRelatorio = new UCRelatorioEncaminhamento(usuarioLogado);
                 InitializeTab(ucRelatorio, "Encaminhamento");
             }
             catch (Exception exception)
             {
-                Mensagens.MensagemErroOk(exception.Message);
+                _vm.ShowError("Ao iniciar a tela do encaminhamento: " + exception.Message);
             }
         }
 
@@ -211,12 +199,61 @@ namespace TJ.View
         {
             try
             {
-                UCRelatorioFrequencia ucRelatorio = new UCRelatorioFrequencia(_serviceSentenciado, _serviceEntidade, _serviceSentenciadoEntidade, usuarioLogado);
+                UCRelatorioFrequencia ucRelatorio = new UCRelatorioFrequencia(usuarioLogado);
                 InitializeTab(ucRelatorio, "Folha de Frequência");
             }
             catch (Exception exception)
             {
-                Mensagens.MensagemErroOk(exception.Message);
+                _vm.ShowError("Ao iniciar a tela do encaminhamento: " + exception.Message);
+            }
+        }
+
+        private void lblTtrocarUsuario_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            try
+            {
+                if (Mensagens.MensagemConfirmOkCancel("Deseja trocar de usuário?") == MessageBoxResult.OK)
+                {
+                    mensagemDeFechamento = false;
+                    Login login = new Login();//MinhaNinject.Kernel.Get<Login>();
+                    login.Show();
+                    login.inicializar();
+                    Close();
+                }
+            }
+            catch (Exception exception)
+            {
+                _vm.ShowError("Ao iniciar a tela do encaminhamento: " + exception.Message);
+            }
+        }
+
+        private void lblSair_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            try
+            {
+                Close();
+            }
+            catch (Exception exception)
+            {
+                _vm.ShowError("Ao iniciar a tela do encaminhamento: " + exception.Message);
+            }
+        }
+
+        private void wpfTelaPrincipal_Closing(object sender, CancelEventArgs e)
+        {
+            try
+            {
+                if (mensagemDeFechamento)
+                {
+                    if (Mensagens.MensagemConfirmOkCancel("Deseja sair do sistema?") != MessageBoxResult.OK)
+                        e.Cancel = true;
+                }
+                else
+                    mensagemDeFechamento = true;
+            }
+            catch (Exception exception)
+            {
+                _vm.ShowError("Ao iniciar a tela do encaminhamento: " + exception.Message);
             }
         }
     }

@@ -5,6 +5,5 @@ namespace TJ.Dominio.Interfaces.Servicos
 {
     public interface IServicoCumprimento : IServicoBase<Cumprimento>
     {
-        IEnumerable<Cumprimento> RetornarPorSentenciado(int sentenciadoId);
     }
 }

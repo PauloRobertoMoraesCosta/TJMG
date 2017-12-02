@@ -14,17 +14,12 @@ namespace TJ.View
         {
             InitializeComponent();
         }
-        
+
         private void lbTabTitle_SizeChanged(object sender, SizeChangedEventArgs e)
         {
-            btnClose.Margin = new Thickness(lblTabTitle.ActualWidth + 5, 3, 4, 0);
+            btnClose.Margin = new Thickness(lblTabTitle.ActualWidth + 2, 1, 1, 0);
         }
-
-        private void btnClose_MouseDown(object sender, RoutedEventArgs e)
-        {
-            ((this.Parent as MyTabItem).Parent as TabControl).Items.Remove(this.Parent as MyTabItem);
-        }
-
+        
         private void UserControl_MouseLeave(object sender, MouseEventArgs e)
         {
             btnClose.Visibility = Visibility.Hidden;
@@ -37,13 +32,17 @@ namespace TJ.View
 
         private void btnClose_MouseEnter(object sender, MouseEventArgs e)
         {
-            btnClose.Background = Brushes.Red;
+            btnClose.FontWeight = FontWeights.Bold;
         }
 
         private void btnClose_MouseLeave(object sender, MouseEventArgs e)
         {
-            btnClose.Background = Brushes.White;
+            btnClose.FontWeight = FontWeights.Normal;
         }
 
+        private void btnClose_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            ((this.Parent as MyTabItem).Parent as TabControl).Items.Remove(this.Parent as MyTabItem);
+        }
     }
 }

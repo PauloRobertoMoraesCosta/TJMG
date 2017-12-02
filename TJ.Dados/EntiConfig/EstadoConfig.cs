@@ -11,8 +11,6 @@ namespace TJ.Dados.EntiConfig
 
             Property(e => e.Sigla).HasColumnName("Estado_Sigla").HasMaxLength(2); 
             Property(e => e.Nome).HasColumnName("Estado_Nome").IsRequired().HasMaxLength(20);
-
-            HasMany(e => e.Cidades);
         }
     }
 }

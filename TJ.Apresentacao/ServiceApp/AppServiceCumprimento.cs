@@ -14,10 +14,5 @@ namespace TJ.Apresentacao.ServiceApp
         {
             _serviceCumprimento = servicoCumprimento;
         }
-
-        public IEnumerable<Cumprimento> RetornarPorSentenciado(int sentenciadoId)
-        {
-            return _serviceCumprimento.RetornarPorSentenciado(sentenciadoId);
-        }
     }
 }

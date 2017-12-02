@@ -19,7 +19,7 @@ namespace TJ.Dados.Contexto
         public Context()
             : base("TJ.View.Properties.Settings.StringConection")
         {
-
+            
         }
 
         public DbSet<Usuario> Usuarios { get; set; }
@@ -30,6 +30,7 @@ namespace TJ.Dados.Contexto
         public DbSet<Sentenciado> Sentenciados { get; set; }
         public DbSet<SentenciadoEntidade> SentenciadoEntidades { get; set; }
         public DbSet<Cumprimento> Cumprimentos { get; set; }
+        public DbSet<CumprimentoMes> CumprimentoMes { get; set; }
         public DbSet<Jesp> Jesps { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
@@ -37,7 +38,7 @@ namespace TJ.Dados.Contexto
             modelBuilder.Conventions.Remove<PluralizingTableNameConvention>();
             modelBuilder.Conventions.Remove<OneToManyCascadeDeleteConvention>();
             modelBuilder.Conventions.Remove<ManyToManyCascadeDeleteConvention>();
-
+            
             modelBuilder.Properties().Where(p => p.Name == p.ReflectedType.Name + "ID").Configure(p => p.IsKey());
             modelBuilder.Properties<string>().Configure(p => p.HasColumnType("varchar"));
             modelBuilder.Properties<string>().Configure(p => p.HasMaxLength(100));
@@ -50,6 +51,7 @@ namespace TJ.Dados.Contexto
             modelBuilder.Configurations.Add(new SentenciadoConfig());
             modelBuilder.Configurations.Add(new SentenciadoEntidadeConfig());
             modelBuilder.Configurations.Add(new CumprimentoConfig());
+            modelBuilder.Configurations.Add(new CumprimentoMesConfig());
             modelBuilder.Configurations.Add(new JespConfig());
         }
 

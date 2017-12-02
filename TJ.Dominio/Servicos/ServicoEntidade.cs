@@ -1,4 +1,6 @@
-﻿using TJ.Dominio.Entidades;
+﻿using System;
+using System.Collections.Generic;
+using TJ.Dominio.Entidades;
 using TJ.Dominio.Interfaces.Repositorios;
 using TJ.Dominio.Interfaces.Servicos;
 
@@ -11,6 +13,11 @@ namespace TJ.Dominio.Servicos
         public ServicoEntidade(IRepositorioEntidade repositorioEntidade) : base(repositorioEntidade)
         {
             _repositorioEntidade = repositorioEntidade;
+        }
+
+        IEnumerable<Entidade> IServicoEntidade.RetornaEntidadesAtivasAsNoTracking()
+        {
+            return _repositorioEntidade.RetornaEntidadesAtivasAsNoTracking();
         }
     }
 }

@@ -1,4 +1,5 @@
-﻿using TJ.Dominio.Entidades;
+﻿using System;
+using TJ.Dominio.Entidades;
 
 namespace TJ.Apresentacao.InterfacesApp
 {

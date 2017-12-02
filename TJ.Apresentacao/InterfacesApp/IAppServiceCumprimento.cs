@@ -5,6 +5,5 @@ namespace TJ.Apresentacao.InterfacesApp
 {
     public interface IAppServiceCumprimento : IAppServiceBase<Cumprimento>
     {
-        IEnumerable<Cumprimento> RetornarPorSentenciado(int sentenciadoId);
     }
 }

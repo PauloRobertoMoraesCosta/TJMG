@@ -1,0 +1,71 @@
+﻿<UserControl x:Class="TJ.View.UCReeducandoLista"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             mc:Ignorable="d" Background="White">
+    <DockPanel>
+        <DockPanel.Resources>
+            <Style TargetType="Button">
+                <Setter Property="Background" Value="#0d9cfa"/>
+                <Setter Property="BorderThickness" Value="1"/>
+                <Setter Property="BorderBrush" Value="#0A66BC"/>
+                <Setter Property="Foreground" Value="#fff"/>
+                <Setter Property="Margin" Value="5,5,0,0"/>
+                <Setter Property="HorizontalContentAlignment" Value="Center"/>
+                <Setter Property="VerticalContentAlignment" Value="Center"/>
+                <Setter Property="FontSize" Value="16"/>
+                <Setter Property="Width" Value="60"/>
+            </Style>
+
+            <Style TargetType="DataGrid">
+                <Setter Property="Margin" Value="10,10,5,0"/>
+                <Setter Property="BorderThickness" Value="0,0,0,1"/>
+                <Setter Property="BorderBrush" Value="#999"/>
+                <Setter Property="Background" Value="White"/>
+                <Setter Property="HeadersVisibility" Value="Column"/>
+                <Setter Property="GridLinesVisibility" Value="None"/>
+                <Setter Property="CanUserAddRows" Value="False"/>
+                <Setter Property="CanUserDeleteRows" Value="False"/>
+                <Setter Property="CanUserResizeRows" Value="False"/>
+                <Setter Property="HorizontalAlignment" Value="Left"/>
+                <Setter Property="VerticalAlignment" Value="Top"/>
+            </Style>
+
+            <Style TargetType="DataGridColumnHeader">
+                <Setter Property="Foreground" Value="#666"/>
+                <Setter Property="Background" Value="White"/>
+                <Setter Property="Margin" Value="5,0,15,5"/>
+                <Setter Property="FontSize" Value="15"/>
+                <Setter Property="FontWeight" Value="Bold"/>
+            </Style>
+
+            <Style TargetType="DataGridRow">
+                <Setter Property="Background" Value="White"/>
+                <Setter Property="Foreground" Value="#0d9cfa"/>
+                <Setter Property="FontSize" Value="15"/>
+                <Setter Property="BorderThickness" Value="0,0,0,1"/>
+                <Setter Property="BorderBrush" Value="#999"/>
+            </Style>
+
+            <Style TargetType="DataGridCell">
+                <Setter Property="Margin" Value="0,5,0,5"/>
+            </Style>
+        </DockPanel.Resources>
+
+        <Grid DockPanel.Dock="Top" Margin="5,10,0,0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="auto"/>
+                <ColumnDefinition Width="auto"/>
+            </Grid.ColumnDefinitions>
+            <Button Name="btnNovo" Content="Novo" Click="btnNovo_Click" ToolTip="Permite incluir um novo reeducando."/>
+            <Button Name="btnExcluir" Content="Excluir" Grid.Column="1" Click="btnExcluir_Click" ToolTip="Permite excluir os reeducandos selecionados abaixo."/>
+        </Grid>
+        <DataGrid DockPanel.Dock="Bottom" Name="dgvReeducando" IsReadOnly="True" AutoGenerateColumns="False" ToolTip="Clique na coluna para ordenar. Clique duas vezes em algum registro para editar." MouseDoubleClick="dgvReeducando_MouseDoubleClick" LostFocus="dgvReeducando_LostFocus">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Nome" Binding="{Binding Nome}"/>
+                <DataGridTextColumn Header="Processo" Binding="{Binding Processo}"/>
+            </DataGrid.Columns>
+        </DataGrid>
+    </DockPanel>
+</UserControl>

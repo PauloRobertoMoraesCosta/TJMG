@@ -5,5 +5,6 @@ namespace TJ.Dados.Repositorios
 {
     public class RepositorioCidade : RepositorioBase<Cidade>, IRepositorioCidade
     {
+        
     }
 }

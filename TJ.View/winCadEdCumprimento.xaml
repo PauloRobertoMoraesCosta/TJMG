@@ -1,0 +1,180 @@
+﻿<Window
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:TJ.View"
+        xmlns:System="clr-namespace:System;assembly=mscorlib" x:Class="TJ.View.winCadEdCumprimento"
+        mc:Ignorable="d"
+        Title="Cadastro de cumprimento" Height="auto" Width="850" WindowStartupLocation="CenterScreen" ResizeMode="NoResize">
+    <ScrollViewer Name="scvCadEdCumprimento" VerticalScrollBarVisibility="Auto">
+        <DockPanel Margin="10,10,10,0" Background="White">
+            <DockPanel.Resources>
+                <Style TargetType="{x:Type Button}">
+                    <Setter Property="Background" Value="#0d9cfa"/>
+                    <Setter Property="BorderThickness" Value="1"/>
+                    <Setter Property="BorderBrush" Value="#0A66BC"/>
+                    <Setter Property="Foreground" Value="#fff"/>
+                    <Setter Property="Margin" Value="5,5,0,0"/>
+                    <Setter Property="HorizontalContentAlignment" Value="Center"/>
+                    <Setter Property="VerticalContentAlignment" Value="Center"/>
+                    <Setter Property="FontSize" Value="16"/>
+                    <Setter Property="Width" Value="80"/>
+                    <Setter Property="VerticalAlignment" Value="Bottom"/>
+                    <Setter Property="HorizontalAlignment" Value="Right"/>
+                    <Style.Triggers>
+                        <Trigger Property = "IsMouseOver" Value = "True">
+                            <Setter Property = "FontWeight" Value = "Bold"/>
+                        </Trigger>
+                    </Style.Triggers>
+                </Style>
+
+                <Style TargetType="{x:Type DataGrid}">
+                    <Setter Property="Margin" Value="10,10,5,0"/>
+                    <Setter Property="BorderThickness" Value="0,0,0,1"/>
+                    <Setter Property="BorderBrush" Value="#999"/>
+                    <Setter Property="Background" Value="White"/>
+                    <Setter Property="HeadersVisibility" Value="Column"/>
+                    <Setter Property="GridLinesVisibility" Value="None"/>
+                    <Setter Property="CanUserAddRows" Value="False"/>
+                    <Setter Property="CanUserDeleteRows" Value="False"/>
+                    <Setter Property="CanUserResizeRows" Value="False"/>
+                    <Setter Property="HorizontalAlignment" Value="Left"/>
+                    <Setter Property="VerticalAlignment" Value="Top"/>
+                </Style>
+
+                <Style TargetType="{x:Type DataGridColumnHeader}">
+                    <Setter Property="Foreground" Value="#666"/>
+                    <Setter Property="Background" Value="White"/>
+                    <Setter Property="Margin" Value="5,0,15,5"/>
+                    <Setter Property="FontSize" Value="15"/>
+                    <Setter Property="FontWeight" Value="Bold"/>
+                </Style>
+
+                <Style TargetType="{x:Type DataGridRow}">
+                    <Setter Property="Background" Value="White"/>
+                    <Setter Property="Foreground" Value="#666"/>
+                    <Setter Property="FontSize" Value="15"/>
+                    <Setter Property="BorderThickness" Value="0,0,0,1"/>
+                    <Setter Property="BorderBrush" Value="#999"/>
+                </Style>
+
+                <Style TargetType="{x:Type DataGridCell}">
+                    <Setter Property="Margin" Value="0,5,0,5"/>
+                </Style>
+
+                <Style TargetType="{x:Type TextBox}">
+                    <Setter Property="HorizontalAlignment" Value="Left"/>
+                    <Setter Property="VerticalAlignment" Value="Top"/>
+                    <Setter Property="BorderThickness" Value="1"/>
+                    <Setter Property="BorderBrush" Value="#999"/>
+                    <Setter Property="Margin" Value="0,5,0,0"/>
+                    <Setter Property="FontSize" Value="15"/>
+                </Style>
+
+                <Style TargetType="{x:Type TextBlock}">
+                    <Setter Property="HorizontalAlignment" Value="Left"/>
+                    <Setter Property="VerticalAlignment" Value="Top"/>
+                    <Setter Property="Margin" Value="0,5,0,0"/>
+                    <Setter Property="FontSize" Value="15"/>
+                </Style>
+
+                <Style TargetType="{x:Type Label}">
+                    <Setter Property="HorizontalAlignment" Value="Right"/>
+                    <Setter Property="VerticalAlignment" Value="Top"/>
+                    <Setter Property="Foreground" Value="#333"/>
+                    <Setter Property="FontSize" Value="15"/>
+                </Style>
+
+                <Style TargetType="{x:Type ComboBox}">
+                    <Setter Property="HorizontalAlignment" Value="Left"/>
+                    <Setter Property="VerticalAlignment" Value="Top"/>
+                    <Setter Property="VerticalContentAlignment" Value="Center"/>
+                    <Setter Property="Height" Value="23"/>
+                    <Setter Property="BorderThickness" Value="1"/>
+                    <Setter Property="BorderBrush" Value="#999"/>
+                    <Setter Property="Margin" Value="0,5,0,0"/>
+                    <Setter Property="FontSize" Value="15"/>
+                </Style>
+
+            </DockPanel.Resources>
+
+            <Grid DockPanel.Dock="Top">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                </Grid.RowDefinitions>
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="auto"/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="auto"/>
+                        <RowDefinition Height="auto"/>
+                    </Grid.RowDefinitions>
+                    <Image Grid.RowSpan="2" Source="Imagens/brazão.png" VerticalAlignment="Top" HorizontalAlignment="Left" Width="80"/>
+                    <Label Content="Poder Judiciário do Estado de Minas Gerais" Grid.Column="1" HorizontalAlignment="Center" FontSize="22"/>
+                    <Label Content="Justiça de Primeiro Grau" Grid.Row="1" Grid.Column="1" HorizontalAlignment="Center" FontSize="18"/>
+                </Grid>
+                <Grid Grid.ColumnSpan="2" Grid.Row="1">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="auto"/>
+                        <ColumnDefinition Width="auto"/>
+                        <ColumnDefinition Width="80"/>
+                        <ColumnDefinition Width="auto"/>
+                        <ColumnDefinition Width="80"/>
+                        <ColumnDefinition Width="auto"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="auto"/>
+                        <RowDefinition Height="auto"/>
+                    </Grid.RowDefinitions>
+                    <Label Content="Nome:"/>
+                    <TextBlock x:Name="tblNome" Grid.Column="1" Grid.ColumnSpan="5" TextWrapping="NoWrap"/>
+                    <Label Content="Instituição:" Grid.Row="1"/>
+                    <ComboBox x:Name="cbxInstituicao" Grid.Row="1" Grid.Column="1" Width="200" TabIndex="1"/>
+                    <Label Content="Mês:" Grid.Row="1" Grid.Column="2"/>
+                    <ComboBox x:Name="cbxMes" Grid.Row="1" Grid.Column="3" Width="200" TabIndex="2"/>
+                    <Label Content="Ano:" Grid.Row="1" Grid.Column="4"/>
+                    <TextBox x:Name="tbxAno" Grid.Row="1" Grid.Column="5" MaxLength="4" Width="100" TabIndex="3"/>
+                </Grid>
+                <Grid Grid.Row="2" Margin="10,20,0,0">
+                    <DataGrid DockPanel.Dock="Bottom" x:Name="dgvCumprimento" IsReadOnly="False" AutoGenerateColumns="False"  ToolTip="Clique na coluna para ordenar. Clique duas vezes em algum registro para editar." KeyDown="dgvCumprimento_KeyDown" KeyUp="dgvCumprimento_KeyUp" >
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Header="Dia" IsReadOnly="True" Binding="{Binding Dia}"/>
+                            <DataGridTextColumn Header="Horário Entrada" Binding="{Binding HorarioEntrada, StringFormat=hh\\:mm}"/>
+                            <DataGridTextColumn Header="Horário Saída" Binding="{Binding HorarioSaida, StringFormat=hh\\:mm}"/>
+                            <DataGridTextColumn Header="Horário Entrada" Binding="{Binding HorarioEntradaAlmoco, StringFormat=hh\\:mm}"/>
+                            <DataGridTextColumn Header="Horário Saída" Binding="{Binding HorarioSaidaAlmoco, StringFormat=hh\\:mm}"/>
+                            <DataGridTextColumn Header="Horas Trabalhadas" IsReadOnly="True" Binding="{Binding DiferencaHoras, StringFormat=hh\\:mm}"/>
+                        </DataGrid.Columns>
+                    </DataGrid>
+                </Grid>
+            </Grid>
+            <Grid DockPanel.Dock="Bottom" Margin="0,15,0,0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="auto"/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+                <Label x:Name="lblTempoCumprido" Grid.ColumnSpan="2" HorizontalAlignment="Left"/>
+                <Label Content="Observação:" Grid.Row="1" />
+                <TextBox x:Name="tblObservacao" Grid.Row="1"  Grid.Column="1" TextWrapping="Wrap" Width="655" MaxLength="200"/>
+                <Grid Grid.Row="2" Grid.ColumnSpan="2" Margin="0,0,10,10">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition/>
+                        <ColumnDefinition Width="85"/>
+                    </Grid.ColumnDefinitions>
+                    <Label Name="lblCancelar" Content="Cancelar" FontSize="15" Foreground="#0d9cfa" HorizontalAlignment="Right" VerticalAlignment="Bottom" MouseDown="lblCancelar_MouseDown" MouseLeave="lblCancelar_MouseLeave" MouseEnter="lblCancelar_MouseEnter"/>
+                    <Button Name="btnGravar" Content="Gravar" Grid.Column="1" Click="btnGravar_Click"/>
+                </Grid>
+            </Grid>
+        </DockPanel>
+    </ScrollViewer>
+</Window>

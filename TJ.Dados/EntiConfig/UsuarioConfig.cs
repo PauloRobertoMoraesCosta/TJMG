@@ -12,7 +12,7 @@ namespace TJ.Dados.EntiConfig
     {
         public UsuarioConfig()
         {
-            HasKey(u => u.Login);
+            HasKey(u => u.Id);
 
             Property(u => u.Login).HasColumnName("Usuario_Login").IsRequired().HasMaxLength(20).HasColumnAnnotation(IndexAnnotation.AnnotationName, new IndexAnnotation(new IndexAttribute("UN_Usuario") { IsUnique = true }));
             Property(u => u.Senha).HasColumnName("Usuario_Senha").IsRequired().HasMaxLength(15);
@@ -21,7 +21,12 @@ namespace TJ.Dados.EntiConfig
             Property(u => u.DadosRegistro).HasColumnName("Usuario_DadosRegistro").HasMaxLength(100);
             Property(u => u.Ativo).HasColumnName("Usuario_Ativo").IsRequired().HasMaxLength(5);
             Property(u => u.Super).HasColumnName("Usuario_Super").IsRequired().HasMaxLength(5);
-            
+
+
+            //HasMany(u => u.SentenciadosCadastro);
+            // HasMany(u => u.SentenciadosAlteracao).WithOptional(u => u.UsuarioAlteracao);
+            //HasMany(u => u.EntidadesCadastro).WithRequired(u => u.UsuarioCadastro);
+            //HasMany(u => u.EntidadesCadastro).WithOptional(u => u.UsuarioAlteracao);
         }
     }
 }

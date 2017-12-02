@@ -5,7 +5,7 @@ using TJ.Dominio.Interfaces.Servicos;
 
 namespace TJ.Dominio.Servicos
 {
-    public class ServicoBase<TEntity> : IDisposable, IServicoBase<TEntity> where TEntity : class
+    public class ServicoBase<TEntity> : IServicoBase<TEntity> where TEntity : class
     {
         private readonly IRepositorioBase<TEntity> _repositorio;
 

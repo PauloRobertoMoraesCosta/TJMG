@@ -31,6 +31,7 @@ namespace TJ.Apresentacao
             kernel.Bind<IAppServiceSentenciadoEntidade>().To<AppServiceSentenciadoEntidade>().InTransientScope();
             kernel.Bind<IAppServiceCumprimento>().To<AppServiceCumprimento>().InTransientScope();
             kernel.Bind<IAppServiceJesp>().To<AppServiceJesp>().InTransientScope();
+            kernel.Bind<IAppServiceCumprimentoMes>().To<AppServiceCumprimentoMes>().InTransientScope();
 
             kernel.Bind(typeof(IServicoBase<>)).To(typeof(ServicoBase<>)).InTransientScope();
             kernel.Bind<IServicoUsuario>().To<ServicoUsuario>().InTransientScope();
@@ -42,6 +43,7 @@ namespace TJ.Apresentacao
             kernel.Bind<IServicoCumprimento>().To<ServicoCumprimento>().InTransientScope();
             kernel.Bind<IServicoSentenciadoEntidade>().To<ServicoSentenciadoEntidade>().InTransientScope();
             kernel.Bind<IServicoJesp>().To<ServicoJesp>().InTransientScope();
+            kernel.Bind<IServicoCumprimentoMes>().To<ServicoCumprimentoMes>().InTransientScope();
 
             kernel.Bind(typeof(IRepositorioBase<>)).To(typeof(RepositorioBase<>)).InTransientScope();
             kernel.Bind<IRepositorioUsuario>().To<RepositorioUsuario>().InTransientScope();
@@ -53,6 +55,7 @@ namespace TJ.Apresentacao
             kernel.Bind<IRepositorioSentenciadoEntidade>().To<RepositorioSentenciadoEntidade>().InTransientScope();
             kernel.Bind<IRepositorioCumprimento>().To<RepositorioCumprimento>().InTransientScope();
             kernel.Bind<IRepositorioJesp>().To<RepositorioJesp>().InTransientScope();
+            kernel.Bind<IRepositorioCumprimentoMes>().To<RepositorioCumprimentoMes>().InTransientScope();
         }
     }
 }

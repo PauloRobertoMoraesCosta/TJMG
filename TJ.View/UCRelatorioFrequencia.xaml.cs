@@ -8,6 +8,8 @@ using System.Windows.Media;
 using CrystalDecisions.CrystalReports.Engine;
 using TJ.Apresentacao.InterfacesApp;
 using TJ.Dominio.Entidades;
+using TJ.Apresentacao;
+using Ninject;
 
 namespace TJ.View
 {
@@ -16,22 +18,19 @@ namespace TJ.View
     /// </summary>
     public partial class UCRelatorioFrequencia : UserControl
     {
-        protected readonly IAppServiceSentenciado _serviceSentenciado;
-        protected readonly IAppServiceEntidade _serviceEntidade;
-        protected readonly IAppServiceSentenciadoEntidade _serviceSentenciadoEntidade;
         private Usuario usuarioLogado;
         ReportDocument relatorio = new ReportDocument();
 
-        public UCRelatorioFrequencia(IAppServiceSentenciado serviceSentenciado, IAppServiceEntidade serviceEntidade, IAppServiceSentenciadoEntidade serviceSentenciadoEntidade, Usuario UsuarioLogado)
+        public UCRelatorioFrequencia(Usuario UsuarioLogado)
         {
             try
             {
                 InitializeComponent();
-                _serviceSentenciado = serviceSentenciado;
-                _serviceEntidade = serviceEntidade;
-                _serviceSentenciadoEntidade = serviceSentenciadoEntidade;
                 usuarioLogado = UsuarioLogado;
-                cbxSentenciado.ItemsSource = _serviceSentenciado.RetornaTodosAsNoTracking().ToList();
+                using (IAppServiceSentenciado serviceSentenciado = MinhaNinject.Kernel.Get<IAppServiceSentenciado>())
+                {
+                    cbxSentenciado.ItemsSource = serviceSentenciado.RetornaTodosAsNoTracking().OrderBy(s => s.Nome).ToList();
+                }
                 cbxSentenciado.DisplayMemberPath = "Nome";
                 CrystalReportsViewer.Owner = Window.GetWindow(this);
             }
@@ -62,9 +61,9 @@ namespace TJ.View
 
                     relatorio.SetParameterValue("IdSentenciado", (cbxSentenciado.SelectedItem as Sentenciado).Id);
                     relatorio.SetParameterValue("Id_Instituicao", (cbxInstituicao.SelectedItem as SentenciadoEntidade).EntidadeId);
-                     
+
                     CrystalReportsViewer.Owner = Window.GetWindow(this);
-                    CrystalReportsViewer.ViewerCore.ReportSource = relatorio;   
+                    CrystalReportsViewer.ViewerCore.ReportSource = relatorio;
                 }
                 else
                 {
@@ -73,43 +72,75 @@ namespace TJ.View
             }
             catch (Exception exception)
             {
-                Mensagens.MensagemErroOk("Ocorreu algo inesperado ao imprimir o relatório: " + exception.Message);
+                Mensagens.MensagemErroOk("Ocorreu umproblema - Ao imprimir o relatório: " + exception.Message);
             }
         }
 
         private void cbx_KeyUp(object sender, KeyEventArgs e)
         {
-            if ((sender as ComboBox).SelectedIndex != -1)
-                (sender as ComboBox).BorderBrush = new SolidColorBrush(Colors.Blue);
+            try
+            {
+                if ((sender as ComboBox).SelectedIndex != -1)
+                    (sender as ComboBox).BorderBrush = new SolidColorBrush(Colors.Blue);
+            }
+            catch (Exception ex)
+            {
+                (App.Current.MainWindow as WpfTelaPrincipal)._vm.ShowError("No relatório de frequência" + ex.Message);
+            }
+
         }
 
         private void cbx_DropDownClosed(object sender, EventArgs e)
         {
-            if ((sender as ComboBox).SelectedIndex != -1)
-                (sender as ComboBox).BorderBrush = new SolidColorBrush(Colors.Blue);
+            try
+            {
+                if ((sender as ComboBox).SelectedIndex != -1)
+                    (sender as ComboBox).BorderBrush = new SolidColorBrush(Colors.Blue);
+            }
+            catch (Exception ex)
+            {
+                (App.Current.MainWindow as WpfTelaPrincipal)._vm.ShowError("No relatório de frequência" + ex.Message);
+            }
         }
 
         private void cbxSentenciado_KeyUp(object sender, KeyEventArgs e)
         {
-            if ((sender as ComboBox).SelectedIndex != -1)
+            try
             {
-                (sender as ComboBox).BorderBrush = new SolidColorBrush(Colors.Blue);
+                if ((sender as ComboBox).SelectedIndex != -1)
+                {
+                    (sender as ComboBox).BorderBrush = new SolidColorBrush(Colors.Blue);
 
-                cbxInstituicao.ItemsSource =
-                    _serviceSentenciadoEntidade.RetornarPorSentenciado((cbxSentenciado.SelectedItem as Sentenciado).Id).ToList();
-                cbxInstituicao.DisplayMemberPath = "Nome";
+                    using (IAppServiceSentenciadoEntidade serviceSentenciadoEntidade = MinhaNinject.Kernel.Get<IAppServiceSentenciadoEntidade>())
+                    {
+                        cbxInstituicao.ItemsSource = serviceSentenciadoEntidade.RetornarPorSentenciado((cbxSentenciado.SelectedItem as Sentenciado).Id).ToList();
+                    }
+                    cbxInstituicao.DisplayMemberPath = "Nome";
+                }
+            }
+            catch (Exception ex)
+            {
+                (App.Current.MainWindow as WpfTelaPrincipal)._vm.ShowError("No relatório de frequência" + ex.Message);
             }
         }
 
         private void cbxSentenciado_DropDownClosed(object sender, EventArgs e)
         {
-            if ((sender as ComboBox).SelectedIndex != -1)
+            try
             {
-                (sender as ComboBox).BorderBrush = new SolidColorBrush(Colors.Blue);
-
-                cbxInstituicao.ItemsSource =
-                    _serviceSentenciadoEntidade.RetornarPorSentenciado((cbxSentenciado.SelectedItem as Sentenciado).Id).ToList().Where(se => se.DataFim == null);
-                cbxInstituicao.DisplayMemberPath = "Entidade.Nome";
+                if ((sender as ComboBox).SelectedIndex != -1)
+                {
+                    (sender as ComboBox).BorderBrush = new SolidColorBrush(Colors.Blue);
+                    using (IAppServiceSentenciadoEntidade serviceSentenciadoEntidade = MinhaNinject.Kernel.Get<IAppServiceSentenciadoEntidade>())
+                    {
+                        cbxInstituicao.ItemsSource = serviceSentenciadoEntidade.RetornarPorSentenciado((cbxSentenciado.SelectedItem as Sentenciado).Id).ToList().Where(se => se.DataFim == null);
+                    }
+                    cbxInstituicao.DisplayMemberPath = "Entidade.Nome";
+                }
+            }
+            catch (Exception ex)
+            {
+                (App.Current.MainWindow as WpfTelaPrincipal)._vm.ShowError("No relatório de frequência" + ex.Message);
             }
         }
     }

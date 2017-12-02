@@ -10,7 +10,7 @@
         public string HorarioDeFuncionamento { get; set; }
         public int BairroId { get; set; }
         public int CidadeId { get; set; }
-        public virtual Bairro Bairro { get; set; }
-        public virtual Cidade Cidade { get; set; }
+        public Bairro Bairro { get; set; }
+        public Cidade Cidade { get; set; }
     }
 }

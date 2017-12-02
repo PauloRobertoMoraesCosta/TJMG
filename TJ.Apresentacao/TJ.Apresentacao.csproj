@@ -49,6 +49,7 @@
     <Compile Include="InterfacesApp\IAppServiceBase.cs" />
     <Compile Include="InterfacesApp\IAppServiceBairro.cs" />
     <Compile Include="InterfacesApp\IAppServiceCidade.cs" />
+    <Compile Include="InterfacesApp\IAppServiceCumprimentoMes.cs" />
     <Compile Include="InterfacesApp\IAppServiceEntidade.cs" />
     <Compile Include="InterfacesApp\IAppServiceEstado.cs" />
     <Compile Include="InterfacesApp\IAppServiceCumprimento.cs" />
@@ -61,6 +62,7 @@
     <Compile Include="ServiceApp\AppServiceBase.cs" />
     <Compile Include="ServiceApp\AppServiceBairro.cs" />
     <Compile Include="ServiceApp\AppServiceCidade.cs" />
+    <Compile Include="ServiceApp\AppServiceCumprimentoMes.cs" />
     <Compile Include="ServiceApp\AppServiceEntidade.cs" />
     <Compile Include="ServiceApp\AppServiceEstado.cs" />
     <Compile Include="ServiceApp\AppServiceCumprimento.cs" />

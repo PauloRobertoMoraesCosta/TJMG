@@ -37,6 +37,7 @@
     <Compile Include="Contexto\Context.cs" />
     <Compile Include="EntiConfig\BairroConfig.cs" />
     <Compile Include="EntiConfig\CidadeConfig.cs" />
+    <Compile Include="EntiConfig\CumprimentoMesConfig.cs" />
     <Compile Include="EntiConfig\EntidadeConfig.cs" />
     <Compile Include="EntiConfig\EstadoConfig.cs" />
     <Compile Include="EntiConfig\CumprimentoConfig.cs" />
@@ -49,6 +50,7 @@
     <Compile Include="Repositorios\RepositorioBase.cs" />
     <Compile Include="Repositorios\RepositorioBairro.cs" />
     <Compile Include="Repositorios\RepositorioCidade.cs" />
+    <Compile Include="Repositorios\RepositorioCumprimentoMes.cs" />
     <Compile Include="Repositorios\RepositorioEntidade.cs" />
     <Compile Include="Repositorios\RepositorioEstado.cs" />
     <Compile Include="Repositorios\RepositorioCumprimento.cs" />
@@ -78,12 +80,18 @@
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
     <None Include="packages.config">
       <SubType>Designer</SubType>
+    </None>
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
   </ItemGroup>
   <ItemGroup>

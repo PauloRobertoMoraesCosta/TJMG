@@ -1,8 +1,9 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 
 namespace TJ.Apresentacao.InterfacesApp
 {
-    public interface IAppServiceBase<TEntity> where TEntity : class
+    public interface IAppServiceBase<TEntity> : IDisposable where TEntity : class
     {
         void Adiciona(TEntity objeto);
         TEntity RetornaPorId(int Id);

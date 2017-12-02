@@ -15,7 +15,7 @@ namespace TJ.View
 
         public static void MensagemErroOk(string mensagem)
         {
-            MessageBox.Show(mensagem, "Erro", MessageBoxButton.OK, MessageBoxImage.Error);
+            MessageBox.Show("Ocorreu um problema - " + mensagem, "Erro", MessageBoxButton.OK, MessageBoxImage.Error);
         }
 
         public static MessageBoxResult MensagemConfirmOkCancel(string mensagem)

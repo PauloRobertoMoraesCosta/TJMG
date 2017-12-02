@@ -13,10 +13,7 @@ namespace TJ.Dados.EntiConfig
             Property(c => c.Nome).HasColumnName("Cidade_Nome").IsRequired().HasMaxLength(40);
             Property(c => c.EstadoSigla).IsRequired().HasColumnName("Cidade_EstadoSigla").HasMaxLength(2);
 
-            HasRequired(c => c.Estado);
-
-            HasMany(c => c.Sentenciados);
-            HasMany(c => c.Entidades);
+            HasRequired(c => c.Estado).WithMany(e => e.Cidades).HasForeignKey(c => c.EstadoSigla);
         }
     }
 }
