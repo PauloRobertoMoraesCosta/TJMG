@@ -99,10 +99,10 @@
                 <RowDefinition Height="Auto"/>
             </Grid.RowDefinitions>
             <Label Content="Localizar por Nome: " HorizontalAlignment="Right" HorizontalContentAlignment="Right" Foreground="#333"/>
-            <ComboBox Name="cbxLocalizarNome" HorizontalAlignment="Left" VerticalAlignment="Center"  Grid.Column="1" MinWidth="200" MaxWidth="400" BorderThickness="1" BorderBrush="Blue"/>
+            <ComboBox Name="cbxLocalizarNome" HorizontalAlignment="Left" VerticalAlignment="Center"  Grid.Column="1" MinWidth="200" MaxWidth="400"/>
             <Image Grid.Column="2" Name="imgPesquisarNome" Height="20" HorizontalAlignment="Left" Width="20" Source="Imagens/Seta carregar.png" Stretch="Fill" Margin="5,0,0,0" MouseDown="imgPesquisarNome_MouseDown" ToolTip="Carrega os dados do reeducando selecionado."/>
             <Label Content="Localizar por Processo: " Grid.Row="1" Foreground="#333" HorizontalAlignment="Right" HorizontalContentAlignment="Right"/>
-            <ComboBox Name="cbxLocalizarProcesso" HorizontalAlignment="Left" VerticalAlignment="Center" Grid.Column="1" Grid.Row="1" MinWidth="200" MaxWidth="400" BorderThickness="1" BorderBrush="Blue"/>
+            <ComboBox Name="cbxLocalizarProcesso" HorizontalAlignment="Left" VerticalAlignment="Center" Grid.Column="1" Grid.Row="1" MinWidth="200" MaxWidth="400"/>
             <Image Grid.Column="2" Grid.Row="1" Name="imgPesquisarProcesso" Height="20" HorizontalAlignment="Left" Width="20" Source="Imagens/Seta carregar.png" Stretch="Fill" Margin="5,0,0,0" MouseDown="imgPesquisarProcesso_MouseDown" ToolTip="Carrega os dados do reeducando selecionado."/>
         </Grid>
         <DockPanel Margin="0,10,0,0" Name="dplTelaDados" >
@@ -112,7 +112,7 @@
                     <ColumnDefinition Width="0.3*"/>
                     <ColumnDefinition Width="130"/>
                     <ColumnDefinition Width="0.3*"/>
-                    <ColumnDefinition Width="0.06*"/>
+                    <ColumnDefinition Width="0.1*"/>
                     <ColumnDefinition Width="0.3*"/>
                 </Grid.ColumnDefinitions>
                 <Grid.RowDefinitions>
@@ -129,12 +129,12 @@
                 <TextBlock Name="lblOrigem" Grid.Column="5" TextWrapping="Wrap"/>
                 <Label Content="Situação:" Grid.Row="1"/>
                 <TextBlock Name="lblSituacao" Grid.Row="1" Grid.Column="1" TextWrapping="Wrap"/>
-                <Label Content="Data Entrada:" Grid.Row="1" Grid.Column="2"/>
+                <Label Content="Data Cadastro:" Grid.Row="1" Grid.Column="2"/>
                 <TextBlock Name="lblDataEntrada" Grid.Row="1" Grid.Column="3" TextWrapping="Wrap"/>
-                <Label Content="Filiação:" Grid.Row="1" Grid.Column="4"/>
-                <TextBlock Name="lblFiliacao" Grid.Row="1" Grid.Column="5" TextWrapping="Wrap"/>
-                <Label Content="Telefone:" Grid.Row="2"/>
-                <TextBlock Name="lblTelefone" Grid.Row="2" Grid.Column="1" TextWrapping="Wrap"/>
+                <Label Content="Telefone:" Grid.Row="1" Grid.Column="4"/>
+                <TextBlock Name="lblTelefone" Grid.Row="1" Grid.Column="5" TextWrapping="Wrap"/>
+                <Label Content="Filiação:" Grid.Row="2"/>
+                <TextBlock Name="lblFiliacao" Grid.Row="2" Grid.Column="1" TextWrapping="Wrap"/>
                 <Label Content="Responsável STEP:" Grid.Row="2" Grid.Column="2"/>
                 <TextBlock Name="lblResponsavelSetor" Grid.Row="2" Grid.Column="3" Grid.ColumnSpan="3" TextWrapping="Wrap"/>
                 <Label Content="Observação:" Grid.Row="3"/>
@@ -145,31 +145,16 @@
                     <ColumnDefinition Width="Auto"/>
                     <ColumnDefinition Width="Auto"/>
                 </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                </Grid.RowDefinitions>
                 <Grid Margin="10,10,0,0">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="Auto"/>
                         <ColumnDefinition Width="Auto"/>
                     </Grid.ColumnDefinitions>
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="auto"/>
-                        <RowDefinition Height="auto"/>
-                        <RowDefinition Height="auto"/>
-                    </Grid.RowDefinitions>
-                    <Grid>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition/>
-                            <ColumnDefinition/>
-                        </Grid.ColumnDefinitions>
-                        <Grid.RowDefinitions>
-                            <RowDefinition  Height="35"/>
-                            <RowDefinition  Height="35"/>
-                        </Grid.RowDefinitions>
-                        <Label BorderThickness="1" HorizontalContentAlignment="Center" BorderBrush="#999" Content="Horas/Minutos Cumpridos" VerticalAlignment="Stretch"/>
-                        <Label BorderThickness="1,0,1,1" HorizontalAlignment="Stretch" BorderBrush="#999" Name="lblHorasCumpridas" Grid.Row="1" Foreground="#666" VerticalAlignment="Stretch" HorizontalContentAlignment="Center"/>
-                        <Label BorderThickness="0,1,1,1" HorizontalContentAlignment="Center" BorderBrush="#999" Content="Horas/Minutos a Cumprir" Foreground="#333" Grid.Column="1" VerticalAlignment="Stretch"/>
-                        <Label BorderThickness="0,0,1,1" HorizontalAlignment="Stretch" BorderBrush="#999" Name="lblHorasCumprir" Foreground="#666" Grid.Row="1" Grid.Column="1" VerticalAlignment="Stretch" HorizontalContentAlignment="Center"/>
-                    </Grid>
-                    <Grid  Grid.Column="1" Margin="10,0,10,0">
+                    <Grid >
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition />
                             <ColumnDefinition />
@@ -195,22 +180,38 @@
                         <Label Name="lblDetracao"  Grid.Row="1" Grid.Column="4" BorderThickness="0,0,1,1" BorderBrush="#999" Foreground="#0d9cfa" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" HorizontalContentAlignment="Center"/>
                         <Label Name="lblTotalEmDias" Grid.Row="1" Grid.Column="5" BorderThickness="0,0,1,1" BorderBrush="#999" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" HorizontalContentAlignment="Center"/>
                     </Grid>
-                    <Grid Grid.Row="2" Grid.ColumnSpan="2" Margin="0,15,0,10">
+                    <Grid Grid.Column="1" Margin="10,0,10,0">
                         <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="auto"/>
-                            <ColumnDefinition />
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
                         </Grid.ColumnDefinitions>
                         <Grid.RowDefinitions>
-                            <RowDefinition />
-                            <RowDefinition/>
+                            <RowDefinition  Height="35"/>
+                            <RowDefinition  Height="35"/>
                         </Grid.RowDefinitions>
-                        <Button Name="btnNovoCumprimento" Content="Novo" Click="btnNovoCumprimento_Click"  ToolTip="Permite incluir um novo cumprimento de horas."/>
-                        <Button Name="btnExcluirCumprimento" Content="Excluir" Grid.Column="1" Click="btnExcluirCumprimento_Click" ToolTip="Permite excluir os lançamentos selecionados no quadro abaixo."/>
+                        <Label BorderThickness="1" HorizontalContentAlignment="Center" BorderBrush="#999" Content="Horas/Minutos Cumpridos" VerticalAlignment="Stretch"/>
+                        <Label BorderThickness="1,0,1,1" HorizontalAlignment="Stretch" BorderBrush="#999" Name="lblHorasCumpridas" Grid.Row="1" Foreground="#666" VerticalAlignment="Stretch" HorizontalContentAlignment="Center"/>
+                        <Label BorderThickness="0,1,1,1" HorizontalContentAlignment="Center" BorderBrush="#999" Content="Horas/Minutos a Cumprir" Foreground="#333" Grid.Column="1" VerticalAlignment="Stretch"/>
+                        <Label BorderThickness="0,0,1,1" HorizontalAlignment="Stretch" BorderBrush="#999" Name="lblHorasCumprir" Foreground="#666" Grid.Row="1" Grid.Column="1" VerticalAlignment="Stretch" HorizontalContentAlignment="Center"/>
+                    </Grid>
+                </Grid>
+                <Grid Grid.Row="1" Margin="10,5,0,10">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="auto"/>
+                        <ColumnDefinition Width="695" />
+                        <ColumnDefinition Width="72"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition />
+                        <RowDefinition/>
+                    </Grid.RowDefinitions>
+                    <Button Name="btnNovoCumprimento" Content="Novo" Click="btnNovoCumprimento_Click"  ToolTip="Permite incluir um novo cumprimento de horas."/>
+                    <Button Name="btnExcluirCumprimento" Content="Excluir" Grid.Column="1" Click="btnExcluirCumprimento_Click" ToolTip="Permite excluir os lançamentos selecionados no quadro abaixo."/>
 
-                        <DataGrid Grid.Row="1" Grid.ColumnSpan="2" Name="dgvCumprimento" IsReadOnly="True" AutoGenerateColumns="False" Margin="5,10,0,0" ToolTip="Para editar algum lançamento, clique duas vezes no mesmo!" MouseDoubleClick="dgvCumprimento_MouseDoubleClick">
-                            <DataGrid.Columns>
-                                <DataGridTextColumn Header="Mês" Binding="{Binding Mes}"/>
-                                <!--<DataGridTextColumn Header="Hora Início">
+                    <DataGrid Grid.Row="1" Grid.ColumnSpan="2" Name="dgvCumprimento" IsReadOnly="True" AutoGenerateColumns="False" Margin="5,10,0,0" ToolTip="Para editar algum lançamento, clique duas vezes no mesmo!" MouseDoubleClick="dgvCumprimento_MouseDoubleClick" LostFocus="dgvCumprimento_LostFocus">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Header="Mês" Binding="{Binding Mes}"/>
+                            <!--<DataGridTextColumn Header="Hora Início">
                                     <DataGridTextColumn.Binding>
                                         <MultiBinding StringFormat="{}{0}:{1}">
                                             <Binding Path="InicioHH"/>
@@ -218,13 +219,12 @@
                                         </MultiBinding>
                                     </DataGridTextColumn.Binding>
                                 </DataGridTextColumn>-->
-                                <DataGridTextColumn Header="Ano" Binding="{ Binding Ano}"/>
-                                <DataGridTextColumn Header="Entidade" Binding="{Binding sentenciadoEntidade.Entidade.Nome}"/>
-                                <DataGridTextColumn Header="Tempo total" Binding="{Binding TempoCumprido}"/>
-                                <DataGridTextColumn Header="Usuário" Binding="{Binding usuario.Nome}"/>
-                            </DataGrid.Columns>
-                        </DataGrid>
-                    </Grid>
+                            <DataGridTextColumn Header="Ano" Binding="{ Binding Ano}"/>
+                            <DataGridTextColumn Header="Entidade" Binding="{Binding sentenciadoEntidade.Entidade.Nome}"/>
+                            <DataGridTextColumn Header="Tempo total" Binding="{Binding TempoCumprido, StringFormat=hh\\:mm}"/>
+                            <DataGridTextColumn Header="Usuário" Binding="{Binding usuario.Nome}"/>
+                        </DataGrid.Columns>
+                    </DataGrid>
                 </Grid>
             </Grid>
         </DockPanel>

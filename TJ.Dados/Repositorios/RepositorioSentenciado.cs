@@ -16,10 +16,7 @@ namespace TJ.Dados.Repositorios
 
         public Sentenciado RetornaPorId(int Id)
         {
-            using (Context db = new Context())
-            {
-                return db.Sentenciados.Include(s => s.SentenciadoEntidades).Include(s => s.Bairro).Include(s => s.Cidade).Include(s => s.UsuarioCadastro).Include(s => s.UsuarioAlteracao).FirstOrDefault(e => e.Id == Id);
-            }
+            return db.Sentenciados.Include(s => s.SentenciadoEntidades).Include(s => s.Bairro).Include(s => s.Cidade).Include(s => s.UsuarioCadastro).Include(s => s.UsuarioAlteracao).FirstOrDefault(e => e.Id == Id);
         }
 
         

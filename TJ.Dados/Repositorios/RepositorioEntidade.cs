@@ -10,11 +10,11 @@ namespace TJ.Dados.Repositorios
 {
     public class RepositorioEntidade : RepositorioBase<Entidade>, IRepositorioEntidade
     {
-        public IEnumerable<Entidade> RetornaEntidadesAtivasAsNoTracking()
+        public IEnumerable<Entidade> RetornaEntidadesAtivas()
         {
             try
             {
-                return db.Entidades.AsNoTracking().Where(e => e.Ativo.Equals("True", StringComparison.OrdinalIgnoreCase));
+                return db.Entidades.Where(e => e.Ativo.Equals("True", StringComparison.OrdinalIgnoreCase));
             }
             catch (Exception ex)
             {
@@ -24,10 +24,7 @@ namespace TJ.Dados.Repositorios
 
         public Entidade RetornaPorId(int Id)
         {
-            using (Context db = new Context())
-            {
-                return db.Entidades.Include(e => e.SentenciadoEntidades).Include(e => e.Bairro).Include(e => e.Cidade).Include(e => e.UsuarioCadastro).Include(e => e.UsuarioAlteracao).First(e => e.Id == Id);
-            }
+            return db.Entidades.Include(e => e.SentenciadoEntidades).Include(e => e.Bairro).Include(e => e.Cidade).Include(e => e.UsuarioCadastro).Include(e => e.UsuarioAlteracao).FirstOrDefault(e => e.Id == Id);
         }
     }
 }

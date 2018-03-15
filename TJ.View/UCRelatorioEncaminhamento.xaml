@@ -4,8 +4,59 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:viewer="clr-namespace:SAPBusinessObjects.WPF.Viewer;assembly=SAPBusinessObjects.WPF.Viewer"
-             mc:Ignorable="d" Background="White" MinHeight="600">
-    <DockPanel>
+             mc:Ignorable="d" Background="White" MinHeight="600" Width="auto">
+    <DockPanel Margin="10,10,15,0">
+        <DockPanel.Resources>
+            <Style TargetType="Button">
+                <Setter Property="Background" Value="#0d9cfa"/>
+                <Setter Property="BorderThickness" Value="1"/>
+                <Setter Property="BorderBrush" Value="#0A66BC"/>
+                <Setter Property="Foreground" Value="#fff"/>
+                <Setter Property="Margin" Value="5,5,0,0"/>
+                <Setter Property="HorizontalContentAlignment" Value="Center"/>
+                <Setter Property="VerticalContentAlignment" Value="Center"/>
+                <Setter Property="FontSize" Value="16"/>
+                <Setter Property="Width" Value="85"/>
+                <Setter Property="VerticalAlignment" Value="Bottom"/>
+                <Setter Property="HorizontalAlignment" Value="Right"/>
+                <Style.Triggers>
+                    <Trigger Property = "IsMouseOver" Value = "True">
+                        <Setter Property = "FontWeight" Value = "Bold"/>
+                    </Trigger>
+                </Style.Triggers>
+            </Style>
+
+            <Style TargetType="Label">
+                <Setter Property="HorizontalAlignment" Value="Right"/>
+                <Setter Property="VerticalAlignment" Value="Center"/>
+                <Setter Property="Foreground" Value="#333"/>
+                <Setter Property="FontSize" Value="15"/>
+            </Style>
+
+            <Style TargetType="ComboBox">
+                <Setter Property="HorizontalAlignment" Value="Left"/>
+                <Setter Property="VerticalAlignment" Value="Top"/>
+                <Setter Property="BorderThickness" Value="1"/>
+                <Setter Property="BorderBrush" Value="#999"/>
+                <Setter Property="Margin" Value="0,5,0,0"/>
+                <Setter Property="FontSize" Value="15"/>
+                <Setter Property="MinHeight" Value="25"/>
+                <Setter Property="Width" Value="200"/>
+            </Style>
+
+            <Style TargetType="DatePicker">
+                <Setter Property="HorizontalAlignment" Value="Left"/>
+                <Setter Property="VerticalAlignment" Value="Center"/>
+                <Setter Property="VerticalContentAlignment" Value="Center"/>
+                <Setter Property="BorderThickness" Value="1"/>
+                <Setter Property="BorderBrush" Value="#999"/>
+                <Setter Property="Margin" Value="0,5,0,0"/>
+                <Setter Property="FontSize" Value="15"/>
+                <Setter Property="Width" Value="200"/>
+            </Style>
+
+        </DockPanel.Resources>
+
         <Grid DockPanel.Dock="Top">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="Auto"/>
@@ -17,16 +68,16 @@
                 <RowDefinition/>
                 <RowDefinition/>
             </Grid.RowDefinitions>
-            <Label Content="Reeducando: *" HorizontalAlignment="Right" VerticalAlignment="Center" Foreground="Blue" />
-            <ComboBox Name="cbxSentenciado" HorizontalAlignment="Left" VerticalAlignment="center" Grid.Column="1" MinWidth="150" BorderThickness="1" BorderBrush="Blue" TabIndex="1"  KeyUp="cbxSentenciado_KeyUp" DropDownClosed="cbxSentenciado_DropDownClosed" />
-            <Label Content="Instituição: *" HorizontalAlignment="Right" VerticalAlignment="Center" Grid.Column="2" Foreground="Blue"/>
-            <ComboBox Name="cbxInstituicao" HorizontalAlignment="Left" VerticalAlignment="Top" Grid.Column="3" MinWidth="150" BorderThickness="1" BorderBrush="Blue" TabIndex="2" DropDownClosed="cbx_DropDownClosed" KeyUp="cbx_KeyUp" Margin="0,2,0,0"/>
-            <Label Content="Data Final:" HorizontalAlignment="Right" VerticalAlignment="Center" Grid.Row="1" Foreground="Blue"/>
-            <DatePicker Name="dtpDataFim" Grid.Column="1" BorderBrush="Blue" Grid.Row="1" ToolTip="Deixando a data vazia o sistema vai calcular a mesma." VerticalAlignment="Bottom"/>
-            <Button Name="BtnImprimir" Content="Imprimir" HorizontalAlignment="Center" VerticalAlignment="Center" Width="75" Click="BtnImprimir_Click" Grid.Row="1" Grid.Column="3"/>
+            <Label Content="Reeducando: *"/>
+            <ComboBox Name="cbxSentenciado" Grid.Column="1" MinWidth="150" TabIndex="1"  KeyUp="cbxSentenciado_KeyUp" DropDownClosed="cbxSentenciado_DropDownClosed" />
+            <Label Content="Instituição: *" Grid.Column="2"/>
+            <ComboBox Name="cbxInstituicao" Grid.Column="3" MinWidth="150" TabIndex="2" DropDownClosed="cbx_DropDownClosed" KeyUp="cbx_KeyUp"/>
+            <Label Content="Data Final:" Grid.Row="1"/>
+            <DatePicker Name="dtpDataFim" Grid.Column="1" Grid.Row="1" ToolTip="Deixando a data vazia o sistema vai calcular a mesma." />
+            <Button Name="BtnImprimir" Content="Visualizar" Click="BtnImprimir_Click" Grid.Row="1" Grid.Column="3"/>
         </Grid>
         <Grid DockPanel.Dock="Bottom">
-            <viewer:CrystalReportsViewer x:Name="CrystalReportsViewer" ToggleSidePanel="None"  Margin="0,10,0,0" Visibility="Hidden"/>
+            <viewer:CrystalReportsViewer x:Name="CrystalReportsViewer" ToggleSidePanel="None"  Margin="0,10,0,0" Visibility="Hidden" ShowCopyButton="False" ShowExportButton="False" ShowGoToPageButton="False" ShowLogo="False" ShowNextPageButton="False" ShowPrevPageButton="False" ShowSearchTextButton="False" ShowStatusbar="False" ShowToggleSidePanelButton="False"/>
         </Grid>
     </DockPanel>
 </UserControl>

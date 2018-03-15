@@ -42,7 +42,7 @@ namespace TJ.Dados.Repositorios
         {
             try
             {
-                return (db.CumprimentoMes.Where(c => c.Id == Id).Include(c => c.sentenciadoEntidade).Include(c => c.Cumprimentos).Include(c => c.usuario).Include(c => c.sentenciadoEntidade.Entidade) as CumprimentoMes);
+                return db.CumprimentoMes.Include(c => c.sentenciadoEntidade).Include(c => c.usuario).Include(c => c.Cumprimentos).Include(c => c.sentenciadoEntidade.Entidade).FirstOrDefault(c => c.Id == Id);
             }
             catch (Exception exception)
             {

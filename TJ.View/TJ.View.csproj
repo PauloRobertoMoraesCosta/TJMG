@@ -92,6 +92,9 @@
     </ApplicationDefinition>
     <Compile Include="Enumeracoes.cs" />
     <Compile Include="ToastViewModel.cs" />
+    <Compile Include="UCRelatorioCumprimento.xaml.cs">
+      <DependentUpon>UCRelatorioCumprimento.xaml</DependentUpon>
+    </Compile>
     <Compile Include="UCRelatorioFrequencia.xaml.cs">
       <DependentUpon>UCRelatorioFrequencia.xaml</DependentUpon>
     </Compile>
@@ -110,6 +113,9 @@
     <Compile Include="UCReeducandoLista.xaml.cs">
       <DependentUpon>UCReeducandoLista.xaml</DependentUpon>
     </Compile>
+    <Compile Include="UCBairrosLista.xaml.cs">
+      <DependentUpon>UCBairrosLista.xaml</DependentUpon>
+    </Compile>
     <Compile Include="UCUsuariosLista.xaml.cs">
       <DependentUpon>UCUsuariosLista.xaml</DependentUpon>
     </Compile>
@@ -122,6 +128,9 @@
     </Compile>
     <Compile Include="WinCadEdEntidade.xaml.cs">
       <DependentUpon>WinCadEdEntidade.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="WinCadEdBairro.xaml.cs">
+      <DependentUpon>WinCadEdBairro.xaml</DependentUpon>
     </Compile>
     <Compile Include="WinCadEdUsuario.xaml.cs">
       <DependentUpon>WinCadEdUsuario.xaml</DependentUpon>
@@ -146,6 +155,10 @@
     <Compile Include="Login.xaml.cs">
       <DependentUpon>Login.xaml</DependentUpon>
     </Compile>
+    <Page Include="UCRelatorioCumprimento.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="UCRelatorioFrequencia.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -170,6 +183,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Page Include="UCBairrosLista.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="UCUsuariosLista.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -183,6 +200,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="WinCadEdEntidade.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="WinCadEdBairro.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>

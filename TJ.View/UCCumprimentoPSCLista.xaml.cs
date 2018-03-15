@@ -5,10 +5,10 @@ using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
-using System.Windows.Media;
 using TJ.Apresentacao;
 using TJ.Apresentacao.InterfacesApp;
 using TJ.Dominio.Entidades;
+using static TJ.View.Enumeracoes;
 
 namespace TJ.View
 {
@@ -45,44 +45,10 @@ namespace TJ.View
         {
             using (IAppServiceCumprimentoMes serviceCumprimentoMes = MinhaNinject.Kernel.Get<IAppServiceCumprimentoMes>())
             {
-                dgvCumprimento.ItemsSource = serviceCumprimentoMes.RetornarPorSentenciado(sentenciadoSelecionado.Id).ToList();
+                dgvCumprimento.ItemsSource = serviceCumprimentoMes.RetornarPorSentenciado(sentenciadoSelecionado.Id).ToList().OrderBy(c => c.Ano).ThenBy(c => Enum.Parse(typeof(Meses), c.Mes));
             }
         }
 
-        
-        private void calcularDiferença(string horaMinutoInicio, string horaMinutoFim)
-        {
-            string horaAtual = horaMinutoInicio.Substring(0, horaMinutoInicio.IndexOf(":"));
-            string minutoAtual = horaMinutoInicio.Substring(horaMinutoInicio.IndexOf(":") + 1, 2);
-            string horaFim = horaMinutoFim.Substring(0, horaMinutoFim.IndexOf(":"));
-            string minutoFim = horaMinutoFim.Substring(horaMinutoFim.IndexOf(":") + 1, 2);
-
-            int inicio = ((Convert.ToInt32(horaAtual) * 60) + Convert.ToInt32(minutoAtual));
-            int fim = ((Convert.ToInt32(horaFim) * 60) + Convert.ToInt32(minutoFim));
-            string diferencaHoras = ((inicio - fim) / 60).ToString();
-            string diferencaMinutos = ((inicio - fim) % 60).ToString();
-
-            horasMinutos.Clear();
-            horasMinutos.Add(diferencaHoras.Length > 1 ? diferencaHoras : "0" + diferencaHoras);
-            horasMinutos.Add(diferencaMinutos.Length > 1 ? diferencaMinutos : "0" + diferencaMinutos);
-        }
-
-        private void somarHoras(string horaMinutoAtual, string horaMinutoSomar)
-        {
-            string horaAtual = horaMinutoAtual.Substring(0, horaMinutoAtual.IndexOf(":"));
-            string minutoAtual = horaMinutoAtual.Substring(horaMinutoAtual.IndexOf(":") + 1, 2);
-            string horaSomar = horaMinutoSomar.Substring(0, horaMinutoSomar.IndexOf(":"));
-            string minutoSomar = horaMinutoSomar.Substring(horaMinutoSomar.IndexOf(":") + 1, 2);
-
-            int parcelaInicio = ((Convert.ToInt32(horaAtual) * 60) + Convert.ToInt32(minutoAtual));
-            int parcelaFim = ((Convert.ToInt32(horaSomar) * 60) + Convert.ToInt32(minutoSomar));
-            string totalSomaEmHoras = ((parcelaInicio + parcelaFim) / 60).ToString();
-            string totalSomaEmMinutos = ((parcelaInicio + parcelaFim) % 60).ToString();
-
-            horasMinutos.Clear();
-            horasMinutos.Add(totalSomaEmHoras.Length > 1 ? totalSomaEmHoras : "0" + totalSomaEmHoras);
-            horasMinutos.Add(totalSomaEmMinutos.Length > 1 ? totalSomaEmMinutos : "0" + totalSomaEmMinutos);
-        }
         private void carregarTelaReeducando(Sentenciado sentenciado)
         {
             lblNome.Text = sentenciado.Nome;
@@ -97,7 +63,7 @@ namespace TJ.View
             lblPenaAnos.Content = sentenciado.PenaAnos.ToString();
             lblPenaMeses.Content = sentenciado.PenaMeses.ToString();
             lblPenaDias.Content = sentenciado.PenaDias.ToString();
-            lblTotalEmDias.Content = ((sentenciado.PenaAnos * 365) + (sentenciado.PenaMeses * 30) + sentenciado.PenaDias).ToString();
+            lblTotalEmDias.Content = ((sentenciado.PenaAnos * 365) + (sentenciado.PenaMeses * 30) + sentenciado.PenaDias + sentenciado.SomaDePena - sentenciado.Detracao).ToString();
             lblDetracao.Content = sentenciado.Detracao.ToString();
             lblDetracao.ToolTip = sentenciado.DetracaoObservacao;
             lblSoma.Content = sentenciado.SomaDePena.ToString();
@@ -106,57 +72,20 @@ namespace TJ.View
             carregarDadosCumprimento();
         }
 
-        private void carregarDadosCumprimento()
+        public void carregarDadosCumprimento()
         {
-            string horasCumpridas = "00:00";
-
-            //IEnumerable<Cumprimento> cumprimentos = _serviceCumprimento.RetornaTodos();
-            //if (cumprimentos.Any())
-            //{
-            //    _serviceCumprimento.Reload(cumprimentos);
-            //    cumprimentos = _serviceCumprimento.RetornaTodos(); //RetornarPorSentenciado(sentenciadoSelecionado.Id).ToList();
-            //}
-            //foreach (Cumprimento registro in cumprimentos)
-            //{
-            //    calcularDiferença(registro.FimHH + ":" + registro.FimMM, registro.InicioHH + ":" + registro.InicioMM);
-            //    somarHoras(horasCumpridas, horasMinutos[0] + ":" + horasMinutos[1]);
-            //    horasCumpridas = horasMinutos[0] + ":" + horasMinutos[1];
-            //}
-
-            if (sentenciadoSelecionado.Detracao > 0)
+            carregarDgvCumprimento();
+            TimeSpan horasTotaisCumpridas = new TimeSpan();
+            for (int i = 0; i < dgvCumprimento.Items.Count; i++)
             {
-                somarHoras(horasCumpridas, sentenciadoSelecionado.Detracao > 1 ? sentenciadoSelecionado.Detracao + ":00" : "0" + sentenciadoSelecionado.Detracao + ":00");
-                lblHorasCumpridas.Content = horasMinutos[0] + ":" + horasMinutos[1];
+                string[] listaHoras = (dgvCumprimento.Items[i] as CumprimentoMes).TempoCumprido.Split(':');
+                horasTotaisCumpridas = horasTotaisCumpridas.Add(new TimeSpan(Convert.ToInt32(listaHoras[0]), Convert.ToInt32(listaHoras[1]), Convert.ToInt32(listaHoras[2])));
             }
-            else
-            {
-                lblHorasCumpridas.Content = horasCumpridas;
-            }
-
-            if (sentenciadoSelecionado.SomaDePena > 0)
-            {
-                somarHoras(lblTotalEmDias.Content + ":00", sentenciadoSelecionado.SomaDePena + ":00");
-                calcularDiferença(horasMinutos[0] + ":" + horasMinutos[1], lblHorasCumpridas.Content.ToString());
-                lblHorasCumprir.Content = horasMinutos[0] + ":" + horasMinutos[1];
-            }
-            else
-            {
-                calcularDiferença(lblTotalEmDias.Content + ":00", lblHorasCumpridas.Content.ToString());
-                lblHorasCumprir.Content = horasMinutos[0] + ":" + horasMinutos[1];
-            }
-        }
-
-        private void carregarTelaCumprimento(Cumprimento cumprimento)
-        {
-            //dtpDataCumprimento.SelectedDate = cumprimento.Data;
-            //tbxInicioHH.Text = cumprimento.InicioHH;
-            //tbxInicioMM.Text = cumprimento.InicioMM;
-            //tbxFimHH.Text = cumprimento.FimHH;
-            //tbxFimMM.Text = cumprimento.FimMM;
-            //cbxEntidadeLancamento.ItemsSource = sentenciadoSelecionado.SentenciadoEntidades.Where(s => s.DataFim == null);
-            //cbxEntidadeLancamento.DisplayMemberPath = "Entidade.Nome";
-            //cbxEntidadeLancamento.SelectedIndex = cbxEntidadeLancamento.Items.Count > 0 ? 0 : -1;
-            //cbxEntidadeLancamento.IsEnabled = cbxEntidadeLancamento.Items.Count > 1 ? true : false;
+            lblHorasCumpridas.Content = String.Format("{0}:{1}", (int)horasTotaisCumpridas.TotalHours > 9 ? ((int)horasTotaisCumpridas.TotalHours).ToString() : "0" + (int)horasTotaisCumpridas.TotalHours, horasTotaisCumpridas.Minutes > 9 ? horasTotaisCumpridas.Minutes.ToString() : "0" + horasTotaisCumpridas.Minutes);
+            //lblTotalEmDias
+            TimeSpan tempoCumprir = (new TimeSpan(Convert.ToInt32(lblTotalEmDias.Content),0,0)) - horasTotaisCumpridas;
+            lblHorasCumprir.Content = String.Format("{0}:{1:mm}", (int)tempoCumprir.TotalHours > 9 ? ((int)tempoCumprir.TotalHours).ToString() : "0" + (int)tempoCumprir.TotalHours, tempoCumprir);
+            
         }
 
         private void imgPesquisarNome_MouseDown(object sender, MouseButtonEventArgs e)
@@ -164,7 +93,7 @@ namespace TJ.View
             try
             {
                 if (cbxLocalizarNome.SelectedIndex == -1)
-                    Mensagens.MensagemAlertaOk("Selecione algum nome de reeducando para carregar.");
+                    (App.Current.MainWindow as WpfTelaPrincipal)._vm.ShowInformation("Selecione algum nome de reeducando para carregar.");
                 else
                 {
                     dplTelaDados.Height = double.NaN;
@@ -176,7 +105,7 @@ namespace TJ.View
             }
             catch (Exception exception)
             {
-                Mensagens.MensagemErroOk("Ocorreu um erro inesperado: " + exception.Message);
+                (App.Current.MainWindow as WpfTelaPrincipal)._vm.ShowError("Ao carregar o(a) sentenciado(a): " + exception.Message);
             }
         }
 
@@ -185,7 +114,7 @@ namespace TJ.View
             try
             {
                 if (cbxLocalizarProcesso.SelectedIndex == -1)
-                    Mensagens.MensagemAlertaOk("Selecione algum processo de reeducando para carregar.");
+                    (App.Current.MainWindow as WpfTelaPrincipal)._vm.ShowInformation("Selecione algum processo de reeducando para carregar.");
                 else
                 {
                     sentenciadoSelecionado = cbxLocalizarProcesso.SelectedItem as Sentenciado;
@@ -196,7 +125,7 @@ namespace TJ.View
             }
             catch (Exception exception)
             {
-                Mensagens.MensagemErroOk("Ocorreu um erro inesperado: " + exception.Message);
+                (App.Current.MainWindow as WpfTelaPrincipal)._vm.ShowError("Ao carregar o(a) sentenciado(a): " + exception.Message);
             }
         }
 
@@ -210,11 +139,11 @@ namespace TJ.View
                     winCadEdCumprimento.ShowDialog();
                 }
                 else
-                    Mensagens.MensagemAlertaOk("Para editar algum registro, clique duas vezes no mesmo!");
+                    (App.Current.MainWindow as WpfTelaPrincipal)._vm.ShowInformation("Para editar algum registro, clique duas vezes no mesmo!");
             }
             catch (Exception exception)
             {
-                Mensagens.MensagemErroOk("Algo aconteceu errado ao clicar duas vezes no Grid: " + exception.Message);
+                (App.Current.MainWindow as WpfTelaPrincipal)._vm.ShowError("Ao clicar duas vezes no Grid: " + exception.Message);
             }
         }
 
@@ -242,192 +171,50 @@ namespace TJ.View
                     {
                         for (int i = 0; i < dgvCumprimento.SelectedItems.Count; i++)
                         {
-                            //_serviceCumprimento.Remover((Cumprimento)dgvCumprimento.SelectedItems[i]);
+                            using (IAppServiceCumprimentoMes serviceCumprimentoMes = MinhaNinject.Kernel.Get<IAppServiceCumprimentoMes>())
+                            {
+                                cumprimentoMesSelecionado = serviceCumprimentoMes.RetornaPorId((dgvCumprimento.SelectedItems[i] as CumprimentoMes).Id);
+                            }
+                            using (IAppServiceCumprimento serviceCumprimento = MinhaNinject.Kernel.Get<IAppServiceCumprimento>())
+                            {
+                                for (int n = 0; n < cumprimentoMesSelecionado.Cumprimentos.Count; n++)
+                                {
+                                    serviceCumprimento.Remover(serviceCumprimento.RetornaPorId(cumprimentoMesSelecionado.Cumprimentos.ElementAt(n).Id));
+                                }
+                            }
+                            using (IAppServiceCumprimentoMes serviceCumprimentoMes = MinhaNinject.Kernel.Get<IAppServiceCumprimentoMes>())
+                            {
+                                cumprimentoMesSelecionado = serviceCumprimentoMes.RetornaPorId((dgvCumprimento.SelectedItems[i] as CumprimentoMes).Id);
+                                serviceCumprimentoMes.Remover(cumprimentoMesSelecionado);
+                            }
+                            cumprimentoMesSelecionado = null;
                         }
-                        carregarDgvCumprimento();
-                        btnNovoCumprimento.IsEnabled = true;
                         carregarDadosCumprimento();
+                        (App.Current.MainWindow as WpfTelaPrincipal)._vm.ShowSuccess("Cumprimento(s) excluido(s) com sucesso!");
                     }
                 }
                 else
-                    Mensagens.MensagemAlertaOk("Para excluir cumprimentos selecione pelo menos um!");
+                    (App.Current.MainWindow as WpfTelaPrincipal)._vm.ShowInformation("Para excluir cumprimentos selecione pelo menos um!");
             }
             catch (Exception exception)
             {
-                Mensagens.MensagemErroOk("Erro inesperado ao excluir: " + exception.Message);
+                (App.Current.MainWindow as WpfTelaPrincipal)._vm.ShowError("Erro inesperado ao excluir: " + exception.Message);
             }
         }
 
-        private void btnGravarCumprimento_Click(object sender, RoutedEventArgs e)
+        private void dgvCumprimento_LostFocus(object sender, RoutedEventArgs e)
         {
             try
             {
-                if (true)
+                if (!btnExcluirCumprimento.IsKeyboardFocused && !dgvCumprimento.IsKeyboardFocusWithin)
                 {
-                    //if (!Validacoes.validarCampos(new List<Control>() { dtpDataCumprimento, tbxInicioHH, tbxInicioMM, tbxFimHH, tbxFimMM, cbxEntidadeLancamento }))
-                    //    Mensagens.MensagemAlertaOk("Favor informar os dados obrigatórios.");
-                    //else
-                    //{
-                    //    //_serviceCumprimento.Adiciona(popularCumprimento(new Cumprimento()));
-                    //    carregarDgvCumprimento();
-                    //    incluindo = false;
-                    //    btnNovoCumprimento.IsEnabled = true;
-                    //    carregarDadosCumprimento();
-                    //}
-                }
-                else
-                {
-                    //if (!Validacoes.validarCampos(new List<Control>() { dtpDataCumprimento, tbxInicioHH, tbxInicioMM, tbxFimHH, tbxFimMM, cbxEntidadeLancamento }))
-                    //    Mensagens.MensagemAlertaOk("Favor informar os dados obrigatórios.");
-                    //else
-                    //{
-                    //    if (cumprimentoSelecionado != null)
-                    //    {
-                    //        //Cumprimento cumprimentoBanco = _serviceCumprimento.RetornaPorId(cumprimentoSelecionado.Id);
-                    //        //_serviceCumprimento.Alterar(popularCumprimento(cumprimentoBanco));
-                    //        carregarDgvCumprimento();
-                    //        btnNovoCumprimento.IsEnabled = true;
-                    //        cumprimentoSelecionado = null;
-                    //        carregarDadosCumprimento();
-                    //    }
-                    //}
+                    dgvCumprimento.SelectedItem = null;
                 }
             }
             catch (Exception exception)
             {
-                Mensagens.MensagemErroOk("Erro ao gravar a entidade: " + exception.Message);
+                (App.Current.MainWindow as WpfTelaPrincipal)._vm.ShowError("Ao perder o foco: " + exception.Message);
             }
-        }
-
-        private void Button_Click(object sender, RoutedEventArgs e)
-        {
-            try
-            {
-                carregarDadosCumprimento();
-            }
-            catch (Exception exception)
-            {
-                Mensagens.MensagemErroOk("Erro inesperado: " + exception.Message);
-            }
-        }
-
-        private void tbxInicioHH_KeyUp(object sender, KeyEventArgs e)
-        {
-            try
-            {
-                if ((e.Key >= Key.D0 && e.Key <= Key.D9) || (e.Key >= Key.NumPad0 && e.Key <= Key.NumPad9))
-                {
-                    if ((sender as TextBox).Text != "")
-                    {
-                        (sender as TextBox).BorderBrush = new SolidColorBrush(Colors.Blue);
-                        if (Convert.ToInt32((sender as TextBox).Text) > 23)
-                        {
-                            (sender as TextBox).Text = "0";
-                            Mensagens.MensagemAlertaOk("Atenção: Os campos de horas não podem ser maiores que 23");
-                        }
-                        if ((sender as TextBox).Text.Length >= 2)
-                        {
-                            var ex = e.OriginalSource as UIElement;
-                            ex.MoveFocus(new TraversalRequest(FocusNavigationDirection.Next));
-                        }
-                    }
-                }
-            }
-            catch (Exception Exception)
-            {
-                Mensagens.MensagemErroOk("Erro inesperado: " + Exception.Message);
-            }
-        }
-
-        private void tbxInicioHH_KeyDown(object sender, KeyEventArgs e)
-        {
-            if (e.Key == Key.Enter)
-                //tbxInicioMM.Focus();
-
-                if ((!(e.Key >= Key.D0 && e.Key <= Key.D9) && !(e.Key >= Key.NumPad0 && e.Key <= Key.NumPad9) && e.Key != Key.Tab))
-                    e.Handled = true;
-        }
-
-        private void tbxInicioMM_KeyUp(object sender, KeyEventArgs e)
-        {
-            try
-            {
-                if ((e.Key >= Key.D0 && e.Key <= Key.D9) || (e.Key >= Key.NumPad0 && e.Key <= Key.NumPad9))
-                {
-                    if ((sender as TextBox).Text != "")
-                    {
-                        (sender as TextBox).BorderBrush = new SolidColorBrush(Colors.Blue);
-                        if (Convert.ToInt32((sender as TextBox).Text) > 59)
-                        {
-                            (sender as TextBox).Text = "0";
-                            Mensagens.MensagemAlertaOk("Atenção: Os campos de minutos não podem ser maiores que 59");
-                        }
-                        if ((sender as TextBox).Text.Length >= 2)
-                        {
-                            var ex = e.OriginalSource as UIElement;
-                            ex.MoveFocus(new TraversalRequest(FocusNavigationDirection.Next));
-                        }
-                    }
-                }
-            }
-            catch (Exception Exception)
-            {
-                Mensagens.MensagemErroOk("Erro inesperado: " + Exception.Message);
-            }
-        }
-
-        private void dtpDataCumprimento_SelectedDateChanged(object sender, SelectionChangedEventArgs e)
-        {
-            if ((sender as DatePicker).SelectedDate != null)
-                (sender as DatePicker).BorderBrush = new SolidColorBrush(Colors.Blue);
-        }
-
-        private void dtpDataCumprimento_CalendarClosed(object sender, RoutedEventArgs e)
-        {
-            try
-            {
-                //tbxInicioHH.Focus();
-            }
-            catch (Exception ex)
-            {
-                Mensagens.MensagemErroOk(ex.Message);
-            }
-        }
-
-        private void cbxEntidadeLancamento_KeyUp(object sender, KeyEventArgs e)
-        {
-            if ((e.Source as ComboBox).SelectedIndex != -1)
-                (e.Source as ComboBox).BorderBrush = new SolidColorBrush(Colors.Blue);
-        }
-
-        private void cbxEntidadeLancamento_DropDownClosed(object sender, EventArgs e)
-        {
-            if ((sender as ComboBox).SelectedIndex != -1)
-                (sender as ComboBox).BorderBrush = new SolidColorBrush(Colors.Blue);
-        }
-
-        private void tbxInicioMM_KeyDown(object sender, KeyEventArgs e)
-        {
-            if (e.Key == Key.Enter)
-                //tbxFimHH.Focus();
-                if ((!(e.Key >= Key.D0 && e.Key <= Key.D9) && !(e.Key >= Key.NumPad0 && e.Key <= Key.NumPad9) && e.Key != Key.Tab))
-                    e.Handled = true;
-        }
-
-        private void tbxFimHH_KeyDown(object sender, KeyEventArgs e)
-        {
-            if (e.Key == Key.Enter)
-                //tbxFimMM.Focus();
-                if ((!(e.Key >= Key.D0 && e.Key <= Key.D9) && !(e.Key >= Key.NumPad0 && e.Key <= Key.NumPad9) && e.Key != Key.Tab))
-                    e.Handled = true;
-        }
-
-        private void tbxFimMM_KeyDown(object sender, KeyEventArgs e)
-        {
-            if (e.Key == Key.Enter)
-                //cbxEntidadeLancamento.Focus();
-                if ((!(e.Key >= Key.D0 && e.Key <= Key.D9) && !(e.Key >= Key.NumPad0 && e.Key <= Key.NumPad9) && e.Key != Key.Tab))
-                    e.Handled = true;
         }
     }
 }

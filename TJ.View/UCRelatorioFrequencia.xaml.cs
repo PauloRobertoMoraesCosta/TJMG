@@ -29,7 +29,7 @@ namespace TJ.View
                 usuarioLogado = UsuarioLogado;
                 using (IAppServiceSentenciado serviceSentenciado = MinhaNinject.Kernel.Get<IAppServiceSentenciado>())
                 {
-                    cbxSentenciado.ItemsSource = serviceSentenciado.RetornaTodosAsNoTracking().OrderBy(s => s.Nome).ToList();
+                    cbxSentenciado.ItemsSource = serviceSentenciado.RetornaTodos().OrderBy(s => s.Nome).ToList();
                 }
                 cbxSentenciado.DisplayMemberPath = "Nome";
                 CrystalReportsViewer.Owner = Window.GetWindow(this);
@@ -51,7 +51,7 @@ namespace TJ.View
 
                     relatorio.Load(String.Format(@"{0}FolhaFrequencia.rpt", Validacoes.caminhoExe()));
 
-                    string[] connectionString = ConfigurationManager.ConnectionStrings["TJ.View.Properties.Settings.StringConection"].ConnectionString.Split(';');
+                    string[] connectionString = ConfigurationManager.ConnectionStrings["ExecucoesPenais2"].ConnectionString.Split(';');
                     string servidor = connectionString[0].Split('=')[1];
                     string banco = connectionString[1].Split('=')[1];
                     string usuario = connectionString[3].Split('=')[1];

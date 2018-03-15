@@ -11,13 +11,12 @@ namespace TJ.Dados.EntiConfig
         {
             HasKey(c => c.Id);
 
-            Property(c => c.Data).HasColumnName("Cumprimento_Data").IsRequired().HasColumnAnnotation(IndexAnnotation.AnnotationName, new IndexAnnotation(new IndexAttribute("UN_Cumprimento") { IsUnique = true })); ;
+            Property(c => c.Data).HasColumnName("Cumprimento_Data").IsRequired();//.HasColumnAnnotation(IndexAnnotation.AnnotationName, new IndexAnnotation(new IndexAttribute("UN_Cumprimento") { IsUnique = true }));
             Property(c => c.HorarioEntrada).HasColumnName("Cumprimento_HorarioEntrada").IsRequired();
             Property(c => c.HorarioSaida).HasColumnName("Cumprimento_HorarioSaida").IsRequired();
             Property(c => c.HorarioEntradaAlmoco).HasColumnName("Cumprimento_HorarioEntradaAlmoco").IsOptional();
             Property(c => c.HorarioSaidaAlmoco).HasColumnName("Cumprimento_HorarioSaidaAlmoco").IsOptional();
             Property(c => c.DiferencaHoras).HasColumnName("Cumprimento_DiferencaHoras");
-            Property(c => c.Usuario).HasColumnName("Cumprimento_Usuario").HasMaxLength(20).IsRequired();
             Property(c => c.CumprimentoMesId).HasColumnName("Cumprimento_CumprimentoMesId").IsRequired();
             
             HasRequired(c => c.cumprimentoMes).WithMany(cm => cm.Cumprimentos).HasForeignKey(ccm => ccm.CumprimentoMesId);

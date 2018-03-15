@@ -8,6 +8,7 @@ using Ninject;
 using TJ.Apresentacao;
 using TJ.Apresentacao.InterfacesApp;
 using TJ.Dominio.Entidades;
+using Ninject.Activation;
 
 namespace TJ.View
 {
@@ -16,7 +17,7 @@ namespace TJ.View
     /// </summary>
     public partial class Login : Window
     {
-        private ICollection<Usuario> usuarios;
+        private IEnumerable<Usuario> usuarios;
         private Usuario usuario;
 
         #region "Contrutores"

@@ -18,7 +18,7 @@ namespace TJ.View
     {
         private Usuario usuarioLogado;
         private Entidade entidadeSelecionada;
-        
+
         #region "Construtores"
         public UCEntidadesLista(Usuario usuario)
         {
@@ -60,9 +60,9 @@ namespace TJ.View
                 {
                     if (Mensagens.MensagemConfirmOkCancel("Deseja excluir as entidades selecionadas caso isso seja possível?") == MessageBoxResult.OK)
                     {
-                        using (IAppServiceEntidade serviceEntidade = MinhaNinject.Kernel.Get<IAppServiceEntidade>())
+                        for (int i = 0; i < dgvEntidades.SelectedItems.Count; i++)
                         {
-                            for (int i = 0; i < dgvEntidades.SelectedItems.Count; i++)
+                            using (IAppServiceEntidade serviceEntidade = MinhaNinject.Kernel.Get<IAppServiceEntidade>())
                             {
                                 entidadeSelecionada = serviceEntidade.RetornaPorId(((Entidade)dgvEntidades.SelectedItems[i]).Id);
                                 if (entidadeSelecionada.SentenciadoEntidades.Count > 0)

@@ -17,9 +17,8 @@ namespace TJ.Dados.Contexto
     public class Context : DbContext
     {
         public Context()
-            : base("TJ.View.Properties.Settings.StringConection")
+            : base("ExecucoesPenais2")
         {
-            
         }
 
         public DbSet<Usuario> Usuarios { get; set; }

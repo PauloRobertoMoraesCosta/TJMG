@@ -23,11 +23,13 @@
                 </Menu.ItemsPanel>
                 <Label x:Name="lblDadosJesp" Content="Dados do Step" MouseDown="lblDadosJesp_MouseDown" ToolTip="Cadastro dos dados principais do Fórum."/>
                 <Label x:Name="lblUsuarios" Content="Usuários" MouseDown="lblUsuarios_MouseDown" ToolTip="Cadastro e manutenção dos usuários do sistema."/>
+                <Label x:Name="lblBairros" Content="Bairros" MouseDown="lblBairro_MouseDown" ToolTip="Cadastro e manutenção dos bairros do sistema."/>
                 <Label x:Name="lblReeducando" Content="Reeducando" MouseDown="lblReeducando_MouseDown" ToolTip="Cadastro e manutenção dos reeducandos."/>
                 <Label x:Name="lblInstituicoes" Content="Entidades" MouseDown="lblInstituicoes_MouseDown" ToolTip="Cadastro e manutenção das entidades."/>
                 <Label x:Name="lblLancamentos" Content="Cumprimento PSC" MouseDown="lblLancamentos_MouseDown" ToolTip="Cadastro e manutenção dos dados do cumprimento."/>
                 <Label Name="lblEncaminhamento" Content="Encaminhamento" ToolTip="Geração e impressão do encaminhamento." MouseDown="Encaminhamento_MouseDown"/>
                 <Label Name="lblFrequencia" Content="Frequência" ToolTip="Geração e impressão da folha de frequência." MouseDown="Frequencia_MouseDown"/>
+                <Label x:Name="lblRelCumprimento" Content="Cumprimento" ToolTip="Geração e impressão do relatório de cumprimento." MouseDown="RelCumprimento_MouseDown"/>
                 <Label Content="Trocar de Usuário" Name="lblTtrocarUsuario" MouseDown="lblTtrocarUsuario_MouseDown" ToolTip="Usado para entrar com outro usuário."/>
                 <Label Content="Sair" Name="lblSair" MouseDown="lblSair_MouseDown" ToolTip="Usado para fechar o sistema."/>
             </Menu>

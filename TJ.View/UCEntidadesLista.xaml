@@ -5,7 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              mc:Ignorable="d">
 
-    <DockPanel Background="White">
+    <DockPanel Background="White" HorizontalAlignment="Left" VerticalAlignment="Top">
         <DockPanel.Resources>
             <Style TargetType="Button">
                 <Setter Property="Background" Value="#0d9cfa"/>
@@ -50,7 +50,7 @@
             </Style>
 
             <Style TargetType="DataGridCell">
-                <Setter Property="Margin" Value="0,5,0,5"/>
+                <Setter Property="Margin" Value="5,5,5,5"/>
             </Style>
         </DockPanel.Resources>
 
@@ -65,8 +65,8 @@
 
         <DataGrid DockPanel.Dock="Bottom" Name="dgvEntidades" IsReadOnly="True" AutoGenerateColumns="False" MouseDoubleClick="dgvEntidades_MouseDoubleClick" ToolTip="Para editar qualquer entidade, clique duas vezes na mesma!" LostFocus="dgvEntidades_LostFocus">
             <DataGrid.Columns>
-                <DataGridTextColumn Header="Nome" Binding="{Binding Nome}"/>
-                <DataGridTextColumn Header="Atividade" Binding="{Binding AtividadePrincipal}"/>
+                <DataGridTextColumn MaxWidth="400" Header="Nome" Binding="{Binding Nome}"/>
+                <DataGridTextColumn MaxWidth="400" Header="Atividade" Binding="{Binding AtividadePrincipal}"/>
                 <DataGridTextColumn Header="Bairro" Binding="{Binding Bairro.Nome}"/>
                 <DataGridCheckBoxColumn Header="Ativa" Binding="{Binding Ativo}"/>
             </DataGrid.Columns>

@@ -85,8 +85,7 @@ namespace TJ.View
                     {
                         using (IAppServiceSentenciado serviceSentenciado = MinhaNinject.Kernel.Get<IAppServiceSentenciado>())
                         {
-                            Sentenciado sentenciadoBanco = serviceSentenciado.RetornaPorId(sentenciadoSelecionado.Id);
-                            serviceSentenciado.Alterar(popularSentenciado(sentenciadoBanco));
+                            serviceSentenciado.Alterar(popularSentenciado(serviceSentenciado.RetornaPorId(sentenciadoSelecionado.Id)));
                         }
                         _pai.carregarDgvReeducando();
                         Close();
@@ -423,12 +422,12 @@ namespace TJ.View
             cbxOrigem.ItemsSource = new List<string>
             {
                 "Vara de Execuções Penais",
-                "1ª Vara Criminal",
-                "2ª Vara Criminal",
-                "3ª Vara Criminal",
-                "1ª U.J. – 1° J.D.",
-                "1ª U.J. – 2° J.D.",
-                "1ª U.J. – 3° J.D."
+                "Primeira Vara Criminal",
+                "Segunda Vara Criminal",
+                "Terceira Vara Criminal",
+                "1 U.J. - 1 J.D.",
+                "1 U.J. - 2 J.D.",
+                "1 U.J. - 3 J.D."
             };
             cbxSituacaoPena.ItemsSource = new List<string>
             {

@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:TJ.View"
         mc:Ignorable="d"
-        Title="Cadastro de Entidade-Sentenciado" Height="240" Width="760" WindowStartupLocation="CenterScreen" ResizeMode="NoResize">
+        Title="Cadastro de Entidade-Sentenciado" Height="240" Width="775" WindowStartupLocation="CenterScreen" ResizeMode="NoResize">
 
     <DockPanel Margin="10,10,10,0">
         <DockPanel.Resources>
@@ -86,21 +86,21 @@
             <ComboBox Name="cbxEntidade" Grid.Column="1"  KeyUp="cbxEntidade_KeyUp" DropDownClosed="cbxEntidade_DropDownClosed" TabIndex="1"/>
             <Label Content="Situação Cumprimento: *" Grid.Column="2"/>
             <ComboBox Name="cbxSituacaoComprimento" Grid.Column="3" KeyUp="cbxEntidade_KeyUp" DropDownClosed="cbxEntidade_DropDownClosed" TabIndex="2"/>
-            <Label Content="Data Inicial: *" Grid.Row="1"/>
+            <Label Content="Data Inicial/Previsão: *" Grid.Row="1"/>
             <DatePicker Name="dtpDataInicial" Grid.Row="1" Grid.Column="1" SelectedDateChanged="dtpDataInicial_SelectedDateChanged" TabIndex="3"/>
             <Label Content="Data Final:" Grid.Row="1" Grid.Column="2"/>
             <DatePicker Name="dtpDataFinal" Grid.Row="1" Grid.Column="3" TabIndex="4"/>
             <Label Content="Dias e horários:" Grid.Row="2"/>
-            <TextBox Name="tbxSentenciadoDiasHorarios" Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="3" MaxLength="200" TabIndex="5"/>
+            <TextBox Name="tbxSentenciadoDiasHorarios" Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="3" Width="576" MaxLength="200" TabIndex="5"/>
             <Label Content="Atividades na PSC:" Grid.Row="3"/>
-            <TextBox Name="tbxAtividadePSC" Grid.Row="3" Grid.Column="1" Grid.ColumnSpan="3" MaxLength="100" TabIndex="6"/>
+            <TextBox Name="tbxAtividadePSC" Grid.Row="3" Grid.Column="1" Grid.ColumnSpan="3" Width="576" MaxLength="100" TabIndex="6"/>
             <Grid Grid.Row="4" Grid.ColumnSpan="4" Margin="0,30,0,0" >
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition />
                     <ColumnDefinition />
                     <ColumnDefinition Width="auto"/>
                 </Grid.ColumnDefinitions>
-                <Label Name="lblCancelar" Content="Cancelar" Grid.Column="1" FontSize="15" Foreground="#0d9cfa" HorizontalAlignment="Right" VerticalAlignment="Bottom" MouseDown="lblCancelar_MouseDown" MouseLeave="lblCancelar_MouseLeave" MouseEnter="lblCancelar_MouseEnter"/>
+                <Label Name="lblCancelar" Content="Cancelar" Grid.Column="1" Margin="0,0,10,0" FontSize="15" Foreground="#0d9cfa" HorizontalAlignment="Right" VerticalAlignment="Bottom" MouseDown="lblCancelar_MouseDown" MouseLeave="lblCancelar_MouseLeave" MouseEnter="lblCancelar_MouseEnter"/>
                 <Button Name="btnGravar" Content="Gravar" Grid.Column="2" ToolTip="Permite gravar o novo usuário ou alterar um já existente." Click="btnGravar_Click" Style="{StaticResource Btn}" TabIndex="7" Margin="0,5,0,0" VerticalAlignment="Top"/>
             </Grid>
         </Grid>

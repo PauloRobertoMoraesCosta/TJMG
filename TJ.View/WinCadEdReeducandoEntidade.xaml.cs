@@ -150,7 +150,7 @@ namespace TJ.View
                     {
                         using (IAppServiceSentenciadoEntidade serviceSentenciadoEntidade = MinhaNinject.Kernel.Get<IAppServiceSentenciadoEntidade>())
                         {
-                            serviceSentenciadoEntidade.Alterar(popularSentenciadoEntidade(sentenciadoEntidadeSelecionado));
+                            serviceSentenciadoEntidade.Alterar(popularSentenciadoEntidade(serviceSentenciadoEntidade.RetornaPorId(sentenciadoEntidadeSelecionado.Id)));
                         }
                         (_pai as WinCadEdReeducando).carregarDgvHistorico(sentenciadoSelecionadoId);
                         (App.Current.MainWindow as WpfTelaPrincipal)._vm.ShowSuccess("Alteração realizada com sucesso");
@@ -171,7 +171,7 @@ namespace TJ.View
         {
             using (IAppServiceEntidade serviceEntidade = MinhaNinject.Kernel.Get<IAppServiceEntidade>())
             {
-                cbxEntidade.ItemsSource = serviceEntidade.RetornaEntidadesAtivasAsNoTracking().OrderBy(e => e.Nome);
+                cbxEntidade.ItemsSource = serviceEntidade.RetornaEntidadesAtivas().OrderBy(e => e.Nome);
             }
             cbxEntidade.DisplayMemberPath = "Nome";
             cbxSituacaoComprimento.ItemsSource = new List<string> {

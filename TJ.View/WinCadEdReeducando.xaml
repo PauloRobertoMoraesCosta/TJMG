@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:TJ.View"
         mc:Ignorable="d"
-        Title="Cadastro de reeducando" ResizeMode="NoResize" WindowStartupLocation="CenterScreen" Width="980" Height="700">
+        Title="Cadastro de reeducando" ResizeMode="NoResize" WindowStartupLocation="CenterScreen" Width="970" Height="700">
     <ScrollViewer VerticalScrollBarVisibility="Auto" Background="White">
         <DockPanel Margin="10,10,10,0" Background="White">
             <DockPanel.Resources>
@@ -203,11 +203,11 @@
                     <Label Content="Observação:" Grid.Row="2"/>
                     <TextBox Name="tbxObservacao" Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="3" MaxLength="300" Width="753" HorizontalAlignment="Left" TabIndex="22"/>
                     <Label Content="Detração:" Grid.Row="3"/>
-                    <TextBox Name="tbxDetracao" Grid.Row="3" Grid.Column="1" MaxLength="2" TabIndex="23" Width="100"/>
+                    <TextBox Name="tbxDetracao" Grid.Row="3" Grid.Column="1" MaxLength="5" TabIndex="23" Width="100"/>
                     <Label Content="Observação detração:" Grid.Row="3" Grid.Column="2"/>
                     <TextBox Name="tbxObservacaoDetracao" Grid.Row="3" Grid.Column="3" MaxLength="300" TabIndex="24"/>
                     <Label Content="Soma de pena:" Grid.Row="4"/>
-                    <TextBox Name="tbxSomaDePena" Grid.Row="4" Grid.Column="1" MaxLength="2" TabIndex="25" Width="100"/>
+                    <TextBox Name="tbxSomaDePena" Grid.Row="4" Grid.Column="1" MaxLength="5" TabIndex="25" Width="100"/>
                     <Label Content="Observação soma:" Grid.Row="4" Grid.Column="2"/>
                     <TextBox Name="tbxObservacaoSoma" Grid.Row="4" Grid.Column="3" MaxLength="300" TabIndex="26"/>
                     <Label Name="lblInclusao" Content="Usuário Inclusão:" Grid.Row="5"/>
@@ -243,7 +243,7 @@
                         </Grid>
                         <DataGrid Name="dgvHistorico" Grid.Row="1" Grid.ColumnSpan="4" AutoGenerateColumns="False" IsReadOnly="True" ToolTip="Clique na coluna para ordenar. Clique duas vezes em algum registro para editar." MouseDoubleClick="dgvHistorico_MouseDoubleClick" LostFocus="dgvHistorico_LostFocus" MaxHeight="200">
                             <DataGrid.Columns>
-                                <DataGridTextColumn Header="Instituição" Binding="{Binding Entidade.Nome}"/>
+                                <DataGridTextColumn MaxWidth="470" Header="Instituição" Binding="{Binding Entidade.Nome}"/>
                                 <DataGridTextColumn Header="Data Início" Binding="{Binding DataInicio, StringFormat=dd/MM/yyyy}"/>
                                 <DataGridTextColumn Header="Data Fim" Binding="{Binding DataFim, StringFormat=dd/MM/yyyy}"/>
                                 <DataGridTextColumn Header="Situação Cumprimento" Binding="{Binding SituacaoCumprimento}"/>
@@ -252,13 +252,13 @@
                     </Grid>
                 </GroupBox>
 
-                <Grid Grid.Row="1" Margin="0,30,0,15" >
+                <Grid Grid.Row="1" Margin="0,30,15,15" >
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition />
                         <ColumnDefinition />
                         <ColumnDefinition Width="auto"/>
                     </Grid.ColumnDefinitions>
-                    <Label Name="lblCancelar" Content="Cancelar" Grid.Column="1" FontSize="15" Margin="0,0,0,-3" Foreground="#0d9cfa" HorizontalAlignment="Right" VerticalAlignment="Bottom" MouseDown="lblCancelar_MouseDown" MouseLeave="lblCancelar_MouseLeave" MouseEnter="lblCancelar_MouseEnter"/>
+                    <Label Name="lblCancelar" Content="Cancelar" Grid.Column="1" FontSize="15" Margin="0,0,10,-3" Foreground="#0d9cfa" HorizontalAlignment="Right" VerticalAlignment="Bottom" MouseDown="lblCancelar_MouseDown" MouseLeave="lblCancelar_MouseLeave" MouseEnter="lblCancelar_MouseEnter"/>
                     <Button Name="btnGravar" Content="Gravar" Grid.Column="2" ToolTip="Permite gravar o novo usuário ou alterar um já existente." Click="btnGravar_Click" Style="{StaticResource Btn}"/>
                 </Grid>
             </Grid>

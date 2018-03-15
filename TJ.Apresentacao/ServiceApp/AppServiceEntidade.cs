@@ -15,9 +15,9 @@ namespace TJ.Apresentacao.ServiceApp
             _serviceEntidade = serviceEntidade;
         }
 
-        public IEnumerable<Entidade> RetornaEntidadesAtivasAsNoTracking()
+        public IEnumerable<Entidade> RetornaEntidadesAtivas()
         {
-            return _serviceEntidade.RetornaEntidadesAtivasAsNoTracking();
+            return _serviceEntidade.RetornaEntidadesAtivas();
         }
     }
 }

@@ -43,7 +43,7 @@ namespace TJ.Dados.Repositorios
         {
             try
             {
-                    IEnumerable<Usuario> usuariosAtivos = db.Usuarios.AsNoTracking().Where(u => u.Ativo.Equals("True", StringComparison.OrdinalIgnoreCase));
+                    IEnumerable<Usuario> usuariosAtivos = db.Usuarios.Where(u => u.Ativo.Equals("True", StringComparison.OrdinalIgnoreCase));
                     if (usuariosAtivos == null)
                         throw new DadosException("Nenhum Usuário ativo no sistema");
 

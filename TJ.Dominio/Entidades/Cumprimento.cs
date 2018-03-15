@@ -11,7 +11,6 @@ namespace TJ.Dominio.Entidades
         public TimeSpan HorarioEntradaAlmoco { get; set; }
         public TimeSpan HorarioSaidaAlmoco { get; set; }
         public TimeSpan DiferencaHoras { get; set; }
-        public string Usuario { get; set; }
         public int CumprimentoMesId { get; set; }
 
         public CumprimentoMes cumprimentoMes { get; set; }

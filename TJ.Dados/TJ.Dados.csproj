@@ -62,12 +62,6 @@
     <Compile Include="Verifications\VerificacoesBanco.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\TJ.Dominio\TJ.Dominio.csproj">
-      <Project>{b3e89431-18cc-4948-9788-f86a30a42bcf}</Project>
-      <Name>Upa.Dominio</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
     <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\EntityFramework.6.1.3\lib\net40\EntityFramework.dll</HintPath>
@@ -89,13 +83,15 @@
     <None Include="packages.config">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Properties\Settings.settings">
-      <Generator>SettingsSingleFileGenerator</Generator>
-      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
-    </None>
   </ItemGroup>
   <ItemGroup>
     <Service Include="{C0C07587-41A7-46C8-8FBD-3F9C8EBE2DDC}" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\TJ.Dominio\TJ.Dominio.csproj">
+      <Project>{b3e89431-18cc-4948-9788-f86a30a42bcf}</Project>
+      <Name>TJ.Dominio</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

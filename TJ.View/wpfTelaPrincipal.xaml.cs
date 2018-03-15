@@ -121,13 +121,25 @@ namespace TJ.View
         {
             try
             {
-
                 UCUsuariosLista ucUsuario = new UCUsuariosLista();
                 InitializeTab(ucUsuario, "Usuários");
             }
             catch (Exception exception)
             {
                 _vm.ShowError("Ao iniciar a tela de usuários: " + exception.Message);
+            }
+        }
+
+        private void lblBairro_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            try
+            {
+                UCBairrosLista ucBairro = new UCBairrosLista();
+                InitializeTab(ucBairro, "Bairros");
+            }
+            catch (Exception exception)
+            {
+                _vm.ShowError("Ao iniciar a tela de bairros: " + exception.Message);
             }
         }
 
@@ -204,7 +216,20 @@ namespace TJ.View
             }
             catch (Exception exception)
             {
-                _vm.ShowError("Ao iniciar a tela do encaminhamento: " + exception.Message);
+                _vm.ShowError("Ao iniciar a tela da folha de frequência: " + exception.Message);
+            }
+        }
+
+        private void RelCumprimento_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            try
+            {
+                UCRelatorioCumprimento ucRelatorio = new UCRelatorioCumprimento();
+                InitializeTab(ucRelatorio, "Relatório de cumprimentos");
+            }
+            catch (Exception exception)
+            {
+                _vm.ShowError("Ao iniciar a tela do relatório de cumprimento: " + exception.Message);
             }
         }
 

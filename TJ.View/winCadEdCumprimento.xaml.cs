@@ -2,15 +2,10 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 using TJ.Apresentacao;
 using TJ.Apresentacao.InterfacesApp;
 using TJ.Dominio.Entidades;
@@ -62,7 +57,7 @@ namespace TJ.View
             CarregarTela();
 
             calcularTempoCumprido();
-            lblTempoCumprido.Content = tempoCumprido.Minutes > 0 ? String.Format("Foram cumpridas {0}h{1}min no total.", tempoCumprido.Hours, tempoCumprido.Minutes) : String.Format("Foram cumpridas {0}h no total.", tempoCumprido.Hours);
+            lblTempoCumprido.Content = tempoCumprido.Minutes > 0 ? String.Format("Foram cumpridas {0}h{1}min no total.", (int)tempoCumprido.TotalHours, tempoCumprido.Minutes) : String.Format("Foram cumpridas {0}h no total.", (int)tempoCumprido.TotalHours);
             this.Title = "Alteração de cumprimento";
             btnGravar.Content = "Alterar";
 
@@ -71,7 +66,11 @@ namespace TJ.View
         private void CarregarTela()
         {
             tblNome.Text = sentenciadoSelecionado.Nome;
-            cbxMes.ItemsSource = Enum.GetValues(typeof(Meses));
+            Array a = Enum.GetValues(typeof(Meses));
+            for (int i = 0; i < a.Length; i++)
+            {
+                cbxMes.Items.Add(a.GetValue(i).ToString());
+            }
 
             using (IAppServiceSentenciadoEntidade serviceSentenciadoEntidade = MinhaNinject.Kernel.Get<IAppServiceSentenciadoEntidade>())
             {
@@ -111,6 +110,7 @@ namespace TJ.View
                     }
                 }
                 tbxAno.Text = cumprimentoMesSelecionado.Ano.ToString();
+                tbxObservacao.Text = cumprimentoMesSelecionado.Observacao;
 
                 int i = 0;
                 while (i < cumprimentoMesSelecionado.Cumprimentos.Count())
@@ -134,6 +134,60 @@ namespace TJ.View
                 }
                 dgvCumprimento.ItemsSource = cumprimentosTela;
             }
+        }
+
+        public Cumprimento popularCumprimento(Cumprimento cumprimento, cumprimentoTela cumprimentoTela, int cumprimentoMesId)
+        {
+            DateTime a;
+            if (DateTime.TryParse(String.Format("{0}/{1}/{2}", cumprimentoTela.Dia, ((int)Enum.Parse(typeof(Meses), cbxMes.SelectedItem.ToString())).ToString("D2"), tbxAno.Text), out a))
+            {
+                cumprimento.Data = Convert.ToDateTime(String.Format("{0}/{1}/{2}", cumprimentoTela.Dia, ((int)Enum.Parse(typeof(Meses), cbxMes.SelectedItem.ToString())).ToString("D2"), tbxAno.Text));
+                cumprimento.HorarioEntrada = cumprimentoTela.HorarioEntrada;
+                cumprimento.HorarioSaida = cumprimentoTela.HorarioSaida;
+                cumprimento.HorarioEntradaAlmoco = cumprimentoTela.HorarioEntradaAlmoco;
+                cumprimento.HorarioSaidaAlmoco = cumprimentoTela.HorarioSaidaAlmoco;
+                cumprimento.CumprimentoMesId = cumprimentoMesId;
+                cumprimento.DiferencaHoras = cumprimentoTela.DiferencaHoras;
+            }
+            return cumprimento;
+        }
+
+        public CumprimentoMes popularCumprimentoMes(CumprimentoMes cumprimentoMes)
+        {
+            cumprimentoMes.Ano = Convert.ToInt16(tbxAno.Text);
+            cumprimentoMes.Mes = cbxMes.SelectedValue.ToString();
+            cumprimentoMes.Observacao = tbxObservacao.Text;
+            cumprimentoMes.SentenciadoEntidadeId = (cbxInstituicao.SelectedItem as SentenciadoEntidade).Id;
+            cumprimentoMes.UsuarioId = usuarioLogado.Id;
+            cumprimentoMes.TempoCumprido = new TimeSpan().ToString();
+            return cumprimentoMes;
+        }
+
+        private void atualizarGrid()
+        {
+            if (cumprimentosTela[dgvCumprimento.SelectedIndex - 1].HorarioSaida >= cumprimentosTela[dgvCumprimento.SelectedIndex - 1].HorarioEntrada)
+            {
+                cumprimentosTela[dgvCumprimento.SelectedIndex - 1].DiferencaHoras = cumprimentosTela[dgvCumprimento.SelectedIndex - 1].HorarioSaida - cumprimentosTela[dgvCumprimento.SelectedIndex - 1].HorarioEntrada;
+                if (cumprimentosTela[dgvCumprimento.SelectedIndex - 1].DiferencaHoras.TotalHours >= 24)
+                    (App.Current.MainWindow as WpfTelaPrincipal)._vm.ShowError("Não é permitido cumprir 24 horas de serviço a comunidade por dia! Favor conferir.");
+            }
+            if (cumprimentosTela[dgvCumprimento.SelectedIndex - 1].HorarioSaidaAlmoco >= cumprimentosTela[dgvCumprimento.SelectedIndex - 1].HorarioEntradaAlmoco)
+            {
+                cumprimentosTela[dgvCumprimento.SelectedIndex - 1].DiferencaHoras += cumprimentosTela[dgvCumprimento.SelectedIndex - 1].HorarioSaidaAlmoco - cumprimentosTela[dgvCumprimento.SelectedIndex - 1].HorarioEntradaAlmoco;
+                if (cumprimentosTela[dgvCumprimento.SelectedIndex - 1].DiferencaHoras.TotalHours >= 24)
+                    (App.Current.MainWindow as WpfTelaPrincipal)._vm.ShowError("Não é permitido cumprir 24 horas de serviço a comunidade por dia! Favor conferir.");
+            }
+            dgvCumprimento.Items.Refresh();
+        }
+
+        private void calcularTempoCumprido()
+        {
+            tempoCumprido = new TimeSpan();
+            for (int i = 0; i < dgvCumprimento.Items.Count; i++)
+            {
+                tempoCumprido += cumprimentosTela[i].DiferencaHoras;
+            }
+
         }
 
         private void dgvCumprimento_KeyDown(object sender, KeyEventArgs e)
@@ -171,7 +225,7 @@ namespace TJ.View
                                 dgvCumprimento.CurrentCell = new DataGridCellInfo(dgvCumprimento.Items[dgvCumprimento.SelectedIndex], dgvCumprimento.Columns[dgvCumprimento.CurrentColumn.DisplayIndex - 1]);
 
                                 calcularTempoCumprido();
-                                lblTempoCumprido.Content = tempoCumprido.Minutes > 0 ? String.Format("Foram cumpridas {0}h{1}min no total.", tempoCumprido.Hours, tempoCumprido.Minutes) : String.Format("Foram cumpridas {0}h no total.", tempoCumprido.Hours);
+                                lblTempoCumprido.Content = tempoCumprido.Minutes > 0 ? String.Format("Foram cumpridas {0}h{1}min no total.", (int)tempoCumprido.TotalHours, tempoCumprido.Minutes) : String.Format("Foram cumpridas {0}h no total.", (int)tempoCumprido.TotalHours);
                             }
                             else if (dgvCumprimento.CurrentColumn.DisplayIndex == 1 || dgvCumprimento.CurrentColumn.DisplayIndex == 3)
                             {
@@ -182,7 +236,7 @@ namespace TJ.View
                                 dgvCumprimento.CurrentCell = new DataGridCellInfo(dgvCumprimento.Items[dgvCumprimento.SelectedIndex], dgvCumprimento.Columns[dgvCumprimento.CurrentColumn.DisplayIndex]);
 
                                 calcularTempoCumprido();
-                                lblTempoCumprido.Content = tempoCumprido.Minutes > 0 ? String.Format("Foram cumpridas {0}h{1}min no total.", tempoCumprido.Hours, tempoCumprido.Minutes) : String.Format("Foram cumpridas {0}h no total.", tempoCumprido.Hours);
+                                lblTempoCumprido.Content = tempoCumprido.Minutes > 0 ? String.Format("Foram cumpridas {0}h{1}min no total.", (int)tempoCumprido.TotalHours, tempoCumprido.Minutes) : String.Format("Foram cumpridas {0}h no total.", (int)tempoCumprido.TotalHours);
                             }
                         }
                         else
@@ -203,7 +257,7 @@ namespace TJ.View
                                 dgvCumprimento.Items.Refresh();
 
                                 calcularTempoCumprido();
-                                lblTempoCumprido.Content = tempoCumprido.Minutes > 0 ? String.Format("Foram cumpridas {0}h{1}min no total.", tempoCumprido.Hours, tempoCumprido.Minutes) : String.Format("Foram cumpridas {0}h no total.", tempoCumprido.Hours);
+                                lblTempoCumprido.Content = tempoCumprido.Minutes > 0 ? String.Format("Foram cumpridas {0}h{1}min no total.", (int)tempoCumprido.TotalHours, tempoCumprido.Minutes) : String.Format("Foram cumpridas {0}h no total.", (int)tempoCumprido.TotalHours);
 
                                 dgvCumprimento.SelectedIndex = 0;
                                 dgvCumprimento.CurrentCell = new DataGridCellInfo(dgvCumprimento.Items[0], dgvCumprimento.Columns[dgvCumprimento.CurrentColumn.DisplayIndex]);
@@ -225,10 +279,10 @@ namespace TJ.View
                                 dgvCumprimento.Items.Refresh();
 
                                 calcularTempoCumprido();
-                                lblTempoCumprido.Content = tempoCumprido.Minutes > 0 ? String.Format("Foram cumpridas {0}h{1}min no total.", tempoCumprido.Hours, tempoCumprido.Minutes) : String.Format("Foram cumpridas {0}h no total.", tempoCumprido.Hours);
+                                lblTempoCumprido.Content = tempoCumprido.Minutes > 0 ? String.Format("Foram cumpridas {0}h{1}min no total.", (int)tempoCumprido.TotalHours, tempoCumprido.Minutes) : String.Format("Foram cumpridas {0}h no total.", (int)tempoCumprido.TotalHours);
 
                                 dgvCumprimento.SelectedIndex = 30;
-                                tblObservacao.Focus();
+                                tbxObservacao.Focus();
                             }
                             else if (dgvCumprimento.CurrentColumn.DisplayIndex == 1 || dgvCumprimento.CurrentColumn.DisplayIndex == 3)
                             {
@@ -246,7 +300,7 @@ namespace TJ.View
                                 dgvCumprimento.Items.Refresh();
 
                                 calcularTempoCumprido();
-                                lblTempoCumprido.Content = tempoCumprido.Minutes > 0 ? String.Format("Foram cumpridas {0}h{1}min no total.", tempoCumprido.Hours, tempoCumprido.Minutes) : String.Format("Foram cumpridas {0}h no total.", tempoCumprido.Hours);
+                                lblTempoCumprido.Content = tempoCumprido.Minutes > 0 ? String.Format("Foram cumpridas {0}h{1}min no total.", (int)tempoCumprido.TotalHours, tempoCumprido.Minutes) : String.Format("Foram cumpridas {0}h no total.", (int)tempoCumprido.TotalHours);
 
                                 dgvCumprimento.SelectedIndex = 30;
                                 dgvCumprimento.CurrentCell = new DataGridCellInfo(dgvCumprimento.Items[dgvCumprimento.SelectedIndex], dgvCumprimento.Columns[dgvCumprimento.CurrentColumn.DisplayIndex]);
@@ -297,6 +351,7 @@ namespace TJ.View
 
         private void btnGravar_Click(object sender, RoutedEventArgs e)
         {
+            tempoCumprido = new TimeSpan();
             try
             {
                 if (!Validacoes.validarCampos(new List<Control>() { cbxInstituicao, cbxMes, tbxAno }))
@@ -310,23 +365,34 @@ namespace TJ.View
                         {
                             using (IAppServiceCumprimento serviceCumprimento = MinhaNinject.Kernel.Get<IAppServiceCumprimento>())
                             {
-                                serviceCumprimentoMes.Adiciona(cumprimentoMesSelecionado = popularCumprimentoMes(new CumprimentoMes()));
-                                for (int i = 0; i < 31; i++)
+                                cumprimentoMesSelecionado = popularCumprimentoMes(new CumprimentoMes());
+                                if (!cumprimentoMesSelecionado.verificarDuplicidade(cumprimentoMesSelecionado, serviceCumprimentoMes.RetornaTodosAsNoTracking()))
                                 {
-                                    cumprimento = popularCumprimento(new Cumprimento(), cumprimentosTela[i], cumprimentoMesSelecionado.Id);
-                                    if (cumprimento.Data != DateTime.MinValue)
+                                    serviceCumprimentoMes.Adiciona(cumprimentoMesSelecionado);
+                                    for (int i = 0; i < 31; i++)
                                     {
-                                        serviceCumprimento.Adiciona(cumprimento);
+                                        cumprimento = popularCumprimento(new Cumprimento(), cumprimentosTela[i], cumprimentoMesSelecionado.Id);
+                                        if (cumprimento.Data != DateTime.MinValue)
+                                        {
+                                            serviceCumprimento.Adiciona(cumprimento);
+                                            tempoCumprido += cumprimento.DiferencaHoras;
+                                        }
                                     }
+                                    //calcularTempoCumprido();
+                                    cumprimentoMesSelecionado.TempoCumprido = ((int)tempoCumprido.TotalHours).ToString() + ":" + tempoCumprido.Minutes.ToString("D2") + ":00";
+                                    serviceCumprimentoMes.Alterar(cumprimentoMesSelecionado);
+                                    cumprimentoMesSelecionado = null;
+                                    (App.Current.MainWindow as WpfTelaPrincipal)._vm.ShowSuccess("Cumprimento cadastrado com sucesso");
+                                    pai.carregarDadosCumprimento();
+                                    Close();
                                 }
-                                calcularTempoCumprido();
-                                cumprimentoMesSelecionado.TempoCumprido = tempoCumprido;
-                                serviceCumprimentoMes.Alterar(cumprimentoMesSelecionado);
+                                else
+                                {
+                                    cumprimentoMesSelecionado = null;
+                                    (App.Current.MainWindow as WpfTelaPrincipal)._vm.ShowInformation("Esse mês e ano já foi lançado para essa instituição, favor conferir!");
+                                }
                             }
                         }
-                        pai.carregarDgvCumprimento();
-                        Close();
-                        (App.Current.MainWindow as WpfTelaPrincipal)._vm.ShowSuccess("Cumprimento cadastrado com sucesso");
                     }
                     else
                     {
@@ -335,34 +401,42 @@ namespace TJ.View
                         {
                             using (IAppServiceCumprimento serviceCumprimento = MinhaNinject.Kernel.Get<IAppServiceCumprimento>())
                             {
-                                cumprimentoMesSelecionado = popularCumprimentoMes(cumprimentoMesSelecionado);
-                                for (int i = 0; i < 31; i++)
+                                cumprimentoMesSelecionado = popularCumprimentoMes(serviceCumprimentoMes.RetornaPorId(cumprimentoMesSelecionado.Id));
+                                if (!cumprimentoMesSelecionado.verificarDuplicidade(cumprimentoMesSelecionado, serviceCumprimentoMes.RetornaTodosAsNoTracking()))
                                 {
-                                    if (i < cumprimentoMesSelecionado.Cumprimentos.Count)
+                                    for (int i = 0; i < 31; i++)
                                     {
-                                        cumprimento = popularCumprimento(cumprimentoMesSelecionado.Cumprimentos.ElementAt(i), cumprimentosTela[i], cumprimentoMesSelecionado.Id);
-                                        if (cumprimento.Data != DateTime.MinValue)
+                                        if (i < cumprimentoMesSelecionado.Cumprimentos.Count)
                                         {
-                                            serviceCumprimento.Alterar(cumprimento);
+                                            cumprimento = serviceCumprimento.RetornaPorId(cumprimentoMesSelecionado.Cumprimentos.ElementAt(i).Id);
+                                            cumprimento = popularCumprimento(cumprimento, cumprimentosTela[i], cumprimentoMesSelecionado.Id);
+                                            if (cumprimento.Data != DateTime.MinValue)
+                                            {
+                                                serviceCumprimento.Alterar(cumprimento);
+                                                tempoCumprido += cumprimento.DiferencaHoras;
+                                            }
+                                        }
+                                        else
+                                        {
+                                            cumprimento = popularCumprimento(new Cumprimento(), cumprimentosTela[i], cumprimentoMesSelecionado.Id);
+                                            if (cumprimento.Data != DateTime.MinValue)
+                                            {
+                                                serviceCumprimento.Adiciona(cumprimento);
+                                                tempoCumprido += cumprimento.DiferencaHoras;
+                                            }
                                         }
                                     }
-                                    else
-                                    {
-                                        cumprimento = popularCumprimento(new Cumprimento(), cumprimentosTela[i], cumprimentoMesSelecionado.Id);
-                                        if (cumprimento.Data != DateTime.MinValue)
-                                        {
-                                            serviceCumprimento.Adiciona(cumprimento);
-                                        }
-                                    }
+                                    //calcularTempoCumprido();
+                                    cumprimentoMesSelecionado.TempoCumprido = ((int)tempoCumprido.TotalHours).ToString() + ":" + tempoCumprido.Minutes.ToString("D2") + ":00";
+                                    serviceCumprimentoMes.Alterar(cumprimentoMesSelecionado);
+                                    pai.carregarDadosCumprimento();
+                                    Close();
+                                    (App.Current.MainWindow as WpfTelaPrincipal)._vm.ShowSuccess("Cumprimento alterado com sucesso");
                                 }
-                                calcularTempoCumprido();
-                                cumprimentoMesSelecionado.TempoCumprido = tempoCumprido;
-                                serviceCumprimentoMes.Alterar(cumprimentoMesSelecionado);
+                                else
+                                    (App.Current.MainWindow as WpfTelaPrincipal)._vm.ShowInformation("Esse mês e ano já foi lançado para essa instituição, favor conferir!");
                             }
                         }
-                        pai.carregarDgvCumprimento();
-                        Close();
-                        (App.Current.MainWindow as WpfTelaPrincipal)._vm.ShowSuccess("Cumprimento cadastrado com sucesso");
                     }
                 }
             }
@@ -370,34 +444,6 @@ namespace TJ.View
             {
                 (App.Current.MainWindow as WpfTelaPrincipal)._vm.ShowError("Ao gravar a entidade: " + exception.Message);
             }
-        }
-
-        public Cumprimento popularCumprimento(Cumprimento cumprimento, cumprimentoTela cumprimentoTela, int cumprimentoMesId)
-        {
-            DateTime a;
-            if (DateTime.TryParse(String.Format("{0}/{1}/{2}", cumprimentoTela.Dia, ((int)Enum.Parse(typeof(Meses), cbxMes.SelectedItem.ToString())).ToString("D2"), tbxAno.Text), out a))
-            {
-                cumprimento.Data = Convert.ToDateTime(String.Format("{0}/{1}/{2}", cumprimentoTela.Dia, ((int)Enum.Parse(typeof(Meses), cbxMes.SelectedItem.ToString())).ToString("D2"), tbxAno.Text));
-                cumprimento.HorarioEntrada = cumprimentoTela.HorarioEntrada;
-                cumprimento.HorarioSaida = cumprimentoTela.HorarioSaida;
-                cumprimento.HorarioEntradaAlmoco = cumprimentoTela.HorarioEntradaAlmoco;
-                cumprimento.HorarioSaidaAlmoco = cumprimentoTela.HorarioSaidaAlmoco;
-                cumprimento.CumprimentoMesId = cumprimentoMesId;
-                cumprimento.DiferencaHoras = cumprimentoTela.DiferencaHoras;
-                cumprimento.Usuario = usuarioLogado.Login;
-            }
-            return cumprimento;
-        }
-
-        public CumprimentoMes popularCumprimentoMes(CumprimentoMes cumprimentoMes)
-        {
-            cumprimentoMes.Ano = Convert.ToInt16(tbxAno.Text);
-            cumprimentoMes.Mes = cbxMes.SelectedValue.ToString();
-            cumprimentoMes.Observacao = tblObservacao.Text;
-            cumprimentoMes.SentenciadoEntidadeId = (cbxInstituicao.SelectedItem as SentenciadoEntidade).Id;
-            cumprimentoMes.UsuarioId = usuarioLogado.Id;
-            cumprimentoMes.TempoCumprido = new TimeSpan();
-            return cumprimentoMes;
         }
 
         private void dgvCumprimento_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -409,28 +455,6 @@ namespace TJ.View
             else
             {
                 cumprimentosTela[30].DiferencaHoras = (cumprimentosTela[30].HorarioSaida - cumprimentosTela[30].HorarioEntrada) + (cumprimentosTela[30].HorarioSaidaAlmoco - cumprimentosTela[30].HorarioEntradaAlmoco);
-            }
-        }
-
-        private void atualizarGrid()
-        {
-            if (cumprimentosTela[dgvCumprimento.SelectedIndex - 1].HorarioSaida > cumprimentosTela[dgvCumprimento.SelectedIndex - 1].HorarioEntrada)
-            {
-                cumprimentosTela[dgvCumprimento.SelectedIndex - 1].DiferencaHoras = cumprimentosTela[dgvCumprimento.SelectedIndex - 1].HorarioSaida - cumprimentosTela[dgvCumprimento.SelectedIndex - 1].HorarioEntrada;
-            }
-            if (cumprimentosTela[dgvCumprimento.SelectedIndex - 1].HorarioSaidaAlmoco > cumprimentosTela[dgvCumprimento.SelectedIndex - 1].HorarioEntradaAlmoco)
-            {
-                cumprimentosTela[dgvCumprimento.SelectedIndex - 1].DiferencaHoras += cumprimentosTela[dgvCumprimento.SelectedIndex - 1].HorarioSaidaAlmoco - cumprimentosTela[dgvCumprimento.SelectedIndex - 1].HorarioEntradaAlmoco;
-            }
-            dgvCumprimento.Items.Refresh();
-        }
-
-        private void calcularTempoCumprido()
-        {
-            tempoCumprido = new TimeSpan();
-            for (int i = 0; i < dgvCumprimento.Items.Count; i++)
-            {
-                tempoCumprido += cumprimentosTela[i].DiferencaHoras;
             }
         }
     }

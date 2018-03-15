@@ -5,6 +5,6 @@ namespace TJ.Apresentacao.InterfacesApp
 {
     public interface IAppServiceEntidade : IAppServiceBase<Entidade>
     {
-        IEnumerable<Entidade> RetornaEntidadesAtivasAsNoTracking();
+        IEnumerable<Entidade> RetornaEntidadesAtivas();
     }
 }

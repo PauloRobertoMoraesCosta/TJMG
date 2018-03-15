@@ -38,6 +38,7 @@ namespace TJ.Dados.Repositorios
 
         public void Alterar(TEntity objeto)
         {
+            //db.Set<TEntity>().Attach(objeto);
             db.Entry(objeto).State = EntityState.Modified;
             db.SaveChanges();
         }

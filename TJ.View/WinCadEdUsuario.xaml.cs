@@ -77,20 +77,16 @@ namespace TJ.View
                         using (IAppServiceUsuario _serviceUsuario = MinhaNinject.Kernel.Get<IAppServiceUsuario>())
                         {
                             usuariosAtivos = _serviceUsuario.RetornaUsuariosAtivosAsNoTracking();
-                        }
-                        if (cbxAtivo.IsChecked == false && usuariosAtivos.Count() <= 1)
-                            (App.Current.MainWindow as WpfTelaPrincipal)._vm.ShowInformation("Para inativar esse usuário, você deve primeiro ativar outro.");
-                        else
-                        {
-                            usuarioSelecionado = (popularUser(usuarioSelecionado));
-                            using (IAppServiceUsuario _serviceUsuario = MinhaNinject.Kernel.Get<IAppServiceUsuario>())
+                            if (cbxAtivo.IsChecked == false && !usuarioSelecionado.Ativo.Equals(cbxAtivo.IsChecked.ToString(), StringComparison.OrdinalIgnoreCase) && usuariosAtivos.Count() <= 1)
+                                (App.Current.MainWindow as WpfTelaPrincipal)._vm.ShowInformation("Para inativar esse usuário, você deve primeiro ativar outro.");
+                            else
                             {
+                                usuarioSelecionado = (popularUser(_serviceUsuario.RetornaPorId(usuarioSelecionado.Id)));
                                 _serviceUsuario.Alterar(usuarioSelecionado);
+                                (_pai as UCUsuariosLista).carregaGridUsuario();
+                                Close();
+                                (App.Current.MainWindow as WpfTelaPrincipal)._vm.ShowSuccess("Usuário alterado com sucesso");
                             }
-
-                            (_pai as UCUsuariosLista).carregaGridUsuario();
-                            Close();
-                            (App.Current.MainWindow as WpfTelaPrincipal)._vm.ShowSuccess("Usuário alterado com sucesso");
                         }
                     }
                 }
@@ -118,8 +114,8 @@ namespace TJ.View
         {
             try
             {
-            if ((e.Source as PasswordBox).Password.Any())
-                (e.Source as PasswordBox).BorderBrush = (SolidColorBrush)(new BrushConverter().ConvertFrom("#999"));
+                if ((e.Source as PasswordBox).Password.Any())
+                    (e.Source as PasswordBox).BorderBrush = (SolidColorBrush)(new BrushConverter().ConvertFrom("#999"));
             }
             catch (Exception ex)
             {

@@ -10,7 +10,7 @@
     <ScrollViewer Name="scvCadEdCumprimento" VerticalScrollBarVisibility="Auto">
         <DockPanel Margin="10,10,10,0" Background="White">
             <DockPanel.Resources>
-                <Style TargetType="{x:Type Button}">
+                <Style TargetType="Button">
                     <Setter Property="Background" Value="#0d9cfa"/>
                     <Setter Property="BorderThickness" Value="1"/>
                     <Setter Property="BorderBrush" Value="#0A66BC"/>
@@ -29,7 +29,7 @@
                     </Style.Triggers>
                 </Style>
 
-                <Style TargetType="{x:Type DataGrid}">
+                <Style TargetType="DataGrid">
                     <Setter Property="Margin" Value="10,10,5,0"/>
                     <Setter Property="BorderThickness" Value="0,0,0,1"/>
                     <Setter Property="BorderBrush" Value="#999"/>
@@ -43,7 +43,7 @@
                     <Setter Property="VerticalAlignment" Value="Top"/>
                 </Style>
 
-                <Style TargetType="{x:Type DataGridColumnHeader}">
+                <Style TargetType="DataGridColumnHeader">
                     <Setter Property="Foreground" Value="#666"/>
                     <Setter Property="Background" Value="White"/>
                     <Setter Property="Margin" Value="5,0,15,5"/>
@@ -51,7 +51,7 @@
                     <Setter Property="FontWeight" Value="Bold"/>
                 </Style>
 
-                <Style TargetType="{x:Type DataGridRow}">
+                <Style TargetType="DataGridRow">
                     <Setter Property="Background" Value="White"/>
                     <Setter Property="Foreground" Value="#666"/>
                     <Setter Property="FontSize" Value="15"/>
@@ -59,42 +59,42 @@
                     <Setter Property="BorderBrush" Value="#999"/>
                 </Style>
 
-                <Style TargetType="{x:Type DataGridCell}">
+                <Style TargetType="DataGridCell">
                     <Setter Property="Margin" Value="0,5,0,5"/>
                 </Style>
 
-                <Style TargetType="{x:Type TextBox}">
+                <Style TargetType="TextBox">
                     <Setter Property="HorizontalAlignment" Value="Left"/>
                     <Setter Property="VerticalAlignment" Value="Top"/>
                     <Setter Property="BorderThickness" Value="1"/>
                     <Setter Property="BorderBrush" Value="#999"/>
+                    <Setter Property="Height" Value="25"/>
                     <Setter Property="Margin" Value="0,5,0,0"/>
                     <Setter Property="FontSize" Value="15"/>
                 </Style>
 
-                <Style TargetType="{x:Type TextBlock}">
+                <Style TargetType="TextBlock">
                     <Setter Property="HorizontalAlignment" Value="Left"/>
                     <Setter Property="VerticalAlignment" Value="Top"/>
                     <Setter Property="Margin" Value="0,5,0,0"/>
                     <Setter Property="FontSize" Value="15"/>
                 </Style>
 
-                <Style TargetType="{x:Type Label}">
+                <Style TargetType="Label">
                     <Setter Property="HorizontalAlignment" Value="Right"/>
                     <Setter Property="VerticalAlignment" Value="Top"/>
                     <Setter Property="Foreground" Value="#333"/>
                     <Setter Property="FontSize" Value="15"/>
                 </Style>
 
-                <Style TargetType="{x:Type ComboBox}">
+                <Style TargetType="ComboBox">
                     <Setter Property="HorizontalAlignment" Value="Left"/>
                     <Setter Property="VerticalAlignment" Value="Top"/>
-                    <Setter Property="VerticalContentAlignment" Value="Center"/>
-                    <Setter Property="Height" Value="23"/>
                     <Setter Property="BorderThickness" Value="1"/>
                     <Setter Property="BorderBrush" Value="#999"/>
                     <Setter Property="Margin" Value="0,5,0,0"/>
                     <Setter Property="FontSize" Value="15"/>
+                    <Setter Property="MinHeight" Value="25"/>
                 </Style>
 
             </DockPanel.Resources>
@@ -132,7 +132,7 @@
                         <RowDefinition Height="auto"/>
                     </Grid.RowDefinitions>
                     <Label Content="Nome:"/>
-                    <TextBlock x:Name="tblNome" Grid.Column="1" Grid.ColumnSpan="5" TextWrapping="NoWrap"/>
+                    <TextBlock x:Name="tblNome" Grid.Column="1" Grid.ColumnSpan="5" Width="661" TextWrapping="Wrap"/>
                     <Label Content="Instituição:" Grid.Row="1"/>
                     <ComboBox x:Name="cbxInstituicao" Grid.Row="1" Grid.Column="1" Width="200" TabIndex="1"/>
                     <Label Content="Mês:" Grid.Row="1" Grid.Column="2"/>
@@ -148,7 +148,7 @@
                             <DataGridTextColumn Header="Horário Saída" Binding="{Binding HorarioSaida, StringFormat=hh\\:mm}"/>
                             <DataGridTextColumn Header="Horário Entrada" Binding="{Binding HorarioEntradaAlmoco, StringFormat=hh\\:mm}"/>
                             <DataGridTextColumn Header="Horário Saída" Binding="{Binding HorarioSaidaAlmoco, StringFormat=hh\\:mm}"/>
-                            <DataGridTextColumn Header="Horas Trabalhadas" IsReadOnly="True" Binding="{Binding DiferencaHoras, StringFormat=hh\\:mm}"/>
+                            <DataGridTextColumn Header="Horas Trabalhadas" IsReadOnly="True" Binding="{Binding DiferencaHoras}"/>
                         </DataGrid.Columns>
                     </DataGrid>
                 </Grid>
@@ -165,8 +165,8 @@
                 </Grid.RowDefinitions>
                 <Label x:Name="lblTempoCumprido" Grid.ColumnSpan="2" HorizontalAlignment="Left"/>
                 <Label Content="Observação:" Grid.Row="1" />
-                <TextBox x:Name="tblObservacao" Grid.Row="1"  Grid.Column="1" TextWrapping="Wrap" Width="655" MaxLength="200"/>
-                <Grid Grid.Row="2" Grid.ColumnSpan="2" Margin="0,0,10,10">
+                <TextBox x:Name="tbxObservacao" Grid.Row="1"  Grid.Column="1" TextWrapping="Wrap" Width="655" MaxLength="200"/>
+                <Grid Grid.Row="2" Grid.ColumnSpan="2" Margin="0,10,10,10">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition/>
                         <ColumnDefinition Width="85"/>

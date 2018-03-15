@@ -15,9 +15,9 @@ namespace TJ.Dominio.Servicos
             _repositorioEntidade = repositorioEntidade;
         }
 
-        IEnumerable<Entidade> IServicoEntidade.RetornaEntidadesAtivasAsNoTracking()
+        IEnumerable<Entidade> IServicoEntidade.RetornaEntidadesAtivas()
         {
-            return _repositorioEntidade.RetornaEntidadesAtivasAsNoTracking();
+            return _repositorioEntidade.RetornaEntidadesAtivas();
         }
     }
 }

@@ -18,14 +18,28 @@ namespace TJ.View
 
         public App()
         {
-            ninject = new MinhaNinject();
+            try
+            {
+                ninject = new MinhaNinject();
+            }
+            catch (Exception)
+            {
+                MessageBox.Show("Aconteceu algum problema no App.");
+            }
         }
 
         private void OnAppStartup(object sender, StartupEventArgs e)
         {
-            Login login = new Login();//MinhaNinject.Kernel.Get<Login>();
-            login.Show();
-            login.inicializar();
+            try
+            {
+                Login login = new Login(); //MinhaNinject.Kernel.Get<Login>();
+                login.Show();
+                login.inicializar();
+            }
+            catch (Exception)
+            {
+                MessageBox.Show("Aconteceu algum problema no onAppStartup.");
+            }
         }
 
         private void OnAppStartup2(object sender, StartupEventArgs e)
